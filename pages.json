@@ -1,0 +1,73 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "柠檬小铺"
+			}
+		},
+		{
+			"path": "pages/newest/newest",
+			"style": {
+				"navigationBarTitleText": "新品上架"
+			}
+		}
+	    ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人中心",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	    "color": "#000000",
+	    "selectedColor": "#55d98d",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [{
+				"iconPath": "static/tabicons/home_0.png",
+				"selectedIconPath": "static/tabicons/home_1.png",
+				"pagePath":"pages/home/home",
+				"text": "首页"
+			},
+			{
+				"iconPath":"static/tabicons/forum_0.png",
+				"selectedIconPath":"static/tabicons/forum_1.png",
+				"pagePath":"pages/newest/newest",
+				"text": "新品"
+			},
+			{
+				"iconPath":"static/tabicons/manage_0.png",
+				"selectedIconPath":"static/tabicons/manage_1.png",
+				"pagePath":"pages/order/order",
+				"text": "订单"				
+			},
+			{
+				"iconPath":"static/tabicons/me_0.png",
+				"selectedIconPath":"./static/tabicons/me_1.png",
+				"pagePath":"pages/mine/mine",
+				"text": "我的"
+			}]
+	}
+}
