@@ -1,55 +1,33 @@
 <template>
-	<view class="wrap">
-		<u-notice-bar mode="horizontal" :is-circular="true" :list="flagList" type="success"></u-notice-bar>
-		<!-- <u-button @click="clear">清空列表</u-button> -->
-		<u-waterfall v-model="flowList" ref="uWaterfall">
-			<template v-slot:left="{leftList}">
-				<view class="demo-warter" v-for="(item, index) in leftList" :key="index">
-					<!-- 警告：微信小程序中需要hx2.8.11版本才支持在template中结合其他组件，比如下方的lazy-load组件 -->
-					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon"></u-lazy-load>
-					<view class="demo-title">
-						{{item.name}}
-					</view>
-					<view class="demo-price">
-						{{item.price}}元
-					</view>
-					<view class="demo-shop">
-						月销量{{item.sell}}份
-					</view>
+	<view>
+		<view class="item-container">
+			<view class="thumb-box" v-for="(item, index) in list" :key="index">
+				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail()"></image>
+				<view style="display: flex; flex-direction: column; align-items: center;">
+					<view class="item-menu-name">{{item.name}}</view>
+					<!-- 价格 -->
+					<text class="total-price">
+						￥{{ item.price }}
+					</text>
+					<!-- 步进器 -->
+					<u-number-box input-width="40" :index='index'></u-number-box>
+					<!-- 共{{ value }}件餐品 -->
 				</view>
-			</template>
-			<template v-slot:right="{rightList}">
-				<view class="demo-warter" v-for="(item, index) in rightList" :key="index">
-					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon"></u-lazy-load>
-					<view class="demo-title">
-						{{item.name}}
-					</view>
-					<view class="demo-price">
-						{{item.price}}元
-					</view>
-					<view class="demo-shop">
-						月销量{{item.sell}}份
-					</view>
-					<dc_order></dc_order>
-				</view>
-			</template>
-		</u-waterfall>
-		<u-loadmore bg-color="rgb(240, 240, 240)" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	export default {
+		name: "search-list",
 		data() {
 			return {
-				loadStatus: 'loadmore',
-				flowList: [],
-				flagList: ['喜讯','本店新品出炉','欢迎各位食客前来品尝！！！'],
 				list: [{
 					"_id": "28ee4e3e6023757804385d0b1e9aed15",
 					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫保鸡丁",
-					"price": 15,
+					"price": 35,
 					"sell": 12,
 					"status": "上架",
 					"_createTime": 1612936568799,
@@ -59,7 +37,7 @@
 					"_id": "b00064a7602375ba0403f9ad7bd398cc",
 					"icon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3815861419,3479367376&fm=26&gp=0.jpg",
 					"name": "鱼香肉丝",
-					"price": 12,
+					"price": 22,
 					"sell": 17,
 					"status": "上架",
 					"_createTime": 1612936634258,
@@ -69,7 +47,7 @@
 					"_id": "b00064a76027e22e04c888357d766c5c",
 					"icon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3607142225,358344641&fm=26&gp=0.jpg",
 					"name": "青椒土豆丝",
-					"price": 6,
+					"price": 9,
 					"sell": 3,
 					"status": "上架",
 					"_createTime": 1613226542536,
@@ -99,7 +77,7 @@
 					"_id": "79550af26029b0f804dbf1b91f7bbedf",
 					"fenlei": "店长推荐",
 					"name": "糖醋里脊",
-					"price": 35,
+					"price": 45,
 					"sell": 2,
 					"status": "上架",
 					"_createTime": 1613345016404,
@@ -109,7 +87,7 @@
 					"_id": "79550af26029b10d04dbf29f7db04607",
 					"fenlei": "店长推荐",
 					"name": "龙井虾仁",
-					"price": 30,
+					"price": 59,
 					"sell": 0,
 					"status": "上架",
 					"_createTime": 1613345036998,
@@ -119,7 +97,7 @@
 					"_id": "79550af26029c07a04dd8c0a2cd710e5",
 					"fenlei": "经典套餐",
 					"name": "鱼香肉丝套餐",
-					"price": 30,
+					"price": 45,
 					"sell": 0,
 					"status": "上架",
 					"_createTime": 1613348986044,
@@ -129,7 +107,7 @@
 					"_id": "79550af26029e69604e4c14c13f85c60",
 					"fenlei": "经典套餐",
 					"name": "宫保鸡丁套餐",
-					"price": 35,
+					"price": 45,
 					"sell": 0,
 					"status": "上架",
 					"_createTime": 1613358742773,
@@ -139,7 +117,7 @@
 					"_id": "28ee4e3e6029e6b6054fd8021ff3d887",
 					"fenlei": "经典套餐",
 					"name": "狮子头套餐",
-					"price": 25,
+					"price": 35,
 					"sell": 2,
 					"status": "上架",
 					"_createTime": 1613358774645,
@@ -189,7 +167,7 @@
 					"_id": "b00064a76029e7ce0506300b2c4a29ed",
 					"fenlei": "经典套餐",
 					"name": "大盘鸡 ",
-					"price": 108,
+					"price": 88,
 					"sell": 0,
 					"status": "上架",
 					"_createTime": 1613359054023,
@@ -236,107 +214,41 @@
 					"_updateTime": 1613362532882,
 					"icon": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3192640871,229058421&fm=26&gp=0.jpg"
 				}]
-			}
-		},
-		onLoad() {
-			this.addRandomData();
-		},
-		onReachBottom() {
-			this.loadStatus = 'loading';
-			// 模拟数据加载
-			setTimeout(() => {
-				// this.addRandomData();
-				this.loadStatus = 'loadmore';
-			}, 1000)
-		},
-		methods: {
-			addRandomData() {
-				for(let i = 0; i < 10; i++) {
-					let index = this.$u.random(0, this.list.length - 1);
-					// 先转成字符串再转成对象，避免数组对象引用导致数据混乱
-					let item = JSON.parse(JSON.stringify(this.list[index]))
-					item.id = this.$u.guid();
-					this.flowList.push(item);
-				}
-			},
+			};
 		}
 	}
 </script>
 
-<style>
-	/* page不能写带scope的style标签中，否则无效 */
-	page {
-		background-color: rgb(245, 245, 245);
-	}
-</style>
-
 <style lang="scss" scoped>
-	.newIcon {
-		height: 230rpx;
-	}
-	.demo-warter {
-		border-radius: 8px;
-		margin: 5px;
-		background-color: #ffffff;
-		padding: 8px;
-		position: relative;
-	}
-	
-	.u-close {
-		position: absolute;
-		top: 32rpx;
-		right: 32rpx;
-	}
-	
-	.demo-image {
-		width: 100%;
-		border-radius: 4px;
-	}
-	
-	.demo-title {
+	.item-menu-name {
+		font-weight: normal;
 		font-size: 30rpx;
-		margin-top: 5px;
+		margin-bottom: 6rpx;
 		color: $u-main-color;
 	}
-	
-	.demo-tag {
+
+	.item-container {
 		display: flex;
-		margin-top: 5px;
+		flex-wrap: wrap;
 	}
-	
-	.demo-tag-owner {
-		background-color: $u-type-error;
-		color: #FFFFFF;
-		display: flex;
-		align-items: center;
-		padding: 4rpx 14rpx;
-		border-radius: 50rpx;
-		font-size: 20rpx;
-		line-height: 1;
-	}
-	
-	.demo-tag-text {
-		border: 1px solid $u-type-primary;
-		color: $u-type-primary;
-		margin-left: 10px;
-		border-radius: 50rpx;
-		line-height: 1;
-		padding: 4rpx 14rpx;
+
+	.thumb-box {
+		background-color: #fafafa;
+		width: 100%;
+		padding: 6rpx 20rpx;
+		// box-shadow: 0 0 1rpx #000000;
+		border-radius: 16rpx;
 		display: flex;
 		align-items: center;
-		border-radius: 50rpx;
-		font-size: 20rpx;
+		// justify-content: center;
+		flex-direction: row;
+		// align-items: flex-end;
+		justify-content: space-between;
+		margin-top: 20rpx;
 	}
-	
-	.demo-price {
-		font-size: 30rpx;
-		color: $u-type-error;
-		margin-top: 5px;
-	}
-	
-	.demo-shop {
-		font-size: 22rpx;
-		color: $u-tips-color;
-		margin-top: 5px;
+
+	.item-menu-image {
+		width: 220rpx;
+		height: 220rpx;
 	}
 </style>

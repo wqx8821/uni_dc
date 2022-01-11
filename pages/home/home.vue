@@ -1,83 +1,110 @@
 <template>
-	<view>
+	<view class="u-wrap">
 		<view class="search_d">
-			<u-search placeholder="日照香炉生紫烟" v-model="keyword" bg-color="#f8f8f8"></u-search>
+			<u-search placeholder="想吃点啥" bg-color="#edf1f9"></u-search>
 		</view>
 		<view class="swiper_wrap">
-			<u-swiper :list="list"></u-swiper>
+			<u-swiper :list="list" height="300" mode="rect"></u-swiper>
 		</view>
+		<!-- <u-line  margin="10rpx 0" color="#333333" border-style="dotted"/> -->
 		<view class="u-menu-wrap">
-			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop">
+			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
+				:scroll-into-view="itemId">
 				<view v-for="(item,index) in tabbar" :key="index" class="u-tab-item"
-					:class="[current==index ? 'u-tab-item-active' : '']" :data-current="index"
-					@tap.stop="swichMenu(index)">
+					:class="[current == index ? 'u-tab-item-active' : '']" @tap.stop="swichMenu(index)">
 					<text class="u-line-1">{{item.name}}</text>
 				</view>
 			</scroll-view>
-			<block v-for="(item,index) in tabbar" :key="index">
-				<scroll-view scroll-y class="right-box" v-if="current==index">
-					<view class="page-view">
-						<view class="class-item">
-							<view class="item-title">
-								<text>{{item.name}}</text>
-							</view>
-							<view class="item-container">
-								<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
-									<image class="item-menu-image" :src="item1.icon" mode=""></image>
+			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box"
+				@scroll="rightScroll">
+				<view class="page-view">
+					<view class="class-item" :id="'item' + index" v-for="(item , index) in tabbar" :key="index">
+						<view class="item-title">
+							<text>{{item.name}}</text>
+						</view>
+						<view class="item-container">
+							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
+								<image class="item-menu-image" :src="item1.icon" mode="" @click="toDetail()"></image>
+								<view style="display: flex; flex-direction: column; align-items: center;">
 									<view class="item-menu-name">{{item1.name}}</view>
+									<text class="total-price">
+										￥{{ item1.cat }}
+									</text>
+									<!-- 步进器 -->
+									<u-number-box  input-width="40"></u-number-box>
+									<!-- 价格 -->
+									<!-- 共{{ value }}件餐品 -->
 								</view>
 							</view>
 						</view>
 					</view>
-				</scroll-view>
-			</block>
+				</view>
+			</scroll-view>
 		</view>
+		<dc_order></dc_order>
 	</view>
 </template>
-
 <script>
-	import classifyData from "@/common/classify.data.js";
+	import classifyData from '@/common/classify.data.js';
 	export default {
 		data() {
 			return {
 				list: [{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-226aa1402126662efd2013ad719f0b77_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644487883&t=edc2945aa37275441c6405dbfbb3a45e',
+						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+					},
+					{
+						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
 						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
 						title: '身无彩凤双飞翼，心有灵犀一点通'
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-					}
-				],
-				tabbar: classifyData,
+					}],
+				value: 0,
 				scrollTop: 0, //tab标题的滚动条位置
+				oldScrollTop: 0,
 				current: 0, // 预设当前项的值
 				menuHeight: 0, // 左边菜单的高度
 				menuItemHeight: 0, // 左边菜单item的高度
+				itemId: '', // 栏目右边scroll-view用于滚动的id
+				tabbar: classifyData,
+				menuItemPos: [],
+				arr: [],
+				scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
+				timer: null, // 定时器
+
 			}
 		},
-		computed: {
+		onLoad() {
 
 		},
+		onReady() {
+			this.getMenuItemTop()
+		},
 		methods: {
-			getImg() {
-				return Math.floor(Math.random() * 35);
+			// 跳转详情页
+			toDetail() {
+				uni.navigateTo({
+					url: '/pages/detail/detail'
+				})
 			},
 			// 点击左边的栏目切换
 			async swichMenu(index) {
-				if (index == this.current) return;
-				this.current = index;
-				// 如果为0，意味着尚未初始化
-				if (this.menuHeight == 0 || this.menuItemHeight == 0) {
-					await this.getElRect('menu-scroll-view', 'menuHeight');
-					await this.getElRect('u-tab-item', 'menuItemHeight');
+				if (this.arr.length == 0) {
+					await this.getMenuItemTop();
 				}
-				// 将菜单菜单活动item垂直居中
-				this.scrollTop = index * this.menuItemHeight + this.menuItemHeight / 2 - this.menuHeight / 2;
+				if (index == this.current) return;
+				this.scrollRightTop = this.oldScrollTop;
+				this.$nextTick(function() {
+					this.scrollRightTop = this.arr[index];
+					this.current = index;
+					this.leftMenuStatus(index);
+				})
 			},
 			// 获取一个目标元素的高度
 			getElRect(elClass, dataVal) {
@@ -94,8 +121,81 @@
 							return;
 						}
 						this[dataVal] = res.height;
+						resolve();
 					}).exec();
 				})
+			},
+			// 观测元素相交状态
+			async observer() {
+				this.tabbar.map((val, index) => {
+					let observer = uni.createIntersectionObserver(this);
+					// 检测右边scroll-view的id为itemxx的元素与right-box的相交状态
+					// 如果跟.right-box底部相交，就动态设置左边栏目的活动状态
+					observer.relativeTo('.right-box', {
+						top: 0
+					}).observe('#item' + index, res => {
+						if (res.intersectionRatio > 0) {
+							let id = res.id.substring(4);
+							this.leftMenuStatus(id);
+						}
+					})
+				})
+			},
+			// 设置左边菜单的滚动状态
+			async leftMenuStatus(index) {
+				this.current = index;
+				// 如果为0，意味着尚未初始化
+				if (this.menuHeight == 0 || this.menuItemHeight == 0) {
+					await this.getElRect('menu-scroll-view', 'menuHeight');
+					await this.getElRect('u-tab-item', 'menuItemHeight');
+				}
+				// 将菜单活动item垂直居中
+				this.scrollTop = index * this.menuItemHeight + this.menuItemHeight / 2 - this.menuHeight / 2;
+			},
+			// 获取右边菜单每个item到顶部的距离
+			getMenuItemTop() {
+				new Promise(resolve => {
+					let selectorQuery = uni.createSelectorQuery();
+					selectorQuery.selectAll('.class-item').boundingClientRect((rects) => {
+						// 如果节点尚未生成，rects值为[](因为用selectAll，所以返回的是数组)，循环调用执行
+						if (!rects.length) {
+							setTimeout(() => {
+								this.getMenuItemTop();
+							}, 10);
+							return;
+						}
+						rects.forEach((rect) => {
+							// 这里减去rects[0].top，是因为第一项顶部可能不是贴到导航栏(比如有个搜索框的情况)
+							this.arr.push(rect.top - rects[0].top);
+							resolve();
+						})
+					}).exec()
+				})
+			},
+			// 右边菜单滚动
+			async rightScroll(e) {
+				this.oldScrollTop = e.detail.scrollTop;
+				if (this.arr.length == 0) {
+					await this.getMenuItemTop();
+				}
+				if (this.timer) return;
+				if (!this.menuHeight) {
+					await this.getElRect('menu-scroll-view', 'menuHeight');
+				}
+				setTimeout(() => { // 节流
+					this.timer = null;
+					// scrollHeight为右边菜单垂直中点位置
+					let scrollHeight = e.detail.scrollTop + this.menuHeight / 2;
+					for (let i = 0; i < this.arr.length; i++) {
+						let height1 = this.arr[i];
+						let height2 = this.arr[i + 1];
+						// 如果不存在height2，意味着数据循环已经到了最后一个，设置左边菜单为最后一项即可
+						if (!height2 || scrollHeight >= height1 && scrollHeight < height2) {
+							this.leftMenuStatus(i);
+							return;
+						}
+					}
+				}, 10)
 			}
 		}
 	}
@@ -105,12 +205,18 @@
 	.u-wrap {
 		height: calc(100vh);
 		/* #ifdef H5 */
-		height: calc(100vh - var(--window-top));
+		height: calc(100vh - var(--window-top) + 300rpx);
 		/* #endif */
 		display: flex;
 		flex-direction: column;
 	}
-
+	.swiper_wrap {
+		padding: 10rpx;
+	}
+	.search_d {
+		padding: 4rpx 0;
+		background-color: #f8f8f8;
+	}
 	.u-search-box {
 		padding: 18rpx 30rpx;
 	}
@@ -183,10 +289,15 @@
 	}
 
 	.class-item {
+		
 		margin-bottom: 30rpx;
 		background-color: #fff;
 		padding: 16rpx;
 		border-radius: 8rpx;
+	}
+
+	.class-item:last-child {
+		min-height: 100vh;
 	}
 
 	.item-title {
@@ -197,7 +308,8 @@
 
 	.item-menu-name {
 		font-weight: normal;
-		font-size: 24rpx;
+		font-size: 30rpx;
+		margin-bottom: 6rpx;
 		color: $u-main-color;
 	}
 
@@ -207,16 +319,22 @@
 	}
 
 	.thumb-box {
-		width: 33.333333%;
+		background-color: #fafafa;
+		width: 100%;
+		padding: 6rpx;
+		// box-shadow: 0 0 1rpx #000000;
+		border-radius: 16rpx;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		flex-direction: column;
+		// justify-content: center;
+		flex-direction: row;
+		// align-items: flex-end;
+		justify-content: space-around;
 		margin-top: 20rpx;
 	}
 
 	.item-menu-image {
-		width: 120rpx;
-		height: 120rpx;
+		width: 220rpx;
+		height: 220rpx;
 	}
 </style>
