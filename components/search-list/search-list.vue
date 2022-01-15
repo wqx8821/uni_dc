@@ -1,8 +1,12 @@
 <template>
 	<view>
+		<view class="filer">
+			<text @click="sortData = 0">热门推荐</text>
+			<text @click="sortData = !sortData">价格排序</text>
+		</view>
 		<view class="item-container">
-			<view class="thumb-box" v-for="(item, index) in list" :key="index">
-				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail()"></image>
+			<view class="thumb-box" v-for="(item, index) in searchData" :key="index">
+				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail"></image>
 				<view style="display: flex; flex-direction: column; align-items: center;">
 					<view class="item-menu-name">{{item.name}}</view>
 					<!-- 价格 -->
@@ -21,9 +25,16 @@
 <script>
 	export default {
 		name: "search-list",
+		props: {
+			searchValue: {
+				type: String,
+				default: ''
+			}
+		},
 		data() {
 			return {
-				list: [{
+				sortData: 0,
+				dcdata: [{
 					"_id": "28ee4e3e6023757804385d0b1e9aed15",
 					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫保鸡丁",
@@ -215,11 +226,40 @@
 					"icon": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3192640871,229058421&fm=26&gp=0.jpg"
 				}]
 			};
+		},
+		methods: {
+			toDetail() {
+				
+			}
+		},
+		computed: {
+			searchData() {
+				let filData = this.dcdata.filter(item => {
+					return item.name.includes(this.searchValue)
+				})
+				if(this.sortData) {
+					filData.sort((a,b) => {
+						return this.sortData == 1 ? a.price - b.price : b.price - a.price
+					})
+				}
+				return filData
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+	.green {
+		color: #55d98d;
+	}
+	.filer {
+		margin: 20rpx 0 0rpx 0;
+		background-color: #fefefe;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		flex: 1;
+	}
 	.item-menu-name {
 		font-weight: normal;
 		font-size: 30rpx;

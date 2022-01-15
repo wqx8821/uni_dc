@@ -1,7 +1,7 @@
 <template>
 	<view class="u-wrap">
 		<view class="search_d">
-			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()"></u-search>
+			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()" style="padding: 0 10rpx;"></u-search>
 		</view>
 		<view class="swiper_wrap">
 			<u-swiper :list="list" height="300" mode="rect"></u-swiper>

@@ -1,11 +1,8 @@
 <template>
 	<view>
-		<u-search placeholder="想吃点啥" bg-color="#edf1f9" v-model="searchValue"></u-search>
+		<u-search placeholder="想吃点啥" bg-color="#edf1f9" :focus="true" v-model="searchValue" style="padding: 0 10rpx;"></u-search>
 		
-		<!-- <search-list></search-list> -->
-		<view>
-			{{searchData}}
-		</view>
+		<search-list :searchValue="searchValue"></search-list>
 	</view>
 </template>
 
@@ -13,23 +10,18 @@
 	export default {
 		data() {
 			return {
-				searchValue: '',
-				dcdata: [
-					{name: '100'},
-					{name: '120'},
-					{name: '130'}
-				]
+				searchValue: ''
 			}
 		},
 		methods: {
 
 		},
 		computed: {
-			searchData() {
-					return this.dcdata.filter(item => {
-						return item.name.includes(this.searchValue)
-					})
-			}
+			// searchData() {
+			// 	return this.dcdata.filter(item => {
+			// 		return item.name.includes(this.searchValue)
+			// 	})
+			// }
 		}
 	}
 </script>
