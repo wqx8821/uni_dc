@@ -1,7 +1,7 @@
 <template>
 	<view class="u-wrap">
 		<view class="search_d">
-			<u-search placeholder="想吃点啥" bg-color="#edf1f9"></u-search>
+			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()"></u-search>
 		</view>
 		<view class="swiper_wrap">
 			<u-swiper :list="list" height="300" mode="rect"></u-swiper>
@@ -65,6 +65,7 @@
 						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					}],
+				search: '', // 双向绑定定义搜索内容
 				value: 0,
 				scrollTop: 0, //tab标题的滚动条位置
 				oldScrollTop: 0,
@@ -91,6 +92,13 @@
 			toDetail() {
 				uni.navigateTo({
 					url: '/pages/detail/detail'
+				})
+			},
+			// 跳转搜索页面
+			toSearch() {
+				console.log('77');
+				uni.navigateTo({
+					url: '/pages/home/search/search'
 				})
 			},
 			// 点击左边的栏目切换
@@ -198,6 +206,7 @@
 				}, 10)
 			}
 		}
+		,
 	}
 </script>
 

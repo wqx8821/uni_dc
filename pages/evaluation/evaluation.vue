@@ -1,9 +1,11 @@
 <template>
 	<view>
+		<u-button>提交</u-button>
 		<!-- rate评分 -->
 		用餐满意度:<u-rate :count="count" v-model="value" size="60" gutter="30"></u-rate>
 		<!-- 图片上传 -->
 		<view class="wrap">
+			选择图片
 			<view class="pre-box" v-if="!showUploadList">
 				<view class="pre-item" v-for="(item, index) in lists" :key="index">
 					<image class="pre-item-image" :src="item.url" mode="aspectFill"></image>
