@@ -6,7 +6,7 @@
 			<template v-slot:left="{leftList}">
 				<view class="demo-warter" v-for="(item, index) in leftList" :key="index">
 					<!-- 警告：微信小程序中需要hx2.8.11版本才支持在template中结合其他组件，比如下方的lazy-load组件 -->
-					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon"></u-lazy-load>
+					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon" @click="toDetail()"></u-lazy-load>
 					<view class="demo-title">
 						{{item.name}}
 					</view>
@@ -20,7 +20,7 @@
 			</template>
 			<template v-slot:right="{rightList}">
 				<view class="demo-warter" v-for="(item, index) in rightList" :key="index">
-					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon"></u-lazy-load>
+					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon" @click="toDetail()"></u-lazy-load>
 					<view class="demo-title">
 						{{item.name}}
 					</view>
@@ -250,6 +250,12 @@
 			}, 1000)
 		},
 		methods: {
+			// 跳转详情页
+			toDetail() {
+				uni.navigateTo({
+					url: '/pages/detail/detail'
+				})
+			},
 			addRandomData() {
 				for(let i = 0; i < 10; i++) {
 					let index = this.$u.random(0, this.list.length - 1);

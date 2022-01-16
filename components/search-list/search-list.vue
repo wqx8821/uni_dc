@@ -4,9 +4,9 @@
 			<text @click="sortData = 0">热门推荐</text>
 			<text @click="sortData = !sortData">价格排序</text>
 		</view>
-		<view class="item-container">
+		<view class="item-container" v-if="searchData.length">
 			<view class="thumb-box" v-for="(item, index) in searchData" :key="index">
-				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail"></image>
+				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail()"></image>
 				<view style="display: flex; flex-direction: column; align-items: center;">
 					<view class="item-menu-name">{{item.name}}</view>
 					<!-- 价格 -->
@@ -18,6 +18,15 @@
 					<!-- 共{{ value }}件餐品 -->
 				</view>
 			</view>
+		</view>
+		<view v-else>
+			<u-empty
+			        mode="list"
+			        icon="http://cdn.uviewui.com/uview/empty/car.png"
+					marginTop="100"
+					iconSize="130"
+			>
+			</u-empty>
 		</view>
 	</view>
 </template>
@@ -228,9 +237,12 @@
 			};
 		},
 		methods: {
+			// 跳转详情页
 			toDetail() {
-				
-			}
+				uni.navigateTo({
+					url: '/pages/detail/detail'
+				})
+			},
 		},
 		computed: {
 			searchData() {

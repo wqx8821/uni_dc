@@ -1,8 +1,7 @@
 <template>
 	<view>
-		<u-button>提交</u-button>
-		<!-- rate评分 -->
-		用餐满意度:<u-rate :count="count" v-model="value" size="60" gutter="30"></u-rate>
+		<!-- 文本编辑 -->
+		<textarea value="" placeholder="感谢您的宝贵意见" class="evalText"/>
 		<!-- 图片上传 -->
 		<view class="wrap">
 			选择图片
@@ -17,7 +16,9 @@
 				</view>
 			</u-upload>
 		</view>
-		<search-list></search-list>
+		<!-- rate评分 -->
+		用餐满意度:<u-rate :count="count" v-model="value" size="60" gutter="30"></u-rate>
+		<u-button size="default">提交</u-button>
 	</view>
 </template>
 
@@ -46,10 +47,13 @@
 </script>
 
 <style lang="scss" scoped>
+	.evalText {
+		width: 100%;
+		background-color: #ebeef5;
+	}
 	.wrap {
 		padding: 24rpx;
 	}
-
 	.slot-btn {
 		width: 341rpx;
 		height: 140rpx;
@@ -72,12 +76,12 @@
 	}
 
 	.pre-item {
-		flex: 0 0 48.5%;
+		flex: 0 0 32%;
 		border-radius: 10rpx;
 		height: 140rpx;
 		overflow: hidden;
 		position: relative;
-		margin-bottom: 20rpx;
+		margin: 20rpx 0;
 	}
 
 	.pre-item-image {

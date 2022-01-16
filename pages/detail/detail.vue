@@ -6,6 +6,13 @@
 		<!-- 餐品名称价格特色 -->
 
 		<!-- 评价 -->
+		<view class="tag">
+			<view style="font-size: 32rpx;">食客评价</view>
+			<u-tag text="味道不错" mode="light" type="info" />
+			<u-tag text="价格公道" mode="light" type="info"/>
+			<u-tag text="好评+1" mode="light" type="info"/>
+			<u-tag text="服务态度好" mode="light" type="info"/>
+		</view>
 		<view class="comment" v-for="(res, index) in commentList" :key="res.id">
 			<view class="left">
 				<image :src="res.url" mode="aspectFill"></image>
@@ -37,6 +44,25 @@
 				</view>
 			</view>
 		</view>
+		
+		<!-- 购物栏 -->
+		<view class="navigation">
+			<view class="left">
+				<view class="item">
+					<u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
+					<view class="text u-line-1">首页</view>
+				</view>
+				<view class="item car">
+					<u-badge class="car-num" :count="9" type="error" :offset="[-3, -6]"></u-badge>
+					<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
+					<view class="text u-line-1">购物车</view>
+				</view>
+			</view>
+			<view class="right">
+				<view class="cart btn u-line-1">加入购物车</view>
+				<view class="buy btn u-line-1">立即购买</view>
+			</view>
+		</view>
 	</view>
 
 
@@ -46,19 +72,19 @@
 	export default {
 		data() {
 			return {
-				list: [{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+				list: [
+					{
+						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
 						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
 						title: '身无彩凤双飞翼，心有灵犀一点通'
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-					}
-				],
+					}],
 				commentList: []
 			}
 		},
@@ -149,8 +175,14 @@
 </script>
 
 <style lang="scss" scoped>
+	.tag {
+		padding-left: 30rpx; 
+		.u-tag {
+			margin: 20rpx 15rpx;
+		}
+	}
 	.wrap {
-		padding: 40rpx;
+		padding: 20rpx;
 	}
 
 
@@ -244,6 +276,52 @@
 					color: #5677fc;
 					margin-left: 10rpx;
 				}
+			}
+		}
+	}
+	// 购物栏
+	.navigation {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		border: solid 2rpx #f2f2f2;
+		background-color: #ffffff;
+		padding: 16rpx 0;
+		.left {
+			display: flex;
+			font-size: 20rpx;
+			margin-right: 30rpx;
+			.item {
+				margin: 0 30rpx;
+				&.car {
+					text-align: center;
+					position: relative;
+					.car-num {
+						position: absolute;
+						top: -10rpx;
+						right: -10rpx;
+					}
+				}
+			}
+		}
+		.right {
+			display: flex;
+			font-size: 28rpx;
+			align-items: center;
+			.btn {
+				line-height: 66rpx;
+				padding: 0 35rpx;
+				border-radius: 36rpx;
+				color: #ffffff;
+			}
+			.cart {
+				background-color: #ed3f14;
+				margin-right: 35rpx;
+			}
+			.buy {
+				background-color: #ff7900;
 			}
 		}
 	}
