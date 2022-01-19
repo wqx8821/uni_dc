@@ -1,12 +1,11 @@
 <template>
 	<view class="u-wrap">
 		<view class="search_d">
-			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()" style="padding: 0 10rpx;"></u-search>
+			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()"></u-search>
 		</view>
 		<view class="swiper_wrap">
 			<u-swiper :list="list" height="300" mode="rect"></u-swiper>
 		</view>
-		<!-- <u-line  margin="10rpx 0" color="#333333" border-style="dotted"/> -->
 		<view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
 				:scroll-into-view="itemId">
@@ -24,14 +23,14 @@
 						</view>
 						<view class="item-container">
 							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
-								<image class="item-menu-image" :src="item1.icon" mode="" @click="toDetail()"></image>
+								<image class="item-menu-image" :src="item1.icon" @click="toDetail()" style="border-radius: 10rpx;"></image>
 								<view style="display: flex; flex-direction: column; align-items: center;">
 									<view class="item-menu-name">{{item1.name}}</view>
 									<text class="total-price">
 										￥{{ item1.cat }}
 									</text>
 									<!-- 步进器 -->
-									<u-number-box  input-width="40"></u-number-box>
+									<u-number-box  input-width="40" :value="value" :key='index1'></u-number-box>
 									<!-- 价格 -->
 									<!-- 共{{ value }}件餐品 -->
 								</view>
@@ -41,7 +40,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		<dc_order></dc_order>
+		<dc_order ></dc_order>
 	</view>
 </template>
 <script>
@@ -51,19 +50,15 @@
 			return {
 				list: [{
 						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-226aa1402126662efd2013ad719f0b77_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644487883&t=edc2945aa37275441c6405dbfbb3a45e',
-						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					},
 					{
 						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
-						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
 					},
 					{
 						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
-						title: '身无彩凤双飞翼，心有灵犀一点通'
 					},
 					{
 						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
-						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					}],
 				search: '', // 双向绑定定义搜索内容
 				value: 0,
@@ -81,9 +76,6 @@
 
 			}
 		},
-		onLoad() {
-
-		},
 		onReady() {
 			this.getMenuItemTop()
 		},
@@ -96,7 +88,6 @@
 			},
 			// 跳转搜索页面
 			toSearch() {
-				console.log('77');
 				uni.navigateTo({
 					url: '/pages/home/search/search'
 				})

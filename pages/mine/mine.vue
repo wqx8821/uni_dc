@@ -1,18 +1,11 @@
 <template>
 	<view>
-		<u-navbar :is-back="false" title="　" :border-bottom="false">
-			<view class="u-flex u-row-right" style="width: 100%;">
-				<view class="camera u-flex u-row-center">
-					<u-icon name="camera-fill" color="#000000" size="48"></u-icon>
-				</view>
-			</view>
-		</u-navbar>
-		<view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30">
+		<view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30 u-m-t-30" @click="updateUserProfile">
 			<view class="u-m-r-10">
-				<u-avatar :src="pic" size="140"></u-avatar>
+				<u-avatar :src="userInfo.avatarUrl" size="140"></u-avatar>
 			</view>
 			<view class="u-flex-1">
-				<view class="u-font-18 u-p-b-20">昵称</view>
+				<view class="u-font-18 u-p-b-20">{{userInfo.nickName}}</view>
 				<view class="u-font-14 u-tips-color">卡号</view>
 			</view>
 
@@ -36,18 +29,51 @@
 </template>
 
 <script>
+	import cloudApi from '../../common/cloudApi.js'
 	export default {
 		data() {
 			return {
-				pic:'../../static/logo.png',
-				show:true
+				pic:'',
+				show:true,
+				userInfo:null,
 			}
 		},
-		onLoad() {
-			
-		},
 		methods: {
-			
+			updateUserProfile(){
+				uni.getUserProfile({
+					// desc提示信息
+					desc: '用于完善会员资料',
+					success: (res) => {
+						this.userInfo = Object.assign(this.userInfo,res.userInfo);
+						cloudApi.call({
+							name: 'updateuserinfo',
+							data: {
+								userInfo: this.userInfo
+							}
+						})
+					}
+				})
+				console.log(this.userInfo);
+			},
+		},
+		// 云函数
+		async onLoad(options){
+			uni.login({
+				provider: "weixin",
+				success: (res) => {
+					let code = res.code;
+					cloudApi.call({
+						name: "login",
+						data: {
+							code
+						},
+						success: (res) => {
+							this.userInfo = res.result
+						}
+					})
+				},
+		
+			})
 		}
 	}
 </script>

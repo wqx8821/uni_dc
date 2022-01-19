@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "柠檬小铺",
+  "usingComponents": {
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
+    "u-number-box": "/uview-ui/components/u-number-box/u-number-box",
+    "dc_order": "/components/dc_order/dc_order"
+  }
+}

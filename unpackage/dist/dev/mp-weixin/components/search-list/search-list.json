@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "u-number-box": "/uview-ui/components/u-number-box/u-number-box",
+    "u-empty": "/uview-ui/components/u-empty/u-empty"
+  },
+  "component": true
+}

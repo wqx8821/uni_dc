@@ -1,6 +1,6 @@
 <template>
 	<view class="navigation">
-		<view class="left">
+		<view class="left" @click="toOrder()">
 			<view class="item car">
 				<u-badge class="car-num" :count="0" type="error" :offset="[-3, -6]"></u-badge>
 				<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
@@ -15,7 +15,14 @@
 
 <script>
 export default {
-	
+	methods: {
+		toOrder() {
+			console.log(22);
+			uni.reLaunch({
+				url: '../../pages/order/order'
+			})
+		}
+	}
 };
 </script>
 
@@ -25,7 +32,7 @@ export default {
 	display: flex;
 	z-index: 999;
 	position: fixed;
-	bottom: 100rpx;
+	bottom: 0;
 	left: 16%;
 	right: 0;
 	// margin-top: 100rpx;

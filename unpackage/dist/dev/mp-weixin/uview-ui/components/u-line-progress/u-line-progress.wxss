@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.u-progress.data-v-0fa21744 {
+  overflow: hidden;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 100rpx;
+}
+.u-active.data-v-0fa21744 {
+  width: 0;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-end;
+  justify-content: space-around;
+  font-size: 20rpx;
+  color: #ffffff;
+  transition: all 0.4s ease;
+}
+.u-striped.data-v-0fa21744 {
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 39px 39px;
+}
+.u-striped-active.data-v-0fa21744 {
+  -webkit-animation: progress-stripes-data-v-0fa21744 2s linear infinite;
+          animation: progress-stripes-data-v-0fa21744 2s linear infinite;
+}
+@-webkit-keyframes progress-stripes-data-v-0fa21744 {
+0% {
+    background-position: 0 0;
+}
+100% {
+    background-position: 39px 0;
+}
+}
+@keyframes progress-stripes-data-v-0fa21744 {
+0% {
+    background-position: 0 0;
+}
+100% {
+    background-position: 39px 0;
+}
+}
+

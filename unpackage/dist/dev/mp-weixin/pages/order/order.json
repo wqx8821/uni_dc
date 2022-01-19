@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "订单列表",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-tabs-swiper": "/uview-ui/components/u-tabs-swiper/u-tabs-swiper",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "u-line": "/uview-ui/components/u-line/u-line",
+    "u-steps": "/uview-ui/components/u-steps/u-steps"
+  }
+}

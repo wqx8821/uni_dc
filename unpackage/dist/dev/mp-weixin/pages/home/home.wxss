@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.u-wrap.data-v-92bb8f34 {
+  height: calc(100vh);
+  display: flex;
+  flex-direction: column;
+}
+.swiper_wrap.data-v-92bb8f34 {
+  padding: 10rpx;
+}
+.search_d.data-v-92bb8f34 {
+  padding: 4rpx 0;
+  background-color: #f8f8f8;
+}
+.u-search-box.data-v-92bb8f34 {
+  padding: 18rpx 30rpx;
+}
+.u-menu-wrap.data-v-92bb8f34 {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+.u-search-inner.data-v-92bb8f34 {
+  background-color: #eaeaea;
+  border-radius: 100rpx;
+  display: flex;
+  align-items: center;
+  padding: 10rpx 16rpx;
+}
+.u-search-text.data-v-92bb8f34 {
+  font-size: 26rpx;
+  color: #909399;
+  margin-left: 10rpx;
+}
+.u-tab-view.data-v-92bb8f34 {
+  width: 200rpx;
+  height: 100%;
+}
+.u-tab-item.data-v-92bb8f34 {
+  height: 110rpx;
+  background: #f6f6f6;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #444;
+  font-weight: 400;
+  line-height: 1;
+}
+.u-tab-item-active.data-v-92bb8f34 {
+  position: relative;
+  color: #000;
+  font-size: 30rpx;
+  font-weight: 600;
+  background: #fff;
+}
+.u-tab-item-active.data-v-92bb8f34::before {
+  content: "";
+  position: absolute;
+  border-left: 4px solid #2979ff;
+  height: 32rpx;
+  left: 0;
+  top: 39rpx;
+}
+.u-tab-view.data-v-92bb8f34 {
+  height: 100%;
+}
+.right-box.data-v-92bb8f34 {
+  background-color: #fafafa;
+}
+.page-view.data-v-92bb8f34 {
+  padding: 16rpx;
+}
+.class-item.data-v-92bb8f34 {
+  margin-bottom: 30rpx;
+  background-color: #fff;
+  padding: 16rpx;
+  border-radius: 8rpx;
+}
+.class-item.data-v-92bb8f34:last-child {
+  min-height: 100vh;
+}
+.item-title.data-v-92bb8f34 {
+  font-size: 26rpx;
+  color: #303133;
+  font-weight: bold;
+}
+.item-menu-name.data-v-92bb8f34 {
+  font-weight: normal;
+  font-size: 30rpx;
+  margin-bottom: 6rpx;
+  color: #303133;
+}
+.item-container.data-v-92bb8f34 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.thumb-box.data-v-92bb8f34 {
+  background-color: #fafafa;
+  width: 100%;
+  padding: 6rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20rpx;
+}
+.item-menu-image.data-v-92bb8f34 {
+  width: 220rpx;
+  height: 220rpx;
+}
+

@@ -17,11 +17,7 @@
 
 		},
 		computed: {
-			// searchData() {
-			// 	return this.dcdata.filter(item => {
-			// 		return item.name.includes(this.searchValue)
-			// 	})
-			// }
+
 		}
 	}
 </script>

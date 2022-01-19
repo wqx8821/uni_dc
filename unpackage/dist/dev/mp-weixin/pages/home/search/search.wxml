@@ -1,0 +1,1 @@
+<view><u-search bind:input="__e" style="padding:0 10rpx;" vue-id="992db6e4-1" placeholder="想吃点啥" bg-color="#edf1f9" focus="{{true}}" value="{{searchValue}}" data-event-opts="{{[['^input',[['__set_model',['','searchValue','$event',[]]]]]]}}" bind:__l="__l"></u-search><search-list vue-id="992db6e4-2" searchValue="{{searchValue}}" bind:__l="__l"></search-list></view>

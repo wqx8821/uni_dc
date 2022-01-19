@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "新品上架",
+  "usingComponents": {
+    "newest-u-waterfall-left": "/pages/newest/newest-u-waterfall-left",
+    "newest-u-waterfall-right": "/pages/newest/newest-u-waterfall-right",
+    "u-notice-bar": "/uview-ui/components/u-notice-bar/u-notice-bar",
+    "u-waterfall": "/uview-ui/components/u-waterfall/u-waterfall",
+    "u-lazy-load": "/uview-ui/components/u-lazy-load/u-lazy-load",
+    "dc_order": "/components/dc_order/dc_order",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

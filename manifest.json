@@ -1,6 +1,6 @@
 {
     "name" : "uView-demo",
-    "appid" : "__UNI__DE5C136",
+    "appid" : "__UNI__AFF15B9",
     "description" : "",
     "versionName" : "1.5.0",
     "versionCode" : "100",
@@ -62,7 +62,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxc256e348c4032ebd",
+        "appid" : "wx83e7c03d8363216d",
         "setting" : {
             "urlCheck" : false
         },
