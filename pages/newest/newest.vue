@@ -1,253 +1,77 @@
 <template>
-	<view class="wrap">
-		<u-notice-bar mode="horizontal" :is-circular="true" :list="flagList" type="success"></u-notice-bar>
-		<!-- <u-button @click="clear">清空列表</u-button> -->
-		<u-waterfall v-model="flowList" ref="uWaterfall">
-			<template v-slot:left="{leftList}">
-				<view class="demo-warter" v-for="(item, index) in leftList" :key="index">
-					<!-- 警告：微信小程序中需要hx2.8.11版本才支持在template中结合其他组件，比如下方的lazy-load组件 -->
-					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon" @click="toDetail()"></u-lazy-load>
-					<view class="demo-title">
-						{{item.name}}
-					</view>
-					<view class="demo-price">
-						{{item.price}}元
-					</view>
-					<view class="demo-shop">
-						月销量{{item.sell}}份
+	<view class="u-wrap">
+		<view class="u-menu-wrap">
+			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
+				:scroll-into-view="itemId">
+				<view v-for="(item,index) in tabbar" :key="index" class="u-tab-item"
+					:class="[current == index ? 'u-tab-item-active' : '']" @tap.stop="swichMenu(index)">
+					<text class="u-line-1">{{item.name}}</text>
+				</view>
+			</scroll-view>
+			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box"
+				@scroll="rightScroll">
+				<view class="page-view">
+					<view class="class-item" :id="'item' + index" v-for="(item , index) in tabbar" :key="index">
+						<view class="item-title">
+							<text>{{item.name}}</text>
+						</view>
+						<view class="item-container">
+							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
+								<image class="item-menu-image" :src="item1.icon" @click="toDetail()" style="border-radius: 10rpx;"></image>
+								<view style="display: flex; flex-direction: column; align-items: center;">
+									<view class="item-menu-name">{{item1.name}}</view>
+									<text class="total-price">
+										￥{{ item1.cat }}
+									</text>
+									<!-- 步进器 -->
+									<u-number-box  input-width="40" :value="value" :key='index1'></u-number-box>
+									<!-- 价格 -->
+									<!-- 共{{ value }}件餐品 -->
+								</view>
+							</view>
+						</view>
 					</view>
 				</view>
-			</template>
-			<template v-slot:right="{rightList}">
-				<view class="demo-warter" v-for="(item, index) in rightList" :key="index">
-					<u-lazy-load threshold="-450" border-radius="10" :image="item.icon" :index="index" class="newIcon" @click="toDetail()"></u-lazy-load>
-					<view class="demo-title">
-						{{item.name}}
-					</view>
-					<view class="demo-price">
-						{{item.price}}元
-					</view>
-					<view class="demo-shop">
-						月销量{{item.sell}}份
-					</view>
-					<dc_order></dc_order>
-				</view>
-			</template>
-		</u-waterfall>
-		<u-loadmore bg-color="rgb(240, 240, 240)" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
+			</scroll-view>
+		</view>
+		<dc_order ></dc_order>
 	</view>
 </template>
-
 <script>
+	import classifyData from '@/common/classify.data.js';
 	export default {
 		data() {
 			return {
-				loadStatus: 'loadmore',
-				flowList: [],
-				flagList: ['喜讯','本店新品出炉','欢迎各位食客前来品尝！！！'],
 				list: [{
-					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
-					"name": "宫保鸡丁",
-					"price": 15,
-					"sell": 12,
-					"status": "上架",
-					"_createTime": 1612936568799,
-					"_updateTime": 1613344915884,
-					"fenlei": "店长推荐"
-				}, {
-					"_id": "b00064a7602375ba0403f9ad7bd398cc",
-					"icon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3815861419,3479367376&fm=26&gp=0.jpg",
-					"name": "鱼香肉丝",
-					"price": 12,
-					"sell": 17,
-					"status": "上架",
-					"_createTime": 1612936634258,
-					"_updateTime": 1613344947622,
-					"fenlei": "店长推荐"
-				}, {
-					"_id": "b00064a76027e22e04c888357d766c5c",
-					"icon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3607142225,358344641&fm=26&gp=0.jpg",
-					"name": "青椒土豆丝",
-					"price": 6,
-					"sell": 3,
-					"status": "上架",
-					"_createTime": 1613226542536,
-					"_updateTime": 1613344956454,
-					"fenlei": "店长推荐"
-				}, {
-					"_id": "28ee4e3e602943f8054157617e205cf4",
-					"name": "西湖醋鱼",
-					"price": 60,
-					"sell": 2,
-					"status": "上架",
-					"_createTime": 1613317112310,
-					"_updateTime": 1613344965171,
-					"icon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=903420395,2168798801&fm=26&gp=0.jpg",
-					"fenlei": "店长推荐"
-				}, {
-					"_id": "b00064a76029b0d904fd8deb38884c8c",
-					"fenlei": "店长推荐",
-					"name": "叫花鸡",
-					"price": 99,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613344985445,
-					"_updateTime": 1613344985445,
-					"icon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2304658453,99815512&fm=26&gp=0.jpg"
-				}, {
-					"_id": "79550af26029b0f804dbf1b91f7bbedf",
-					"fenlei": "店长推荐",
-					"name": "糖醋里脊",
-					"price": 35,
-					"sell": 2,
-					"status": "上架",
-					"_createTime": 1613345016404,
-					"_updateTime": 1613345016404,
-					"icon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4067368087,2410755031&fm=26&gp=0.jpg"
-				}, {
-					"_id": "79550af26029b10d04dbf29f7db04607",
-					"fenlei": "店长推荐",
-					"name": "龙井虾仁",
-					"price": 30,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613345036998,
-					"_updateTime": 1613345036998,
-					"icon": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2116709579,3121502215&fm=26&gp=0.jpg"
-				}, {
-					"_id": "79550af26029c07a04dd8c0a2cd710e5",
-					"fenlei": "经典套餐",
-					"name": "鱼香肉丝套餐",
-					"price": 30,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613348986044,
-					"_updateTime": 1613358715584,
-					"icon": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3541637759,3691401337&fm=26&gp=0.jpg"
-				}, {
-					"_id": "79550af26029e69604e4c14c13f85c60",
-					"fenlei": "经典套餐",
-					"name": "宫保鸡丁套餐",
-					"price": 35,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613358742773,
-					"_updateTime": 1613358742773,
-					"icon": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4033883906,2731252133&fm=26&gp=0.jpg"
-				}, {
-					"_id": "28ee4e3e6029e6b6054fd8021ff3d887",
-					"fenlei": "经典套餐",
-					"name": "狮子头套餐",
-					"price": 25,
-					"sell": 2,
-					"status": "上架",
-					"_createTime": 1613358774645,
-					"_updateTime": 1613358774645,
-					"icon": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3532063679,1935243818&fm=26&gp=0.jpg"
-				}, {
-					"_id": "28ee4e3e6029e6d6054fde646c53d05b",
-					"fenlei": "面食",
-					"name": "刀削面",
-					"price": 15,
-					"sell": 2,
-					"status": "上架",
-					"_createTime": 1613358806929,
-					"_updateTime": 1613358943110,
-					"icon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=308247864,386306050&fm=26&gp=0.jpg"
-				}, {
-					"_id": "b00064a76029e77305061e796dc97e38",
-					"fenlei": "面食",
-					"name": "牛肉拉面",
-					"price": 15,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613358963507,
-					"_updateTime": 1613358963507,
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4283016849,3128990035&fm=26&gp=0.jpg"
-				}, {
-					"_id": "79550af26029e78e04e4f2c737b08c21",
-					"fenlei": "面食",
-					"name": "老北京炸酱面",
-					"price": 15,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613358990572,
-					"_updateTime": 1613358990572,
-					"icon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4217671986,1894020003&fm=26&gp=0.jpg"
-				}, {
-					"_id": "28ee4e3e6029e7b805500db649913288",
-					"fenlei": "面食",
-					"name": "兰州拉面",
-					"price": 12,
-					"sell": 1,
-					"status": "上架",
-					"_createTime": 1613359032544,
-					"_updateTime": 1613359032544,
-					"icon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3686050677,567719515&fm=26&gp=0.jpg"
-				}, {
-					"_id": "b00064a76029e7ce0506300b2c4a29ed",
-					"fenlei": "经典套餐",
-					"name": "大盘鸡 ",
-					"price": 108,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613359054023,
-					"_updateTime": 1613359054023,
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=266238080,1902329614&fm=26&gp=0.jpg"
-				}, {
-					"_id": "79550af26029e80004e5090f1510d3dc",
-					"fenlei": "店长推荐",
-					"name": "杭州小笼包",
-					"price": 24,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613359104541,
-					"_updateTime": 1613385789470,
-					"icon": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3156899831,2997303086&fm=26&gp=0.jpg"
-				}, {
-					"_id": "b00064a76029e81205063dd309806711",
-					"fenlei": "面食",
-					"name": "炒刀削",
-					"price": 14,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613359122726,
-					"_updateTime": 1613359122726,
-					"icon": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1627026643,2380559582&fm=26&gp=0.jpg"
-				}, {
-					"_id": "28ee4e3e6029e8320550270d20ac9657",
-					"fenlei": "面食",
-					"name": "河南烩面",
-					"price": 14,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613359154317,
-					"_updateTime": 1613359154317,
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3521990855,1881261623&fm=26&gp=0.jpg"
-				}, {
-					"_id": "b00064a76029f564050916511cf25667",
-					"fenlei": "面食",
-					"name": "岐山臊子面",
-					"price": 16,
-					"sell": 0,
-					"status": "上架",
-					"_createTime": 1613362532882,
-					"_updateTime": 1613362532882,
-					"icon": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3192640871,229058421&fm=26&gp=0.jpg"
-				}]
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-226aa1402126662efd2013ad719f0b77_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644487883&t=edc2945aa37275441c6405dbfbb3a45e',
+					},
+					{
+						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
+					},
+					{
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
+					},
+					{
+						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
+					}],
+				search: '', // 双向绑定定义搜索内容
+				value: 0,
+				scrollTop: 0, //tab标题的滚动条位置
+				oldScrollTop: 0,
+				current: 0, // 预设当前项的值
+				menuHeight: 0, // 左边菜单的高度
+				menuItemHeight: 0, // 左边菜单item的高度
+				itemId: '', // 栏目右边scroll-view用于滚动的id
+				tabbar: classifyData,
+				menuItemPos: [],
+				arr: [],
+				scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
+				timer: null, // 定时器
+
 			}
 		},
-		onLoad() {
-			this.addRandomData();
-		},
-		onReachBottom() {
-			this.loadStatus = 'loading';
-			// 模拟数据加载
-			setTimeout(() => {
-				// this.addRandomData();
-				this.loadStatus = 'loadmore';
-			}, 1000)
+		onReady() {
+			this.getMenuItemTop()
 		},
 		methods: {
 			// 跳转详情页
@@ -256,93 +80,249 @@
 					url: '/pages/detail/detail'
 				})
 			},
-			addRandomData() {
-				for(let i = 0; i < 10; i++) {
-					let index = this.$u.random(0, this.list.length - 1);
-					// 先转成字符串再转成对象，避免数组对象引用导致数据混乱
-					let item = JSON.parse(JSON.stringify(this.list[index]))
-					item.id = this.$u.guid();
-					this.flowList.push(item);
+			// 点击左边的栏目切换
+			async swichMenu(index) {
+				if (this.arr.length == 0) {
+					await this.getMenuItemTop();
 				}
+				if (index == this.current) return;
+				this.scrollRightTop = this.oldScrollTop;
+				this.$nextTick(function() {
+					this.scrollRightTop = this.arr[index];
+					this.current = index;
+					this.leftMenuStatus(index);
+				})
 			},
+			// 获取一个目标元素的高度
+			getElRect(elClass, dataVal) {
+				new Promise((resolve, reject) => {
+					const query = uni.createSelectorQuery().in(this);
+					query.select('.' + elClass).fields({
+						size: true
+					}, res => {
+						// 如果节点尚未生成，res值为null，循环调用执行
+						if (!res) {
+							setTimeout(() => {
+								this.getElRect(elClass);
+							}, 10);
+							return;
+						}
+						this[dataVal] = res.height;
+						resolve();
+					}).exec();
+				})
+			},
+			// 观测元素相交状态
+			async observer() {
+				this.tabbar.map((val, index) => {
+					let observer = uni.createIntersectionObserver(this);
+					// 检测右边scroll-view的id为itemxx的元素与right-box的相交状态
+					// 如果跟.right-box底部相交，就动态设置左边栏目的活动状态
+					observer.relativeTo('.right-box', {
+						top: 0
+					}).observe('#item' + index, res => {
+						if (res.intersectionRatio > 0) {
+							let id = res.id.substring(4);
+							this.leftMenuStatus(id);
+						}
+					})
+				})
+			},
+			// 设置左边菜单的滚动状态
+			async leftMenuStatus(index) {
+				this.current = index;
+				// 如果为0，意味着尚未初始化
+				if (this.menuHeight == 0 || this.menuItemHeight == 0) {
+					await this.getElRect('menu-scroll-view', 'menuHeight');
+					await this.getElRect('u-tab-item', 'menuItemHeight');
+				}
+				// 将菜单活动item垂直居中
+				this.scrollTop = index * this.menuItemHeight + this.menuItemHeight / 2 - this.menuHeight / 2;
+			},
+			// 获取右边菜单每个item到顶部的距离
+			getMenuItemTop() {
+				new Promise(resolve => {
+					let selectorQuery = uni.createSelectorQuery();
+					selectorQuery.selectAll('.class-item').boundingClientRect((rects) => {
+						// 如果节点尚未生成，rects值为[](因为用selectAll，所以返回的是数组)，循环调用执行
+						if (!rects.length) {
+							setTimeout(() => {
+								this.getMenuItemTop();
+							}, 10);
+							return;
+						}
+						rects.forEach((rect) => {
+							// 这里减去rects[0].top，是因为第一项顶部可能不是贴到导航栏(比如有个搜索框的情况)
+							this.arr.push(rect.top - rects[0].top);
+							resolve();
+						})
+					}).exec()
+				})
+			},
+			// 右边菜单滚动
+			async rightScroll(e) {
+				this.oldScrollTop = e.detail.scrollTop;
+				if (this.arr.length == 0) {
+					await this.getMenuItemTop();
+				}
+				if (this.timer) return;
+				if (!this.menuHeight) {
+					await this.getElRect('menu-scroll-view', 'menuHeight');
+				}
+				setTimeout(() => { // 节流
+					this.timer = null;
+					// scrollHeight为右边菜单垂直中点位置
+					let scrollHeight = e.detail.scrollTop + this.menuHeight / 2;
+					for (let i = 0; i < this.arr.length; i++) {
+						let height1 = this.arr[i];
+						let height2 = this.arr[i + 1];
+						// 如果不存在height2，意味着数据循环已经到了最后一个，设置左边菜单为最后一项即可
+						if (!height2 || scrollHeight >= height1 && scrollHeight < height2) {
+							this.leftMenuStatus(i);
+							return;
+						}
+					}
+				}, 10)
+			}
 		}
+		,
 	}
 </script>
 
-<style>
-	/* page不能写带scope的style标签中，否则无效 */
-	page {
-		background-color: rgb(245, 245, 245);
-	}
-</style>
-
 <style lang="scss" scoped>
-	.newIcon {
-		height: 230rpx;
+	.u-wrap {
+		height: calc(100vh);
+		/* #ifdef H5 */
+		height: calc(100vh - var(--window-top) + 300rpx);
+		/* #endif */
+		display: flex;
+		flex-direction: column;
 	}
-	.demo-warter {
-		border-radius: 8px;
-		margin: 5px;
-		background-color: #ffffff;
-		padding: 8px;
+	.swiper_wrap {
+		padding: 10rpx;
+	}
+	.search_d {
+		padding: 4rpx 0;
+		background-color: #f8f8f8;
+	}
+	.u-search-box {
+		padding: 18rpx 30rpx;
+	}
+
+	.u-menu-wrap {
+		flex: 1;
+		display: flex;
+		overflow: hidden;
+	}
+
+	.u-search-inner {
+		background-color: rgb(234, 234, 234);
+		border-radius: 100rpx;
+		display: flex;
+		align-items: center;
+		padding: 10rpx 16rpx;
+	}
+
+	.u-search-text {
+		font-size: 26rpx;
+		color: $u-tips-color;
+		margin-left: 10rpx;
+	}
+
+	.u-tab-view {
+		width: 200rpx;
+		height: 100%;
+	}
+
+	.u-tab-item {
+		height: 110rpx;
+		background: #f6f6f6;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 26rpx;
+		color: #444;
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	.u-tab-item-active {
 		position: relative;
-	}
-	
-	.u-close {
-		position: absolute;
-		top: 32rpx;
-		right: 32rpx;
-	}
-	
-	.demo-image {
-		width: 100%;
-		border-radius: 4px;
-	}
-	
-	.demo-title {
+		color: #000;
 		font-size: 30rpx;
-		margin-top: 5px;
+		font-weight: 600;
+		background: #fff;
+	}
+
+	.u-tab-item-active::before {
+		content: "";
+		position: absolute;
+		border-left: 4px solid $u-type-primary;
+		height: 32rpx;
+		left: 0;
+		top: 39rpx;
+	}
+
+	.u-tab-view {
+		height: 100%;
+	}
+
+	.right-box {
+		background-color: rgb(250, 250, 250);
+	}
+
+	.page-view {
+		padding: 16rpx;
+	}
+
+	.class-item {
+		
+		margin-bottom: 30rpx;
+		background-color: #fff;
+		padding: 16rpx;
+		border-radius: 8rpx;
+	}
+
+	.class-item:last-child {
+		min-height: 100vh;
+	}
+
+	.item-title {
+		font-size: 26rpx;
+		color: $u-main-color;
+		font-weight: bold;
+	}
+
+	.item-menu-name {
+		font-weight: normal;
+		font-size: 30rpx;
+		margin-bottom: 6rpx;
 		color: $u-main-color;
 	}
-	
-	.demo-tag {
+
+	.item-container {
 		display: flex;
-		margin-top: 5px;
+		flex-wrap: wrap;
 	}
-	
-	.demo-tag-owner {
-		background-color: $u-type-error;
-		color: #FFFFFF;
-		display: flex;
-		align-items: center;
-		padding: 4rpx 14rpx;
-		border-radius: 50rpx;
-		font-size: 20rpx;
-		line-height: 1;
-	}
-	
-	.demo-tag-text {
-		border: 1px solid $u-type-primary;
-		color: $u-type-primary;
-		margin-left: 10px;
-		border-radius: 50rpx;
-		line-height: 1;
-		padding: 4rpx 14rpx;
+
+	.thumb-box {
+		background-color: #fafafa;
+		width: 100%;
+		padding: 6rpx;
+		// box-shadow: 0 0 1rpx #000000;
+		border-radius: 16rpx;
 		display: flex;
 		align-items: center;
-		border-radius: 50rpx;
-		font-size: 20rpx;
+		// justify-content: center;
+		flex-direction: row;
+		// align-items: flex-end;
+		justify-content: space-around;
+		margin-top: 20rpx;
 	}
-	
-	.demo-price {
-		font-size: 30rpx;
-		color: $u-type-error;
-		margin-top: 5px;
-	}
-	
-	.demo-shop {
-		font-size: 22rpx;
-		color: $u-tips-color;
-		margin-top: 5px;
+
+	.item-menu-image {
+		width: 220rpx;
+		height: 200rpx;
 	}
 </style>

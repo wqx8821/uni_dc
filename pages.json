@@ -91,7 +91,7 @@
 				"iconPath":"static/tabicons/forum_0.png",
 				"selectedIconPath":"static/tabicons/forum_1.png",
 				"pagePath":"pages/newest/newest",
-				"text": "新品"
+				"text": "菜单"
 			},
 			{
 				"iconPath":"static/tabicons/manage_0.png",

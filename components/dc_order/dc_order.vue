@@ -28,17 +28,17 @@ export default {
 
 <style lang="scss" scoped>
 .navigation {
-	width: 100rpx;
+	width: 93rpx;
 	display: flex;
 	z-index: 999;
 	position: fixed;
-	bottom: 0;
-	left: 16%;
+	bottom: 1%;
+	left: 1%;
 	right: 0;
 	// margin-top: 100rpx;
 	border: solid 2rpx #b8b8b8;
-	border-radius: 45%;
-	background-color: rgba(234, 234, 234, 0.7);
+	border-radius: 50%;
+	background-color: rgba(234, 234, 234, 0.1);
 	padding: 12rpx 0;
 	// flex: 1;
 	// justify-content: flex-end;
