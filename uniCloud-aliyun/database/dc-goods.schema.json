@@ -1,0 +1,77 @@
+{
+	"bsonType": "object",
+	"required": ["name", "month_sell_count", "total_sell_count", "is_on_sale", "is_alone_sale", "is_new", "is_hot"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"dc_foods": {
+			"category_name": {
+				"bsonType": "string",
+				"description": "食品分类",
+				"title": "分类",
+				"trim": "both"
+			},
+			"foods": {
+				"_id": {
+					"description": "存储文档 ID（商品 ID），系统自动生成"
+				},
+				"name": {
+					"bsonType": "string",
+					"description": "商品名称",
+					"title": "名称",
+					"trim": "both"
+				},
+				"foods_desc": {
+					"bsonType": "string",
+					"description": "商品详细描述",
+					"title": "详细描述",
+					"trim": "both"
+				},
+				"foods_thumb": {
+					"bsonType": "string",
+					"description": "商品缩略图，用于在列表或搜索结果中预览显示",
+					"title": "缩略图地址",
+					"pattern": "^(http:\/\/|https:\/\/|\/|.\/|@\/)\\S",
+					"trim": "both"
+				},
+				"foods_banner_imgs": {
+					"bsonType": "array",
+					"description": "商品详情页的banner图地址"
+				},
+				"price": {
+					"bsonType": "int",
+					"description": "价格"
+				},
+				"month_sell_count": {
+					"bsonType": "int",
+					"description": "月销量"
+				},
+				"total_sell_count": {
+					"bsonType": "int",
+					"description": "总销量"
+				},
+				"comment_count": {
+					"bsonType": "int",
+					"description": "累计评论数"
+				},
+				"is_alone_sale": {
+					"bsonType": "bool",
+					"description": "是否能单独销售；如果不能单独销售，则只能作为某商品的配件或者赠品销售"
+				},
+				"is_new": {
+					"bsonType": "bool",
+					"description": "是否新品",
+					"title": "是否新品"
+				},
+				"is_hot": {
+					"bsonType": "bool",
+					"description": "是否热销"
+				}
+			}
+		}
+	}
+}

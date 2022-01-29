@@ -56,12 +56,12 @@
 				<view class="item car">
 					<u-badge class="car-num" :count="9" type="error" :offset="[-3, -6]"></u-badge>
 					<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
-					<view class="text u-line-1">购物车</view>
+					<view class="text u-line-1">选佳肴</view>
 				</view>
 			</view>
 			<view class="right">
-				<view class="cart btn u-line-1">加入购物车</view>
-				<view class="buy btn u-line-1">立即购买</view>
+				<view class="cart btn u-line-1">加入美食清单</view>
+				<view class="buy btn u-line-1">立即结算</view>
 			</view>
 		</view>
 	</view>
@@ -86,8 +86,9 @@
 				commentList: []
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			this.getComment();
+			
 		},
 		methods: {
 			// 跳转到全部回复

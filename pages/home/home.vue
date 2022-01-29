@@ -6,6 +6,7 @@
 		<view class="swiper_wrap">
 			<u-swiper :list="list" height="300" mode="rect"></u-swiper>
 		</view>
+		<!-- 选择座位 -->
 		<view class="">
 			<u-select v-model="show" mode="single-column" :list="list1" @confirm="confirm"></u-select>
 			<u-tag :text="seat" mode="dark" @click="show = true"/>
@@ -13,7 +14,7 @@
 		</view>
 		<!-- 最新活动 -->
 		<view class="">
-			<u-card :title="title" :sub-title="subTitle" :thumb="thumb" padding="30" title-color='red' title-size="40">
+			<u-card :title="title" :sub-title="subTitle" padding="30" title-color='red' title-size="40">
 					<view class="" slot="body">
 						<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
 							<view class="u-body-item-title u-line-3">小铺新开张，至今日起前来本店消费的食客，送饮料一份，进店帮忙推广宣传送50元代金卷，祝各位食客吃的开心</view>
@@ -62,12 +63,12 @@
 					</u-grid>
 				</swiper-item>
 			</swiper>
-			<view class="indicator-dots" v-if="isSwiper">
+	<!-- 		<view class="indicator-dots" v-if="isSwiper">
 				<view class="indicator-dots-item" :class="[current == 0 ? 'indicator-dots-active' : '']">
 				</view>
 				<view class="indicator-dots-item" :class="[current == 1 ? 'indicator-dots-active' : '']">
 				</view>
-			</view>
+			</view> -->
 		</view>
 		<!-- <dc_order></dc_order> -->
 	</view>
@@ -78,16 +79,13 @@
 		data() {
 			return {
 				list: [{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-226aa1402126662efd2013ad719f0b77_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644487883&t=edc2945aa37275441c6405dbfbb3a45e',
+						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif',
 					},
 					{
-						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
+						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif',
 					},
 					{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
-					},
-					{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
+						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
 					}
 				],
 				search: '', // 双向绑定定义搜索内容
@@ -122,6 +120,8 @@
 				current: 0,
 				// 最新活动
 				title: 'NEW 开业福利！！！',
+				subTitle: '2022-05-21',
+				isSwiper: true, // 
 			}
 		},
 		methods: {

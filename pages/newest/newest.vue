@@ -1,30 +1,30 @@
 <template>
 	<view class="u-wrap">
-		<view class="u-menu-wrap">
+		<view class="u-menu-wrap" >
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
 				:scroll-into-view="itemId">
-				<view v-for="(item,index) in tabbar" :key="index" class="u-tab-item"
+				<view v-for="(item,index) in dataList" :key="index" class="u-tab-item"
 					:class="[current == index ? 'u-tab-item-active' : '']" @tap.stop="swichMenu(index)">
-					<text class="u-line-1">{{item.name}}</text>
+					<text class="u-line-1">{{item.category_name}}</text>
 				</view>
 			</scroll-view>
 			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box"
 				@scroll="rightScroll">
 				<view class="page-view">
-					<view class="class-item" :id="'item' + index" v-for="(item , index) in tabbar" :key="index">
+					<view class="class-item" :id="'item' + index" v-for="(item , index) in dataList" :key="index">
 						<view class="item-title">
-							<text>{{item.name}}</text>
+							<text>{{item.category_name}}</text>
 						</view>
 						<view class="item-container">
 							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
-								<image class="item-menu-image" :src="item1.icon" @click="toDetail()" style="border-radius: 10rpx;"></image>
+								<image class="item-menu-image" :src="item1.foods_thumb" @click="toDetail(item1.name)" style="border-radius: 10rpx;"></image>
 								<view style="display: flex; flex-direction: column; align-items: center;">
 									<view class="item-menu-name">{{item1.name}}</view>
 									<text class="total-price">
-										￥{{ item1.cat }}
+										￥{{ item1.price }}
 									</text>
 									<!-- 步进器 -->
-									<u-number-box  input-width="40" :value="value" :key='index1'></u-number-box>
+									<u-number-box  input-width="40" :index='item1.name' @change="valChange"></u-number-box>
 									<!-- 价格 -->
 									<!-- 共{{ value }}件餐品 -->
 								</view>
@@ -34,35 +34,22 @@
 				</view>
 			</scroll-view>
 		</view>
-		<dc_order ></dc_order>
+		<dc_order></dc_order>
 	</view>
 </template>
 <script>
-	import classifyData from '@/common/classify.data.js';
 	export default {
 		data() {
 			return {
-				list: [{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-226aa1402126662efd2013ad719f0b77_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644487883&t=edc2945aa37275441c6405dbfbb3a45e',
-					},
-					{
-						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
-					},
-					{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
-					},
-					{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
-					}],
-				search: '', // 双向绑定定义搜索内容
-				value: 0,
+				show: true,
+				AddObj: {}, // 加购的食物对象
 				scrollTop: 0, //tab标题的滚动条位置
 				oldScrollTop: 0,
 				current: 0, // 预设当前项的值
 				menuHeight: 0, // 左边菜单的高度
 				menuItemHeight: 0, // 左边菜单item的高度
 				itemId: '', // 栏目右边scroll-view用于滚动的id
-				tabbar: classifyData,
+				dataList: [],
 				menuItemPos: [],
 				arr: [],
 				scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
@@ -70,15 +57,35 @@
 
 			}
 		},
+		async onLoad() {
+			// 连接数据请求数据
+			const db = uniCloud.database();
+			const collection = db.collection('dc-goods');
+			const res = await collection.get()
+			// 深拷贝一份数据
+			const data = JSON.parse(JSON.stringify(res.result.data))
+			// 过滤数据
+			data.forEach(res => {
+				this.dataList.push(res.dc_foods)
+			})
+			
+			// console.log(this.dataList);
+		},
 		onReady() {
 			this.getMenuItemTop()
 		},
 		methods: {
 			// 跳转详情页
-			toDetail() {
+			toDetail(name) {
 				uni.navigateTo({
-					url: '/pages/detail/detail'
+					url: `/pages/detail/detail?name=${name}`
 				})
+			},
+			// 步进器 并入加入购物车的对象
+			valChange(e) {
+				// 以菜品名为键存储加购的数量
+				this.AddObj[e.index] = e.value
+				console.log(this.AddObj)
 			},
 			// 点击左边的栏目切换
 			async swichMenu(index) {
@@ -307,7 +314,7 @@
 	}
 
 	.thumb-box {
-		background-color: #fafafa;
+		background-color: #fbfbfb;
 		width: 100%;
 		padding: 6rpx;
 		// box-shadow: 0 0 1rpx #000000;

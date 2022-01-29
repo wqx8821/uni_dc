@@ -61,7 +61,7 @@
 			// 预显示的数字
 			value: {
 				type: Number,
-				default: 1
+				default: 0
 			},
 			// 背景颜色
 			bgColor: {

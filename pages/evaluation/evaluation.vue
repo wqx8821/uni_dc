@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 文本编辑 -->
-		<textarea value="" placeholder="感谢您的宝贵意见" class="evalText"/>
+		<textarea value="" placeholder="感谢您的宝贵意见" class="evalText" @blur="bindTextAreaBlur"/>
 		<!-- 图片上传 -->
 		<view class="wrap">
 			选择图片
@@ -32,11 +32,18 @@
 				showUploadList: false,
 				// 如果将某个ref的组件实例赋值给data中的变量，在小程序中会因为循环引用而报错
 				// 这里直接获取内部的lists变量即可
-				lists: []
+				lists: [],
+				reviewText: ''   // 评价的文字
 			}
 		},
 		methods: {
-
+			// 评价文本编辑器事件
+			bindTextAreaBlur(e) {
+				if(e.detail.value) return;
+				if(this.reviewText != e.detail.value ) {
+					this.reviewText = e.detail.value
+				}
+			}
 		},
 		// 只有onReady生命周期才能调用refs操作组件
 		onReady() {

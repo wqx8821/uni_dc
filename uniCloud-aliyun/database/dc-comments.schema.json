@@ -1,0 +1,45 @@
+{
+	"bsonType": "object",
+	"required": ["goods_id", "user_id", "content"],
+	"permission": {
+		"read": true,
+		"create": "auth.uid != null",
+		"update": "doc.user_id == auth.uid",
+		"delete": "doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（文章 ID），系统自动生成"
+		},
+		"goods_id": {
+			"bsonType": "string",
+			"description": "分类 id，参考`opendb-mall-goods`表",
+			"foreignKey": "opendb-mall-goods._id"
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "评论者的uid，参考 uni-id-users 表",
+			"foreignKey": "uni-id-users._id"
+		},
+		"content": {
+			"bsonType": "string",
+			"description": "评论内容",
+			"title": "评论内容",
+			"trim": "both"
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"description": "评论发表时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		},
+		"publish_ip": {
+			"bsonType": "string",
+			"description": "评论发表时，客户端的 IP 地址",
+			"forceDefaultValue": {
+				"$env": "clientIP"
+			}
+		}
+	}
+}
