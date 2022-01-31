@@ -86,7 +86,7 @@
 			console.log(this.detailData);
 		},
 		methods: {
-			// 点赞
+			// 评论点赞
 			getLike(index) {
 				this.commentList[index].isLike = !this.commentList[index].isLike;
 				if (this.commentList[index].isLike == true) {

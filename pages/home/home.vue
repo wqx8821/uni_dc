@@ -46,54 +46,6 @@
 				</view>
 			</scroll-view>
 		</view>
-		<!-- 新品推荐 -->
-		<view class="">
-			热门推荐
-			<swiper class="swiper" @change="change">
-				<swiper-item>
-					<u-grid :col="2" @click="click" :border="false">
-						<u-grid-item class="thumb-box">
-							<image src="../../static/gif/gif1.gif" mode="" style="width: 100%; height: 300rpx;"></image>
-						</u-grid-item>
-						<u-grid-item v-for="(item, index) in list.slice(1, 4)" :index="index" :key="index" class="thumb-box">
-							<image class="item-menu-image" :src="item.image" mode="" @click="toDetail(item.name)"></image>
-							<view style="display: flex; flex-direction: column; align-items: center;">
-								<!-- <view class="item-menu-name">{{item.name}}</view> -->
-								<view class="item-menu-name">{{item.name}}</view>
-								<!-- 价格 -->
-								<text class="total-price">
-									<!-- ￥{{ item.price }} -->
-									￥44元
-								</text>
-							</view>
-						</u-grid-item>
-					</u-grid>
-				</swiper-item>
-				<swiper-item>
-					<u-grid :col="2" @click="click" :border="false">
-						<u-grid-item v-for="(item, index) in list.slice(2, 4)" :index="index" :key="index" class="thumb-box">
-							<image class="item-menu-image" :src="item.image" mode="" @click="toDetail(item.name)"></image>
-							<view style="display: flex; flex-direction: column; align-items: center;">
-								<!-- <view class="item-menu-name">{{item.name}}</view> -->
-								<view class="item-menu-name">{{item.name}}</view>
-								<!-- 价格 -->
-								<text class="total-price">
-									<!-- ￥{{ item.price }} -->
-									￥44元
-								</text>
-							</view>
-						</u-grid-item>
-					</u-grid>
-				</swiper-item>
-			</swiper>
-	<!-- 		<view class="indicator-dots" v-if="isSwiper">
-				<view class="indicator-dots-item" :class="[current == 0 ? 'indicator-dots-active' : '']">
-				</view>
-				<view class="indicator-dots-item" :class="[current == 1 ? 'indicator-dots-active' : '']">
-				</view>
-			</view> -->
-
-		</view>
 		<!-- <dc_order></dc_order> -->
 	</view>
 </template>
@@ -214,58 +166,6 @@
 		border-radius: 8rpx;
 		margin-left: 12rpx;
 	}
-	
-	// 上新推荐
-	.item-menu-image {
-		width: 200rpx;
-		height: 200rpx;
-	}
-	.swiper {
-		height: 600rpx;
-		circular: true;
-	}
-	.u-grid-item {
-		width: 100%;
-		height: 300rpx;
-		
-	}
-	.u-grid-item /deep/ .u-grid-item-box {
-		// flex-direction: row ;
-		padding: 0;
-		justify-content: flex-start;
-		// align-items: 
-	}
-	.total-price {
-		color: red;
-	}
-	.item-menu-name {
-		font-weight: normal;
-		font-size: 30rpx;
-		margin-bottom: 6rpx;
-		color: $u-main-color;
-	}
-	
-	.thumb-box {
-		background-color: #F8F8F8;
-		width: 100%;
-		// padding: 6rpx;
-		// box-shadow: 0 0 1rpx #000000;
-		border-radius: 16rpx;
-		display: flex;
-		align-items: center;
-		// justify-content: center;
-		flex-direction: row;
-		// align-items: flex-end;
-		justify-content: space-around;
-		// margin: 2rpx;
-	}
-	
-	.item-menu-image {
-		width: 220rpx;
-		height: 200rpx;
-		border-radius: 15rpx;
-	}
-
 	/* 秒杀专区 */
 	.seckill-section{
 		margin: 10rpx 15rpx;

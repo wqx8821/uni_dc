@@ -250,7 +250,7 @@ var _default =
               console.log(_this.detailData);case 9:case "end":return _context.stop();}}}, _callee);}))();
   },
   methods: {
-    // 点赞
+    // 评论点赞
     getLike: function getLike(index) {
       this.commentList[index].isLike = !this.commentList[index].isLike;
       if (this.commentList[index].isLike == true) {

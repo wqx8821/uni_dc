@@ -5,8 +5,6 @@
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
     "u-select": "/uview-ui/components/u-select/u-select",
     "u-tag": "/uview-ui/components/u-tag/u-tag",
-    "u-card": "/uview-ui/components/u-card/u-card",
-    "u-grid": "/uview-ui/components/u-grid/u-grid",
-    "u-grid-item": "/uview-ui/components/u-grid-item/u-grid-item"
+    "u-card": "/uview-ui/components/u-card/u-card"
   }
 }

@@ -109,12 +109,6 @@ try {
     },
     uCard: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-card/u-card */ "uview-ui/components/u-card/u-card").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-card/u-card.vue */ 151))
-    },
-    uGrid: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-grid/u-grid */ "uview-ui/components/u-grid/u-grid").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-grid/u-grid.vue */ 158))
-    },
-    uGridItem: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-grid-item/u-grid-item */ "uview-ui/components/u-grid-item/u-grid-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-grid-item/u-grid-item.vue */ 165))
     }
   }
 } catch (e) {
@@ -138,44 +132,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.list.slice(1, 4)
-  var l1 = _vm.list.slice(2, 4)
-
   if (!_vm._isMounted) {
     _vm.e0 = function($event) {
       _vm.show = true
     }
-
-    _vm.e1 = function($event, item) {
-      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
-        _temp2 = _temp.eventParams || _temp["event-params"],
-        item = _temp2.item
-
-      var _temp, _temp2
-
-      return _vm.toDetail(item.name)
-    }
-
-    _vm.e2 = function($event, item) {
-      var _temp3 = arguments[arguments.length - 1].currentTarget.dataset,
-        _temp4 = _temp3.eventParams || _temp3["event-params"],
-        item = _temp4.item
-
-      var _temp3, _temp4
-
-      return _vm.toDetail(item.name)
-    }
   }
-
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        l0: l0,
-        l1: l1
-      }
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -210,54 +171,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -360,64 +273,31 @@ var _classifyData = _interopRequireDefault(__webpack_require__(/*! @/common/clas
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = { data: function data() {return { list: [{ image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif', name: 2 }, { image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif', name: 2 }, { image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif', name: 2 }], search: '', // 双向绑定定义搜索内容
       show: false, seat: "请选择座位号", // 座位
       list1: [{ value: '1', label: '一号座位' }, { value: '2', label: '二号座位' }, { value: '2', label: '三号座位' }, { value: '2', label: '四号座位' }, { value: '2', label: '五号座位' }, { value: '2', label: '六号座位' }], // 上新推荐
       current: 0, // 最新活动
       title: 'NEW 开业福利！！！', subTitle: '2022-05-21', isSwiper: true, // 
       goodsList: [] };}, methods: { // 跳转搜索页面
-    toSearch: function toSearch() {uni.navigateTo({ url: '/pages/home/search/search' });}, // 选择座位
-    confirm: function confirm(e) {console.log(e[0].label);this.seat = e[0].label;}, // 上新推荐
-    change: function change(e) {this.current = e.detail.current;}, // 推荐商品跳转详情页
-    toDetail: function toDetail(name) {uni.navigateTo({ url: "/pages/detail/detail?name=".concat(name) });} } };exports.default = _default;
+    toSearch: function toSearch() {uni.navigateTo({
+        url: '/pages/home/search/search' });
+
+    },
+    // 选择座位
+    confirm: function confirm(e) {
+      console.log(e[0].label);
+      this.seat = e[0].label;
+    },
+    // 上新推荐
+    change: function change(e) {
+      this.current = e.detail.current;
+    },
+    // 推荐商品跳转详情页
+    toDetail: function toDetail(name) {
+      uni.navigateTo({
+        url: "/pages/detail/detail?name=".concat(name) });
+
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
