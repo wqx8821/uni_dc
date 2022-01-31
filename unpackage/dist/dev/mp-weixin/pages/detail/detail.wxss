@@ -3,6 +3,22 @@
  * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
  * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
  */
+.detailStyle.data-v-3e159eb4 {
+  margin: 0 8rpx 10rpx 8rpx;
+  padding: 10rpx 10rpx;
+  border: 1px solid #f5f5f5;
+  border-radius: 20rpx;
+  box-shadow: 0 0 1px #7c7c7c;
+}
+.item-menu-name.data-v-3e159eb4 {
+  font-weight: normal;
+  font-size: 35rpx;
+  margin: 6rpx 25rpx;
+  color: #303133;
+}
+.total-price.data-v-3e159eb4 {
+  color: red;
+}
 .tag.data-v-3e159eb4 {
   padding-left: 30rpx;
 }
@@ -10,7 +26,7 @@
   margin: 20rpx 15rpx;
 }
 .wrap.data-v-3e159eb4 {
-  padding: 20rpx;
+  padding: 20rpx 20rpx;
 }
 .comment.data-v-3e159eb4 {
   display: flex;
@@ -55,80 +71,65 @@
 .comment .right .content.data-v-3e159eb4 {
   margin-bottom: 10rpx;
 }
-.comment .right .reply-box.data-v-3e159eb4 {
-  background-color: #f2f2f2;
-  border-radius: 12rpx;
-}
-.comment .right .reply-box .item.data-v-3e159eb4 {
-  padding: 20rpx;
-  border-bottom: solid 2rpx #e4e7ed;
-}
-.comment .right .reply-box .item .username.data-v-3e159eb4 {
-  font-size: 24rpx;
-  color: #999999;
-}
-.comment .right .reply-box .all-reply.data-v-3e159eb4 {
-  padding: 20rpx;
-  display: flex;
-  color: #5677fc;
-  align-items: center;
-}
-.comment .right .reply-box .all-reply .more.data-v-3e159eb4 {
-  margin-left: 6rpx;
-}
-.comment .right .bottom.data-v-3e159eb4 {
-  margin-top: 20rpx;
-  display: flex;
-  font-size: 24rpx;
-  color: #9a9a9a;
-}
-.comment .right .bottom .reply.data-v-3e159eb4 {
-  color: #5677fc;
-  margin-left: 10rpx;
-}
-.navigation.data-v-3e159eb4 {
+/* 底部操作菜单 */
+.page-bottom.data-v-3e159eb4 {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  left: 30rpx;
+  bottom: 30rpx;
+  z-index: 95;
   display: flex;
-  border: solid 2rpx #f2f2f2;
-  background-color: #ffffff;
-  padding: 16rpx 0;
+  justify-content: center;
+  align-items: center;
+  width: 690rpx;
+  height: 100rpx;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 20rpx 0 rgba(0, 0, 0, 0.5);
+  border-radius: 16rpx;
 }
-.navigation .left.data-v-3e159eb4 {
+.page-bottom .p-b-btn.data-v-3e159eb4 {
   display: flex;
-  font-size: 20rpx;
-  margin-right: 30rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #000000;
+  width: 96rpx;
+  height: 80rpx;
 }
-.navigation .left .item.data-v-3e159eb4 {
-  margin: 0 30rpx;
+.page-bottom .p-b-btn.active.data-v-3e159eb4, .page-bottom .p-b-btn.active .yticon.data-v-3e159eb4 {
+  color: #000000;
 }
-.navigation .left .item.car.data-v-3e159eb4 {
-  text-align: center;
+.page-bottom .action-btn-group.data-v-3e159eb4 {
+  display: flex;
+  height: 76rpx;
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: 0 20rpx 40rpx -16rpx #fa436a;
+  box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+  background: linear-gradient(to right, #ffac30, #fa436a, #F56C6C);
+  margin-left: 20rpx;
   position: relative;
 }
-.navigation .left .item.car .car-num.data-v-3e159eb4 {
+.page-bottom .action-btn-group.data-v-3e159eb4:after {
+  content: '';
   position: absolute;
-  top: -10rpx;
-  right: -10rpx;
+  top: 50%;
+  right: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 28rpx;
+  width: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
-.navigation .right.data-v-3e159eb4 {
+.page-bottom .action-btn-group .action-btn.data-v-3e159eb4 {
   display: flex;
-  font-size: 28rpx;
   align-items: center;
-}
-.navigation .right .btn.data-v-3e159eb4 {
-  line-height: 66rpx;
-  padding: 0 35rpx;
-  border-radius: 36rpx;
-  color: #ffffff;
-}
-.navigation .right .cart.data-v-3e159eb4 {
-  background-color: #ed3f14;
-  margin-right: 35rpx;
-}
-.navigation .right .buy.data-v-3e159eb4 {
-  background-color: #ff7900;
+  justify-content: center;
+  width: 180rpx;
+  height: 100%;
+  font-size: 24rpx;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 

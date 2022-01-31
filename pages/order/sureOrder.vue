@@ -2,15 +2,15 @@
 	<view>
 		<view class="goods-section">
 			<view class="g-header b-b">
-				<image class="logo" src="http://duoduo.qibukj.cn/./Upload/Images/20190321/201903211727515.png"></image>
-				<text class="name">西城小店铺</text>
+				<image class="logo" src=''></image>
+				<text class="name">柠檬小铺</text>
 			</view>
 			<!-- 商品列表 -->
 			<view class="g-item">
-				<image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=756705744,3505936868&fm=11&gp=0.jpg"></image>
+				<image src=""></image>
 				<view class="right">
-					<text class="title clamp">古黛妃 短袖t恤女夏装2019新款</text>
-					<text class="spec">春装款 L</text>
+					<text class="title clamp">宫保鸡丁</text>
+					<text class="spec"></text>
 					<view class="price-box">
 						<text class="price">￥17.8</text>
 						<text class="number">x 1</text>
@@ -22,9 +22,7 @@
 		<!-- 优惠明细 -->
 		<view class="yt-list">
 			<view class="yt-list-cell b-b" @click="toggleMask('show')">
-				<view class="cell-icon">
-					券
-				</view>
+				<view class="cell-icon">券</view>
 				<text class="cell-tit clamp">优惠券</text>
 				<text class="cell-tip active">
 					选择优惠券
@@ -32,9 +30,7 @@
 				<text class="cell-more wanjia wanjia-gengduo-d"></text>
 			</view>
 			<view class="yt-list-cell b-b">
-				<view class="cell-icon hb">
-					减
-				</view>
+				<view class="cell-icon hb">减</view>
 				<text class="cell-tit clamp">商家促销</text>
 				<text class="cell-tip disabled">暂无可用优惠</text>
 			</view>
@@ -47,11 +43,11 @@
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">优惠金额</text>
-				<text class="cell-tip red">-￥35</text>
+				<text class="cell-tip red">-￥0</text>
 			</view>
 			<view class="yt-list-cell desc-cell">
 				<text class="cell-tit clamp">备注</text>
-				<input class="desc" type="text" v-model="desc" placeholder="请填写备注信息" placeholder-class="placeholder" />
+				<input class="desc" type="text" v-model="desc" placeholder="可以备注口味哦" placeholder-class="placeholder" />
 			</view>
 		</view>
 		
@@ -69,12 +65,13 @@
 		<!-- 优惠券面板 -->
 		<view class="mask" :class="maskState===0 ? 'none' : maskState===1 ? 'show' : ''" @click="toggleMask">
 			<view class="mask-content" @click.stop.prevent="stopPrevent">
+				可选用优惠卷
 				<!-- 优惠券页面，仿mt -->
 				<view class="coupon-item" v-for="(item,index) in couponList" :key="index">
 					<view class="con">
 						<view class="left">
 							<text class="title">{{item.title}}</text>
-							<text class="time">有效期至2019-06-30</text>
+							<text class="time">有效期至2022-06-30</text>
 						</view>
 						<view class="right">
 							<text class="price">{{item.price}}</text>

@@ -17,13 +17,9 @@
 		<view class="u-m-t-20">
 			<u-cell-group>
 				<u-cell-item icon="heart" title="会员办理"></u-cell-item>
-				<u-cell-item icon="star" title="收藏"></u-cell-item>
-				<u-cell-item icon="coupon" title="卡券"></u-cell-item>
+				<u-cell-item icon="star" title="我的收藏"></u-cell-item>
+				<u-cell-item icon="coupon" title="退出登录"></u-cell-item>
 			</u-cell-group>
-		</view>
-		
-		<view class="u-m-t-80">
-			<u-button>退出登录</u-button>
 		</view>
 	</view>
 </template>
@@ -33,10 +29,11 @@
 	export default {
 		data() {
 			return {
-				pic:'',
-				show:true,
 				userInfo:null,
 			}
+		},
+		async onShow() {
+			await this.updateUserProfile()
 		},
 		methods: {
 			updateUserProfile(){

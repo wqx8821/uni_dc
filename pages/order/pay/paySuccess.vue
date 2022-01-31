@@ -1,11 +1,12 @@
 <template>
 	<view class="content">
+		<u-icon name="checkbox-mark" class="success-icon yticon icon-xuanzhong2"></u-icon>
 		<text class="success-icon yticon icon-xuanzhong2"></text>
 		<text class="tit">支付成功</text>
 		
 		<view class="btn-group">
-			<navigator url="/pages/order/order?state=0" open-type="redirect" class="mix-btn">查看订单</navigator>
-			<navigator url="/pages/index/index" open-type="switchTab" class="mix-btn hollow">返回首页</navigator>
+			<navigator url="/pages//order?state=0" open-type="redirect" class="mix-btn">查看订单</navigator>
+			<navigator url="/pages/home/home" open-type="switchTab" class="mix-btn hollow">返回首页</navigator>
 		</view>
 	</view>
 </template>
@@ -32,7 +33,7 @@
 	}
 	.success-icon{
 		font-size: 160rpx;
-		color: #fa436a;
+		color: #c53454;
 		margin-top: 100rpx;
 	}
 	.tit{
@@ -50,8 +51,8 @@
 		width: 600rpx;
 		height: 80rpx;
 		font-size: 26rpx;
-		color: #fff;
-		background-color: #FFFFFF;
+		color: #000;
+		background-color: #da3a5d;
 		border-radius: 10rpx;
 		&.hollow{
 			background: #fff;

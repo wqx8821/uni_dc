@@ -96,16 +96,25 @@ var components
 try {
   components = {
     uSearch: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 111))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 123))
     },
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 118))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 130))
     },
-    uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 125))
+    uSelect: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-select/u-select */ "uview-ui/components/u-select/u-select").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-select/u-select.vue */ 137))
     },
-    dc_order: function() {
-      return __webpack_require__.e(/*! import() | components/dc_order/dc_order */ "components/dc_order/dc_order").then(__webpack_require__.bind(null, /*! @/components/dc_order/dc_order.vue */ 132))
+    uTag: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 144))
+    },
+    uCard: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-card/u-card */ "uview-ui/components/u-card/u-card").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-card/u-card.vue */ 151))
+    },
+    uGrid: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-grid/u-grid */ "uview-ui/components/u-grid/u-grid").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-grid/u-grid.vue */ 158))
+    },
+    uGridItem: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-grid-item/u-grid-item */ "uview-ui/components/u-grid-item/u-grid-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-grid-item/u-grid-item.vue */ 165))
     }
   }
 } catch (e) {
@@ -129,6 +138,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.list.slice(1, 4)
+  var l1 = _vm.list.slice(2, 4)
+
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      _vm.show = true
+    }
+
+    _vm.e1 = function($event, item) {
+      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp2 = _temp.eventParams || _temp["event-params"],
+        item = _temp2.item
+
+      var _temp, _temp2
+
+      return _vm.toDetail(item.name)
+    }
+
+    _vm.e2 = function($event, item) {
+      var _temp3 = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp4 = _temp3.eventParams || _temp3["event-params"],
+        item = _temp4.item
+
+      var _temp3, _temp4
+
+      return _vm.toDetail(item.name)
+    }
+  }
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+        l1: l1
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -162,7 +209,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 20));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -208,158 +255,169 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _classifyData = _interopRequireDefault(__webpack_require__(/*! @/common/classify.data.js */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
-{
-  data: function data() {
-    return {
-      list: [{
-        image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-226aa1402126662efd2013ad719f0b77_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644487883&t=edc2945aa37275441c6405dbfbb3a45e' },
 
-      {
-        image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500' },
 
-      {
-        image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6' },
 
-      {
-        image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6' }],
 
-      search: '', // 双向绑定定义搜索内容
-      value: 0,
-      scrollTop: 0, //tab标题的滚动条位置
-      oldScrollTop: 0,
-      current: 0, // 预设当前项的值
-      menuHeight: 0, // 左边菜单的高度
-      menuItemHeight: 0, // 左边菜单item的高度
-      itemId: '', // 栏目右边scroll-view用于滚动的id
-      tabbar: _classifyData.default,
-      menuItemPos: [],
-      arr: [],
-      scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
-      timer: null // 定时器
-    };
 
-  },
-  onReady: function onReady() {
-    this.getMenuItemTop();
-  },
-  methods: {
-    // 跳转详情页
-    toDetail: function toDetail() {
-      uni.navigateTo({
-        url: '/pages/detail/detail' });
 
-    },
-    // 跳转搜索页面
-    toSearch: function toSearch() {
-      uni.navigateTo({
-        url: '/pages/home/search/search' });
 
-    },
-    // 点击左边的栏目切换
-    swichMenu: function swichMenu(index) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-                _this.arr.length == 0)) {_context.next = 3;break;}_context.next = 3;return (
-                  _this.getMenuItemTop());case 3:if (!(
 
-                index == _this.current)) {_context.next = 5;break;}return _context.abrupt("return");case 5:
-                _this.scrollRightTop = _this.oldScrollTop;
-                _this.$nextTick(function () {
-                  this.scrollRightTop = this.arr[index];
-                  this.current = index;
-                  this.leftMenuStatus(index);
-                });case 7:case "end":return _context.stop();}}}, _callee);}))();
-    },
-    // 获取一个目标元素的高度
-    getElRect: function getElRect(elClass, dataVal) {var _this2 = this;
-      new Promise(function (resolve, reject) {
-        var query = uni.createSelectorQuery().in(_this2);
-        query.select('.' + elClass).fields({
-          size: true },
-        function (res) {
-          // 如果节点尚未生成，res值为null，循环调用执行
-          if (!res) {
-            setTimeout(function () {
-              _this2.getElRect(elClass);
-            }, 10);
-            return;
-          }
-          _this2[dataVal] = res.height;
-          resolve();
-        }).exec();
-      });
-    },
-    // 观测元素相交状态
-    observer: function observer() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                _this3.tabbar.map(function (val, index) {
-                  var observer = uni.createIntersectionObserver(_this3);
-                  // 检测右边scroll-view的id为itemxx的元素与right-box的相交状态
-                  // 如果跟.right-box底部相交，就动态设置左边栏目的活动状态
-                  observer.relativeTo('.right-box', {
-                    top: 0 }).
-                  observe('#item' + index, function (res) {
-                    if (res.intersectionRatio > 0) {
-                      var id = res.id.substring(4);
-                      _this3.leftMenuStatus(id);
-                    }
-                  });
-                });case 1:case "end":return _context2.stop();}}}, _callee2);}))();
-    },
-    // 设置左边菜单的滚动状态
-    leftMenuStatus: function leftMenuStatus(index) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-                _this4.current = index;
-                // 如果为0，意味着尚未初始化
-                if (!(_this4.menuHeight == 0 || _this4.menuItemHeight == 0)) {_context3.next = 6;break;}_context3.next = 4;return (
-                  _this4.getElRect('menu-scroll-view', 'menuHeight'));case 4:_context3.next = 6;return (
-                  _this4.getElRect('u-tab-item', 'menuItemHeight'));case 6:
 
-                // 将菜单活动item垂直居中
-                _this4.scrollTop = index * _this4.menuItemHeight + _this4.menuItemHeight / 2 - _this4.menuHeight / 2;case 7:case "end":return _context3.stop();}}}, _callee3);}))();
-    },
-    // 获取右边菜单每个item到顶部的距离
-    getMenuItemTop: function getMenuItemTop() {var _this5 = this;
-      new Promise(function (resolve) {
-        var selectorQuery = uni.createSelectorQuery();
-        selectorQuery.selectAll('.class-item').boundingClientRect(function (rects) {
-          // 如果节点尚未生成，rects值为[](因为用selectAll，所以返回的是数组)，循环调用执行
-          if (!rects.length) {
-            setTimeout(function () {
-              _this5.getMenuItemTop();
-            }, 10);
-            return;
-          }
-          rects.forEach(function (rect) {
-            // 这里减去rects[0].top，是因为第一项顶部可能不是贴到导航栏(比如有个搜索框的情况)
-            _this5.arr.push(rect.top - rects[0].top);
-            resolve();
-          });
-        }).exec();
-      });
-    },
-    // 右边菜单滚动
-    rightScroll: function rightScroll(e) {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
-                _this6.oldScrollTop = e.detail.scrollTop;if (!(
-                _this6.arr.length == 0)) {_context4.next = 4;break;}_context4.next = 4;return (
-                  _this6.getMenuItemTop());case 4:if (!
 
-                _this6.timer) {_context4.next = 6;break;}return _context4.abrupt("return");case 6:if (
-                _this6.menuHeight) {_context4.next = 9;break;}_context4.next = 9;return (
-                  _this6.getElRect('menu-scroll-view', 'menuHeight'));case 9:
 
-                setTimeout(function () {// 节流
-                  _this6.timer = null;
-                  // scrollHeight为右边菜单垂直中点位置
-                  var scrollHeight = e.detail.scrollTop + _this6.menuHeight / 2;
-                  for (var i = 0; i < _this6.arr.length; i++) {
-                    var height1 = _this6.arr[i];
-                    var height2 = _this6.arr[i + 1];
-                    // 如果不存在height2，意味着数据循环已经到了最后一个，设置左边菜单为最后一项即可
-                    if (!height2 || scrollHeight >= height1 && scrollHeight < height2) {
-                      _this6.leftMenuStatus(i);
-                      return;
-                    }
-                  }
-                }, 10);case 10:case "end":return _context4.stop();}}}, _callee4);}))();
-    } } };exports.default = _default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _classifyData = _interopRequireDefault(__webpack_require__(/*! @/common/classify.data.js */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { list: [{ image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif', name: 2 }, { image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif', name: 2 }, { image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif', name: 2 }], search: '', // 双向绑定定义搜索内容
+      show: false, seat: "请选择座位号", // 座位
+      list1: [{ value: '1', label: '一号座位' }, { value: '2', label: '二号座位' }, { value: '2', label: '三号座位' }, { value: '2', label: '四号座位' }, { value: '2', label: '五号座位' }, { value: '2', label: '六号座位' }], // 上新推荐
+      current: 0, // 最新活动
+      title: 'NEW 开业福利！！！', subTitle: '2022-05-21', isSwiper: true, // 
+      goodsList: [] };}, methods: { // 跳转搜索页面
+    toSearch: function toSearch() {uni.navigateTo({ url: '/pages/home/search/search' });}, // 选择座位
+    confirm: function confirm(e) {console.log(e[0].label);this.seat = e[0].label;}, // 上新推荐
+    change: function change(e) {this.current = e.detail.current;}, // 推荐商品跳转详情页
+    toDetail: function toDetail(name) {uni.navigateTo({ url: "/pages/detail/detail?name=".concat(name) });} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

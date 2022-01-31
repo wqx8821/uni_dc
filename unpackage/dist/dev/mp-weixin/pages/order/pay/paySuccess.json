@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "支付成功",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-icon": "/uview-ui/components/u-icon/u-icon"
+  }
+}

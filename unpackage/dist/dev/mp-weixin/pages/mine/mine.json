@@ -5,7 +5,6 @@
     "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
     "u-icon": "/uview-ui/components/u-icon/u-icon",
     "u-cell-group": "/uview-ui/components/u-cell-group/u-cell-group",
-    "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
-    "u-button": "/uview-ui/components/u-button/u-button"
+    "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item"
   }
 }

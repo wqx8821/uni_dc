@@ -2,13 +2,12 @@
 	<view class="app">
 		<view class="price-box">
 			<text>支付金额</text>
-			<text class="price">38.88</text>
+			<text class="price">{{888}}</text>
 		</view>
 
 		<view class="pay-type-list">
-
 			<view class="type-item b-b" @click="changePayType(1)">
-				<text class="icon yticon icon-weixinzhifu"></text>
+				<u-icon name="weixin-fill" class="icon yticon icon-weixinzhifu"></u-icon>
 				<view class="con">
 					<text class="tit">微信支付</text>
 					<text>推荐使用微信支付</text>
@@ -19,9 +18,10 @@
 				</label>
 			</view>
 			<view class="type-item b-b" @click="changePayType(2)">
-				<text class="icon yticon icon-alipay"></text>
+				<u-icon name="zhifubao" class="icon yticon icon-alipay"></u-icon>
 				<view class="con">
 					<text class="tit">支付宝支付</text>
+					<text>支付宝不享有特惠</text>
 				</view>
 				<label class="radio">
 					<radio value="" color="#fa436a" :checked='payType == 2' />
@@ -29,7 +29,7 @@
 				</label>
 			</view>
 			<view class="type-item" @click="changePayType(3)">
-				<text class="icon yticon icon-erjiye-yucunkuan"></text>
+				<u-icon name="rmb-circle" class="icon yticon icon-erjiye-yucunkuan"></u-icon>
 				<view class="con">
 					<text class="tit">预存款支付</text>
 					<text>可用余额 ¥198.5</text>
@@ -141,7 +141,7 @@
 			display: flex;
 			flex-direction: column;
 			font-size: 24rpx;
-			color: #01aaef;
+			color: #fa436a;
 		}
 	}
 	.mix-btn {
@@ -153,7 +153,7 @@
 		margin: 80rpx auto 30rpx;
 		font-size: 30rpx;
 		color: #fff;
-		background-color: #01aaef;
+		background-color: #fa436a;
 		border-radius: 10rpx;
 		box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
 	}

@@ -1,18 +1,20 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/newest/newest",
+    "pages/menu/menu",
     "pages/order/order",
     "pages/mine/mine",
     "pages/detail/detail",
-    "pages/detail/reply",
     "pages/evaluation/evaluation",
-    "pages/home/search/search"
+    "pages/home/search/search",
+    "pages/order/sureOrder",
+    "pages/order/pay/pay",
+    "pages/order/pay/paySuccess"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uView",
+    "navigationBarTitleText": "柠檬小铺",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
@@ -20,7 +22,7 @@
     "color": "#000000",
     "selectedColor": "#55d98d",
     "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#F8F8F8",
     "list": [
       {
         "iconPath": "static/tabicons/home_0.png",
@@ -31,8 +33,8 @@
       {
         "iconPath": "static/tabicons/forum_0.png",
         "selectedIconPath": "static/tabicons/forum_1.png",
-        "pagePath": "pages/newest/newest",
-        "text": "新品"
+        "pagePath": "pages/menu/menu",
+        "text": "菜单"
       },
       {
         "iconPath": "static/tabicons/manage_0.png",
@@ -48,6 +50,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

@@ -7,6 +7,7 @@
   height: calc(100vh);
   display: flex;
   flex-direction: column;
+  background-color: #f8f8f8;
 }
 .swiper_wrap.data-v-92bb8f34 {
   padding: 10rpx;
@@ -15,79 +16,36 @@
   padding: 4rpx 0;
   background-color: #f8f8f8;
 }
-.u-search-box.data-v-92bb8f34 {
-  padding: 18rpx 30rpx;
+.u-body-item.data-v-92bb8f34 {
+  font-size: 32rpx;
+  color: #333;
+  padding: 20rpx 10rpx;
 }
-.u-menu-wrap.data-v-92bb8f34 {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-}
-.u-search-inner.data-v-92bb8f34 {
-  background-color: #eaeaea;
-  border-radius: 100rpx;
-  display: flex;
-  align-items: center;
-  padding: 10rpx 16rpx;
-}
-.u-search-text.data-v-92bb8f34 {
-  font-size: 26rpx;
-  color: #909399;
-  margin-left: 10rpx;
-}
-.u-tab-view.data-v-92bb8f34 {
-  width: 200rpx;
-  height: 100%;
-}
-.u-tab-item.data-v-92bb8f34 {
-  height: 110rpx;
-  background: #f6f6f6;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26rpx;
-  color: #444;
-  font-weight: 400;
-  line-height: 1;
-}
-.u-tab-item-active.data-v-92bb8f34 {
-  position: relative;
-  color: #000;
-  font-size: 30rpx;
-  font-weight: 600;
-  background: #fff;
-}
-.u-tab-item-active.data-v-92bb8f34::before {
-  content: "";
-  position: absolute;
-  border-left: 4px solid #2979ff;
-  height: 32rpx;
-  left: 0;
-  top: 39rpx;
-}
-.u-tab-view.data-v-92bb8f34 {
-  height: 100%;
-}
-.right-box.data-v-92bb8f34 {
-  background-color: #fafafa;
-}
-.page-view.data-v-92bb8f34 {
-  padding: 16rpx;
-}
-.class-item.data-v-92bb8f34 {
-  margin-bottom: 30rpx;
-  background-color: #fff;
-  padding: 16rpx;
+.u-body-item image.data-v-92bb8f34 {
+  width: 120rpx;
+  flex: 0 0 120rpx;
+  height: 120rpx;
   border-radius: 8rpx;
+  margin-left: 12rpx;
 }
-.class-item.data-v-92bb8f34:last-child {
-  min-height: 100vh;
+.item-menu-image.data-v-92bb8f34 {
+  width: 200rpx;
+  height: 200rpx;
 }
-.item-title.data-v-92bb8f34 {
-  font-size: 26rpx;
-  color: #303133;
-  font-weight: bold;
+.swiper.data-v-92bb8f34 {
+  height: 600rpx;
+  circular: true;
+}
+.u-grid-item.data-v-92bb8f34 {
+  width: 100%;
+  height: 300rpx;
+}
+.u-grid-item.data-v-92bb8f34 .u-grid-item-box {
+  padding: 0;
+  justify-content: flex-start;
+}
+.total-price.data-v-92bb8f34 {
+  color: red;
 }
 .item-menu-name.data-v-92bb8f34 {
   font-weight: normal;
@@ -95,23 +53,79 @@
   margin-bottom: 6rpx;
   color: #303133;
 }
-.item-container.data-v-92bb8f34 {
-  display: flex;
-  flex-wrap: wrap;
-}
 .thumb-box.data-v-92bb8f34 {
-  background-color: #fafafa;
+  background-color: #F8F8F8;
   width: 100%;
-  padding: 6rpx;
   border-radius: 16rpx;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 20rpx;
 }
 .item-menu-image.data-v-92bb8f34 {
   width: 220rpx;
   height: 200rpx;
+  border-radius: 15rpx;
+}
+/* 秒杀专区 */
+.seckill-section.data-v-92bb8f34 {
+  margin: 10rpx 15rpx;
+  padding: 4rpx 30rpx 24rpx;
+  background: #fff;
+}
+.seckill-section .s-header.data-v-92bb8f34 {
+  display: flex;
+  align-items: center;
+  height: 92rpx;
+  line-height: 1;
+}
+.seckill-section .s-header .s-img.data-v-92bb8f34 {
+  width: 140rpx;
+  height: 30rpx;
+}
+.seckill-section .s-header .tip.data-v-92bb8f34 {
+  font-size: 16px;
+  color: #000000;
+  margin: 0 20rpx 0 40rpx;
+}
+.seckill-section .s-header .timer.data-v-92bb8f34 {
+  display: inline-block;
+  width: 40rpx;
+  height: 36rpx;
+  text-align: center;
+  line-height: 36rpx;
+  margin-right: 14rpx;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.8);
+}
+.seckill-section .s-header .icon-you.data-v-92bb8f34 {
+  font-size: 16px;
+  color: #000000;
+  flex: 1;
+  text-align: right;
+}
+.seckill-section .floor-list.data-v-92bb8f34 {
+  white-space: nowrap;
+}
+.seckill-section .scoll-wrapper.data-v-92bb8f34 {
+  display: flex;
+  align-items: flex-start;
+}
+.seckill-section .floor-item.data-v-92bb8f34 {
+  width: 150rpx;
+  margin-right: 20rpx;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.8;
+}
+.seckill-section .floor-item image.data-v-92bb8f34 {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 6rpx;
+}
+.seckill-section .floor-item .price.data-v-92bb8f34 {
+  color: #000000;
 }
 

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "小铺菜单",
+  "usingComponents": {
+    "u-number-box": "/uview-ui/components/u-number-box/u-number-box",
+    "dc_order": "/components/dc_order/dc_order"
+  }
+}

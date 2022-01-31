@@ -1,0 +1,34 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.u-swipe-action.data-v-49234740 {
+  width: auto;
+  height: initial;
+  position: relative;
+  overflow: hidden;
+}
+.u-swipe-view.data-v-49234740 {
+  display: flex;
+  flex-direction: row;
+  height: initial;
+  position: relative;
+  /* 这一句很关键，覆盖默认的绝对定位 */
+}
+.u-swipe-content.data-v-49234740 {
+  flex: 1;
+}
+.u-swipe-del.data-v-49234740 {
+  position: relative;
+  font-size: 30rpx;
+  color: #ffffff;
+}
+.u-btn-text.data-v-49234740 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+

@@ -42,15 +42,7 @@
             }
             
         }
-		,{
-		    "path" : "pages/detail/reply",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
+		
         ,{
             "path" : "pages/evaluation/evaluation",
             "style" :                                                                                    

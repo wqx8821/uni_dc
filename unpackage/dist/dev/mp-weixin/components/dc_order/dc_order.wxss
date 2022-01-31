@@ -8,7 +8,8 @@
   display: flex;
   z-index: 999;
   position: fixed;
-  bottom: 100rpx;
+  bottom: 1%;
+  left: 1%;
   right: 0;
   border: solid 2rpx #b8b8b8;
   border-radius: 50%;

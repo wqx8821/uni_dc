@@ -35,39 +35,26 @@
 					</view>
 				</view>
 				<view class="content">{{ res.contentText }}</view>
-				<view class="reply-box">
-					<view class="item" v-for="(item, index) in res.replyList" :key="item.index">
-						<view class="username">{{ item.name }}</view>
-						<view class="text">{{ item.contentStr }}</view>
-					</view>
-					<view class="all-reply" @tap="toAllReply" v-if="res.replyList != undefined">
-						共{{ res.allReply }}条回复
-						<u-icon class="more" name="arrow-right" :size="26"></u-icon>
-					</view>
-				</view>
-				<view class="bottom">
-					{{ res.date }}
-					<view class="reply">回复</view>
-				</view>
 			</view>
 		</view>
-		
-		<!-- 购物栏 -->
-		<view class="navigation">
-			<view class="left">
-				<view class="item">
-					<u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
-					<view class="text u-line-1">首页</view>
-				</view>
-				<view class="item car">
-					<u-badge class="car-num" :count="9" type="error" :offset="[-3, -6]"></u-badge>
-					<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
-					<view class="text u-line-1">选佳肴</view>
-				</view>
+		<!-- 底部操作菜单 -->
+		<view class="page-bottom">
+			<navigator url="/pages/index/index" open-type="switchTab" class="p-b-btn">
+				<u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
+				<text>首页</text>
+			</navigator>
+			<navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">
+				<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
+				<text>购物车</text>
+			</navigator>
+			<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
+				<u-icon name="heart" :size="40" :color="$u.color['contentColor']"></u-icon>
+				<text>收藏</text>
 			</view>
-			<view class="right">
-				<view class="cart btn u-line-1">加入美食清单</view>
-				<view class="buy btn u-line-1">立即结算</view>
+			
+			<view class="action-btn-group">
+				<button type="primary" class=" action-btn no-border buy-now-btn" @click="buy">立即购买</button>
+				<button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button>
 			</view>
 		</view>
 	</view>
@@ -99,12 +86,6 @@
 			console.log(this.detailData);
 		},
 		methods: {
-			// 跳转到全部回复
-			toAllReply() {
-				uni.navigateTo({
-					url: '/pages/detail/reply'
-				});
-			},
 			// 点赞
 			getLike(index) {
 				this.commentList[index].isLike = !this.commentList[index].isLike;
@@ -120,26 +101,17 @@
 						id: 1,
 						name: '叶轻眉',
 						date: '12-25 18:58',
-						contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
+						contentText: '味道挺不错的,朋友都很喜欢吃,说下次还要继续点。 今天还是比较幸运的,去了不用排队,可能我们去比较早吧。 虽然中间出了一点小插曲,但还好不影响我们吃,而且店家提供的量是够的。 还担心不好吃呢,结果是感觉比想象中令人满意,..',
 						url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
 						allReply: 12,
 						likeNum: 33,
 						isLike: false,
-						replyList: [{
-								name: 'uview',
-								contentStr: 'uview是基于uniapp的一个UI框架，代码优美简洁，宇宙超级无敌彩虹旋转好用，用它！'
-							},
-							{
-								name: '粘粘',
-								contentStr: '今天吃什么，明天吃什么，晚上吃什么，我只是一只小猫咪为什么要烦恼这么多'
-							}
-						]
 					},
 					{
 						id: 2,
 						name: '叶轻眉1',
 						date: '01-25 13:58',
-						contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
+						contentText: '味道超赞，而且一看就让人觉得很有食欲，但是分量不大，属于比较精致的类型。胜在菜品也很新鲜，味道咸淡适中，而且火候掌握的刚好。',
 						allReply: 0,
 						likeNum: 11,
 						isLike: false,
@@ -149,21 +121,12 @@
 						id: 3,
 						name: '叶轻眉2',
 						date: '03-25 13:58',
-						contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
+						contentText: '这家餐厅环境很好，非常干净整洁，食物不仅外形美观，重要的是味道非常棒，色味俱佳。做法保留了食材原有的味道，清新爽口。',
 						allReply: 0,
 						likeNum: 21,
 						isLike: false,
 						allReply: 2,
 						url: '../../../static/logo.png',
-						replyList: [{
-								name: 'uview',
-								contentStr: 'uview是基于uniapp的一个UI框架，代码优美简洁，宇宙超级无敌彩虹旋转好用，用它！'
-							},
-							{
-								name: '豆包',
-								contentStr: '想吃冰糖葫芦粘豆包，但没钱5555.........'
-							}
-						]
 					},
 					{
 						id: 4,
@@ -213,7 +176,6 @@
 	.comment {
 		display: flex;
 		padding: 30rpx;
-
 		.left {
 			image {
 				width: 64rpx;
@@ -262,90 +224,68 @@
 			.content {
 				margin-bottom: 10rpx;
 			}
-
-			.reply-box {
-				background-color: rgb(242, 242, 242);
-				border-radius: 12rpx;
-
-				.item {
-					padding: 20rpx;
-					border-bottom: solid 2rpx $u-border-color;
-
-					.username {
-						font-size: 24rpx;
-						color: #999999;
-					}
-				}
-
-				.all-reply {
-					padding: 20rpx;
-					display: flex;
-					color: #5677fc;
-					align-items: center;
-
-					.more {
-						margin-left: 6rpx;
-					}
-				}
-			}
-
-			.bottom {
-				margin-top: 20rpx;
-				display: flex;
-				font-size: 24rpx;
-				color: #9a9a9a;
-
-				.reply {
-					color: #5677fc;
-					margin-left: 10rpx;
-				}
-			}
 		}
 	}
-	// 购物栏
-	.navigation {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		display: flex;
-		border: solid 2rpx #f2f2f2;
-		background-color: #f8f8f8;
-		padding: 16rpx 0;
-		.left {
+	
+	/* 底部操作菜单 */
+		.page-bottom{
+			position:fixed;
+			left: 30upx;
+			bottom:30upx;
+			z-index: 95;
 			display: flex;
-			font-size: 20rpx;
-			margin-right: 30rpx;
-			.item {
-				margin: 0 30rpx;
-				&.car {
-					text-align: center;
-					position: relative;
-					.car-num {
-						position: absolute;
-						top: -10rpx;
-						right: -10rpx;
-					}
-				}
-			}
-		}
-		.right {
-			display: flex;
-			font-size: 28rpx;
+			justify-content: center;
 			align-items: center;
-			.btn {
-				line-height: 66rpx;
-				padding: 0 35rpx;
-				border-radius: 36rpx;
-				color: #ffffff;
+			width: 690upx;
+			height: 100upx;
+			background: rgba(255,255,255,.9);
+			box-shadow: 0 0 20upx 0 rgba(0,0,0,.5);
+			border-radius: 16upx;
+			
+			.p-b-btn{
+				display:flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				font-size: 24rpx;
+				color: #000000;
+				width: 96upx;
+				height: 80upx;
+				&.active, &.active .yticon{
+					color: #000000;
+				}
 			}
-			.cart {
-				background-color: #ed3f14;
-				margin-right: 35rpx;
-			}
-			.buy {
-				background-color: #ff7900;
+			.action-btn-group{
+				display: flex;
+				height: 76upx;
+				border-radius: 100px;
+				overflow: hidden;
+				box-shadow: 0 20upx 40upx -16upx #fa436a;
+				box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+				background: linear-gradient(to right, #ffac30,#fa436a,#F56C6C);
+				margin-left: 20upx;
+				position:relative;
+				&:after{
+					content: '';
+					position:absolute;
+					top: 50%;
+					right: 50%;
+					transform: translateY(-50%);
+					height: 28upx;
+					width: 0;
+					border-right: 1px solid rgba(255,255,255,.5);
+				}
+				.action-btn{
+					display:flex;
+					align-items: center;
+					justify-content: center;
+					width: 180upx;
+					height: 100%;
+					font-size: 24rpx ;
+					padding: 0;
+					border-radius: 0;
+					background: transparent;
+				}
 			}
 		}
-	}
 </style>
