@@ -6,7 +6,7 @@
 		</view>
 		<view class="item-container" v-if="searchData.length">
 			<view class="thumb-box" v-for="(item, index) in searchData" :key="index">
-				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail()"></image>
+				<image class="item-menu-image" :src="item.icon" mode="" @click="toDetail(item.name)"></image>
 				<view style="display: flex; flex-direction: column; align-items: center;">
 					<view class="item-menu-name">{{item.name}}</view>
 					<!-- 价格 -->
@@ -238,9 +238,9 @@
 		},
 		methods: {
 			// 跳转详情页
-			toDetail() {
+			toDetail(name) {
 				uni.navigateTo({
-					url: '/pages/detail/detail'
+					url: `/pages/detail/detail?name=${name}`
 				})
 			},
 		},
@@ -275,6 +275,21 @@
 		justify-content: space-around;
 		flex: 1;
 	}
+	// 列表样式
+	.thumb-box {
+		background-color: #fbfbfb;
+		width: 100%;
+		padding: 6rpx 20rpx;
+		// box-shadow: 0 0 1rpx #000000;
+		border-radius: 16rpx;
+		display: flex;
+		align-items: center;
+		// justify-content: center;
+		flex-direction: row;
+		// align-items: flex-end;
+		justify-content: space-between;
+		margin-top: 10rpx;
+	}
 	.item-menu-name {
 		font-weight: normal;
 		font-size: 30rpx;
@@ -287,20 +302,7 @@
 		flex-wrap: wrap;
 	}
 
-	.thumb-box {
-		background-color: #fafafa;
-		width: 100%;
-		padding: 6rpx 20rpx;
-		// box-shadow: 0 0 1rpx #000000;
-		border-radius: 16rpx;
-		display: flex;
-		align-items: center;
-		// justify-content: center;
-		flex-direction: row;
-		// align-items: flex-end;
-		justify-content: space-between;
-		margin-top: 20rpx;
-	}
+
 
 	.item-menu-image {
 		width: 220rpx;

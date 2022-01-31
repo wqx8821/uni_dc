@@ -217,13 +217,14 @@
 	}
 
 	.u-menu-wrap {
+		background-color: #f8f8f8;
 		flex: 1;
 		display: flex;
 		overflow: hidden;
 	}
 
 	.u-search-inner {
-		background-color: rgb(234, 234, 234);
+		background-color: #F8F8F8;
 		border-radius: 100rpx;
 		display: flex;
 		align-items: center;
@@ -243,7 +244,7 @@
 
 	.u-tab-item {
 		height: 110rpx;
-		background: #f6f6f6;
+		background: #F8F8F8;
 		box-sizing: border-box;
 		display: flex;
 		align-items: center;
@@ -276,7 +277,7 @@
 	}
 
 	.right-box {
-		background-color: rgb(250, 250, 250);
+		background-color: #F8F8F8;
 	}
 
 	.page-view {
@@ -284,9 +285,8 @@
 	}
 
 	.class-item {
-		
 		margin-bottom: 30rpx;
-		background-color: #fff;
+		background-color: #f8f8f8;
 		padding: 16rpx;
 		border-radius: 8rpx;
 	}
@@ -311,10 +311,11 @@
 	.item-container {
 		display: flex;
 		flex-wrap: wrap;
+		background-color: #F8F8F8;
 	}
 
 	.thumb-box {
-		background-color: #fbfbfb;
+		background-color: #F8F8F8;
 		width: 100%;
 		padding: 6rpx;
 		// box-shadow: 0 0 1rpx #000000;

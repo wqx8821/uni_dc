@@ -1,11 +1,17 @@
 <template>
-	<view class="">
-		<h3>小黄鱼面</h3>
-		<view class="wrap">
-			<u-swiper :list="list" height="350" :autoplay="false"></u-swiper>
+	<view style="background-color: #f8f8f8;">
+		<!-- 餐品名称价格特色轮播 -->
+		<view class="detailStyle" v-for="item in detailData" :key="item.name">
+			<!-- 名字 -->
+			<text class="item-menu-name">{{item.name}}</text>
+			<!-- 详情页轮播 -->
+			<view class="wrap"   >
+				<u-swiper :list="item.foods_banner_imgs" :height="450" ></u-swiper>
+			</view>
+			<text class="u-line-2 u-p-l-20 u-p-r-20 u-m-t-20">{{item.foods_desc}}</text>
+			<text class="total-price">￥{{ item.price }}</text>
+			<u-divider></u-divider>
 		</view>
-		<!-- 餐品名称价格特色 -->
-
 		<!-- 评价 -->
 		<view class="tag">
 			<view style="font-size: 32rpx;">食客评价</view>
@@ -65,30 +71,32 @@
 			</view>
 		</view>
 	</view>
-
-
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				list: [
-					{
-						image: 'https://img1.baidu.com/it/u=2338790813,1586896540&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
-					},
-					{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftr-osdcp.qunarzz.com%2Ftr-osd-tr-space%2Fimg%2F13b1399e73f91eb66c801106d2bf266c.jpg_r_680x452x95_677723c5.jpg&refer=http%3A%2F%2Ftr-osdcp.qunarzz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488304&t=9e5d5f13877c9f4dcfab3f54307b19e6',
-					},
-					{
-						image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.cool-de.com%2Fdata%2Fattachment%2Fforum%2F201907%2F16%2F113959hrivh9vvq3kqa8xq.jpg&refer=http%3A%2F%2Fimage.cool-de.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644488137&t=50a4eeb1913549db8f3251a454254dd6',
-					}],
-				commentList: []
+				detailData: [], // 存储详情页数据
+				commentList: [] // 评论信息
 			}
 		},
-		onLoad(option) {
+		async onLoad(option) {
 			this.getComment();
-			
+			// 获取菜单页传递的菜品名称,连接数据库查询数据渲染
+			const db = uniCloud.database();
+			const collection = db.collection('dc-goods')
+			// 根据菜品名查询数据
+			const res = await collection.where({
+				'dc_foods.foods.name': option.name
+			}).limit(1).get()
+			// 处理查询的数据 获取指定内容
+			const filterData = res.result.data[0].dc_foods.foods
+			this.detailData = filterData.filter(res=> {
+				// 过滤数据
+				return res.name == option.name
+			})
+			console.log(this.detailData);
 		},
 		methods: {
 			// 跳转到全部回复
@@ -174,6 +182,25 @@
 </script>
 
 <style lang="scss" scoped>
+	.detailStyle {
+		margin: 0 8rpx 10rpx 8rpx;
+		padding: 10rpx 10rpx;
+		// background-color: #fafafa;
+		border: 1px solid #f5f5f5;
+		border-radius: 20rpx;
+		box-shadow: 0 0 1px #7c7c7c;
+	}
+	// 详细信息
+	.item-menu-name {
+		font-weight: normal;
+		font-size: 35rpx;
+		margin: 6rpx 25rpx;
+		color: $u-main-color;
+	}
+	.total-price {
+		color: red;
+	}
+	
 	.tag {
 		padding-left: 30rpx; 
 		.u-tag {
@@ -181,11 +208,8 @@
 		}
 	}
 	.wrap {
-		padding: 20rpx;
+		padding: 20rpx 20rpx;
 	}
-
-
-
 	.comment {
 		display: flex;
 		padding: 30rpx;
@@ -286,7 +310,7 @@
 		right: 0;
 		display: flex;
 		border: solid 2rpx #f2f2f2;
-		background-color: #ffffff;
+		background-color: #f8f8f8;
 		padding: 16rpx 0;
 		.left {
 			display: flex;
