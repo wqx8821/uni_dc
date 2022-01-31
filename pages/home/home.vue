@@ -14,7 +14,7 @@
 		<!-- 最新活动 -->
 		<view class="activity">
 			<u-card :title="title" :sub-title="subTitle" padding="30" title-color='red' title-size="40">
-					<view class="" slot="body">
+					<view slot="body">
 						<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
 							<view class="u-body-item-title u-line-3">小铺新开张，至今日起前来本店消费的食客，送饮料一份，进店帮忙推广宣传送50元代金卷，祝各位食客吃的开心</view>
 							<image src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg" mode="aspectFill"></image>
@@ -30,7 +30,6 @@
 				<text class="hour timer">07</text>
 				<text class="minute timer">13</text>
 				<text class="second timer">55</text>
-				<text class="yticon icon-you"></text>
 			</view>
 			<scroll-view class="floor-list" scroll-x>
 				<view class="scoll-wrapper">
@@ -46,7 +45,6 @@
 				</view>
 			</scroll-view>
 		</view>
-		<!-- <dc_order></dc_order> -->
 	</view>
 </template>
 <script>

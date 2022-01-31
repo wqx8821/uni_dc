@@ -220,11 +220,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var _classifyData = _interopRequireDefault(__webpack_require__(/*! @/common/classify.data.js */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
 //
 //
 //
@@ -278,8 +274,10 @@ var _default = { data: function data() {return { list: [{ image: 'https://vkceyu
       list1: [{ value: '1', label: '一号座位' }, { value: '2', label: '二号座位' }, { value: '2', label: '三号座位' }, { value: '2', label: '四号座位' }, { value: '2', label: '五号座位' }, { value: '2', label: '六号座位' }], // 上新推荐
       current: 0, // 最新活动
       title: 'NEW 开业福利！！！', subTitle: '2022-05-21', isSwiper: true, // 
-      goodsList: [] };}, methods: { // 跳转搜索页面
-    toSearch: function toSearch() {uni.navigateTo({
+      goodsList: [] };}, methods: {
+    // 跳转搜索页面
+    toSearch: function toSearch() {
+      uni.navigateTo({
         url: '/pages/home/search/search' });
 
     },
