@@ -102,6 +102,21 @@
 				goodsList: []
 			}
 		},
+		async onLoad() {
+			// 连接数据请求数据
+			const db = uniCloud.database();
+			const collection = db.collection('dc-goods');
+			const res = await collection.where({
+				'dc_foods.category_name': '每日特惠'
+			}).get()
+			// 深拷贝一份数据
+			const data = JSON.parse(JSON.stringify(res.result.data))
+			// 过滤数据
+			data.forEach(res => {
+				this.goodsList.push(res.dc_foods)
+			})
+			console.log(this.goodsList);
+		},
 		methods: {
 			// 跳转搜索页面
 			toSearch() {

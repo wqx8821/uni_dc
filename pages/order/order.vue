@@ -10,6 +10,13 @@
 			:key="index"
 			>
 				<view class="item u-border-bottom">
+					<u-checkbox 
+					v-model="item.checked" 
+					active-color="red" 
+					shape="circle"
+					:name="item.name"
+					@change="check"
+					></u-checkbox>
 					<image mode="aspectFill" class="item-menu-image" :src="item.icon" />
 					<!-- 此层wrap在此为必写的，否则可能会出现标题定位错误 -->
 					<view class="title-wrap">
@@ -17,7 +24,7 @@
 						<!-- 价格 -->
 						<text class="total-price">￥{{ item.price }}</text>
 						<!-- 数量 -->
-						<u-number-box :min="1" :max="100"></u-number-box>
+						<u-number-box v-model="item.sell" :min="1" :index='item.name' @change="numChange"></u-number-box>
 					</view>
 				</view>
 			</u-swipe-action>
@@ -25,8 +32,11 @@
 
 		<!-- 底部菜单栏 -->
 		<view class="action-section">
+			<!-- 全选按钮 -->
+			<!-- <u-button @click="checkedAll">全选</u-button> -->
+			<u-checkbox v-model="allChecked" active-color="red" shape="circle" @change="checkedAll" >全选</u-checkbox>
 			<view class="total-box">
-				<text class="price">¥8888</text>
+				<text class="price">¥{{totalPrice}}</text>
 				<text class="coupon">
 					已优惠
 					<text>74.35</text>
@@ -48,40 +58,39 @@
 					"name": "宫保鸡丁",
 					"price": 35,
 					"sell": 12,
-					"status": "上架",
+					"checked": true,
+					"_createTime": 1612936568799,
+					"_updateTime": 1613344915884,
+					"fenlei": "店长推荐"
+				},{
+					"_id": "28ee4e3e6023757804385d0b1e9aed15",
+					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
+					"name": "宫保鸡",
+					"price": 35,
+					"sell": 12,
+					"checked": true,
+					"_createTime": 1612936568799,
+					"_updateTime": 1613344915884,
+					"fenlei": "店长推荐"
+				},{
+					"_id": "28ee4e3e6023757804385d0b1e9aed15",
+					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
+					"name": "宫鸡丁",
+					"price": 35,
+					"sell": 12,
+					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,
 					"fenlei": "店长推荐"
 				}],
-				options: [
-					{
-						text: '删除',
-						style: {
-							backgroundColor: '#dd524d'
-						}
-					}
-				],
+				options: [{text: '删除',style: {backgroundColor: '#dd524d'}}],
 				show: false,
+				allChecked: true, // 全选
+				totalPrice: 0, // 总价
 			};
 		},
 		onLoad() {
-
-		},
-		computed: {
-			// 价格小数
-			priceDecimal() {
-				return val => {
-					if (val !== parseInt(val)) return val.slice(-2);
-					else return '00';
-				};
-			},
-			// 价格整数
-			priceInt() {
-				return val => {
-					if (val !== parseInt(val)) return val.split('.')[0];
-					else return val;
-				};
-			}
+			this.calcTotal() //计算总价
 		},
 		methods: {
 			// 跳转到评价页面
@@ -89,6 +98,59 @@
 				uni.navigateTo({
 					url: '../evaluation/evaluation'
 				})
+			},
+			// 订单选择状态， 是否全选
+			check(e) {
+				// 每次点击就更新一下全选按钮
+				this.allChecked = !this.allChecked
+				this.dcdata.forEach(item=>{
+					// 根据名字更新数据状态
+					if(item.name === e.name) {
+						item.checked = e.value
+					}
+					// 若有数据不是选中状态就将 全选状态去除
+					if(!item.checked) {
+						this.allChecked = false
+					}
+				})
+				this.calcTotal() //计算总价
+			},
+			// 全选
+			checkedAll(allcked) {
+				// 全选按钮状态
+				this.allChecked = !this.allChecked
+				// 列表按钮状态
+				this.dcdata.forEach(item=>{
+					item.checked = this.allChecked;
+				})
+				this.calcTotal() //计算总价
+			},
+			// 计算总价
+			calcTotal() {
+				// 每次计算前 清空状态，防止一直累加
+				this.totalPrice = 0
+				// 若购物车无商品就不计算
+				if(!this.dcdata.length) return;
+				this.dcdata.forEach(item=>{
+					// 只计算选中的食品
+					if(item.checked) {
+						this.totalPrice += item.price * item.sell;
+					}
+				})
+			},
+			// 计算商品数量
+			numChange(e) {
+				// 若购物车无商品就不计算
+				if(!this.dcdata.length) return;
+				// 根据步进器更新数据
+				this.dcdata.forEach(item=>{
+					// 只计算选中的食品
+					if(item.name === e.index) {
+						item.sell = e.value
+					}
+				})
+				// 计算总价
+				this.calcTotal()
 			},
 			// 跳转确认订单
 			createOrder() {
@@ -134,11 +196,15 @@
 		width: 220rpx;
 		height: 200rpx;
 		border-radius: 10rpx;
-		margin: 0 20rpx;
+		margin: 0 20rpx 0 0;
 	}
 	.item {
 		display: flex;
-		padding: 20rpx;
+		background-color: rgba(247, 247, 241, 0.7);
+		border-radius: 10rpx;
+		margin: 0 10rpx;
+		margin-top: 5rpx;
+		padding: 10rpx;
 	}
 	.title-wrap {
 		display: flex;
@@ -170,20 +236,22 @@
 			flex: 1;
 			display: flex;
 			flex-direction: column;
-			text-align: right;
-			padding-right: 40rpx;
+			align-items: center;
+			// justify-content: space-between;
+			// text-align: right;
+			// padding-right: 40rpx;
 
 			.price {
-				font-size: 34rpx;
-				color: rgba(217, 60, 93, 0.72);
+				font-size: 32rpx;
+				color: #303133;
 			}
 
 			.coupon {
-				font-size: 34rpx;
-				color: rgba(217, 60, 93, 0.72);
+				font-size: 26rpx;
+				color: #909399;
 
 				text {
-					color: rgba(217, 60, 93, 0.72);
+					color: #303133;
 				}
 			}
 		}

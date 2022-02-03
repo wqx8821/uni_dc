@@ -97,7 +97,7 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 123))
     },
     searchList: function() {
-      return __webpack_require__.e(/*! import() | components/search-list/search-list */ "components/search-list/search-list").then(__webpack_require__.bind(null, /*! @/components/search-list/search-list.vue */ 256))
+      return __webpack_require__.e(/*! import() | components/search-list/search-list */ "components/search-list/search-list").then(__webpack_require__.bind(null, /*! @/components/search-list/search-list.vue */ 235))
     }
   }
 } catch (e) {

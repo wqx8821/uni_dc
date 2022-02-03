@@ -39,13 +39,13 @@
 		</view>
 		<!-- 底部操作菜单 -->
 		<view class="page-bottom">
-			<navigator url="/pages/index/index" open-type="switchTab" class="p-b-btn">
+			<navigator url="/pages/home/home" open-type="switchTab" class="p-b-btn">
 				<u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
 				<text>首页</text>
 			</navigator>
-			<navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">
+			<navigator url="/pages/order/order" open-type="switchTab" class="p-b-btn">
 				<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
-				<text>购物车</text>
+				<text>美食车</text>
 			</navigator>
 			<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
 				<u-icon name="heart" :size="40" :color="$u.color['contentColor']"></u-icon>
@@ -53,8 +53,8 @@
 			</view>
 			
 			<view class="action-btn-group">
-				<button type="primary" class=" action-btn no-border buy-now-btn" @click="buy">立即购买</button>
-				<button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button>
+				<button type="primary" class="action-btn no-border add-cart-btn" >加入美食车</button>
+				<button type="primary" class="action-btn no-border buy-now-btn" @click="toSureOrder()">立即购买</button>
 			</view>
 		</view>
 	</view>
@@ -65,7 +65,8 @@
 		data() {
 			return {
 				detailData: [], // 存储详情页数据
-				commentList: [] // 评论信息
+				commentList: [], // 评论信息
+				favorite: true, // 收藏状态
 			}
 		},
 		async onLoad(option) {
@@ -139,7 +140,22 @@
 						isLike: false
 					}
 				];
-			}
+			},
+			// 收藏
+			toFavorite(){
+				this.favorite = !this.favorite;
+			},
+			// 跳转立即购买
+			toSureOrder() {
+				uni.navigateTo({
+					url: '/pages/order/sureOrder'
+				})
+			},
+			// toOrder() {
+			// 	uni.switchTab({
+			// 		url: '/pages/order/order'
+			// 	})
+			// }
 		}
 	};
 </script>
@@ -238,7 +254,7 @@
 			align-items: center;
 			width: 690upx;
 			height: 100upx;
-			background: rgba(255,255,255,.9);
+			background: rgba(255,255,255,.6);
 			box-shadow: 0 0 20upx 0 rgba(0,0,0,.5);
 			border-radius: 16upx;
 			

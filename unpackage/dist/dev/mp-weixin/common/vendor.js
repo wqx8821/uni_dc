@@ -11761,9 +11761,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         "127.0.0.1",
         "192.168.114.67"
     ],
-    "debugPort": 3822,
+    "debugPort": 14411,
     "initialLaunchType": "local",
-    "servePort": 3823,
+    "servePort": 14412,
     "skipFiles": [
         "<node_internals>/**/*.js",
         "C:/HBuilder/HBuilderX/plugins/unicloud/**/*.js"
