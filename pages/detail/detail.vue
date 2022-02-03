@@ -70,6 +70,7 @@
 			}
 		},
 		async onLoad(option) {
+			// 执行评论列表
 			this.getComment();
 			// 获取菜单页传递的菜品名称,连接数据库查询数据渲染
 			const db = uniCloud.database();
