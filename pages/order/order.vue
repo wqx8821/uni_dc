@@ -17,14 +17,14 @@
 					:name="item.name"
 					@change="check"
 					></u-checkbox>
-					<image mode="aspectFill" class="item-menu-image" :src="item.icon" />
+					<image mode="aspectFill" class="item-menu-image" :src="item.foods_thumb" />
 					<!-- 此层wrap在此为必写的，否则可能会出现标题定位错误 -->
 					<view class="title-wrap">
 						<view class="item-menu-name">{{item.name}}</view>
 						<!-- 价格 -->
 						<text class="total-price">￥{{ item.price }}</text>
 						<!-- 数量 -->
-						<u-number-box v-model="item.sell" :min="1" :index='item.name' @change="numChange"></u-number-box>
+						<u-number-box v-model="item.number" :min="1" :index='item.name' @change="numChange"></u-number-box>
 					</view>
 				</view>
 			</u-swipe-action>
@@ -36,10 +36,10 @@
 			<!-- <u-button @click="checkedAll">全选</u-button> -->
 			<u-checkbox v-model="allChecked" active-color="red" shape="circle" @change="checkedAll" >全选</u-checkbox>
 			<view class="total-box">
-				<text class="price">¥{{totalPrice}}</text>
+				<text class="price">总计  ¥{{totalPrice}}</text>
 				<text class="coupon">
 					已优惠
-					<text>74.35</text>
+					<text>0.00</text>
 					元
 				</text>
 			</view>
@@ -54,30 +54,30 @@
 			return {
 				dcdata: [{
 					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
+					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫保鸡丁",
 					"price": 35,
-					"sell": 12,
+					"number": 12,
 					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,
 					"fenlei": "店长推荐"
 				},{
 					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
+					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫保鸡",
 					"price": 35,
-					"sell": 12,
+					"number": 12,
 					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,
 					"fenlei": "店长推荐"
 				},{
 					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"icon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
+					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫鸡丁",
 					"price": 35,
-					"sell": 12,
+					"number": 12,
 					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,
@@ -134,7 +134,7 @@
 				this.dcdata.forEach(item=>{
 					// 只计算选中的食品
 					if(item.checked) {
-						this.totalPrice += item.price * item.sell;
+						this.totalPrice += item.price * item.number;
 					}
 				})
 			},
@@ -146,7 +146,7 @@
 				this.dcdata.forEach(item=>{
 					// 只计算选中的食品
 					if(item.name === e.index) {
-						item.sell = e.value
+						item.number = e.value 
 					}
 				})
 				// 计算总价
@@ -154,19 +154,24 @@
 			},
 			// 跳转确认订单
 			createOrder() {
-				// let list = this.cartList;
-				// let goodsData = [];
-				// list.forEach(item => {
-				// 	if (item.checked) {
-				// 		goodsData.push({
-				// 			attr_val: item.attr_val,
-				// 			number: item.number
-				// 		})
-				// 	}
-				// })
+				let list = this.dcdata;
+				let foodsData = [];
+				list.forEach(item => {
+					if (item.checked) {
+						// 将必须的字段传入 确认订单页
+						foodsData.push({
+							// foods_thumb: item.foods_thumb,
+							name: item.name,
+							price: item.price,
+							number: item.number,
+							// totalPrice:this.totalPrice
+						})
+					}
+				})
+				
 				uni.navigateTo({
 					url: `/pages/order/sureOrder?data=${JSON.stringify({
-							// goodsData: goodsData
+							foodsData: foodsData
 						})}`
 				})
 			},

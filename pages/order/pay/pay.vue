@@ -2,7 +2,7 @@
 	<view class="app">
 		<view class="price-box">
 			<text>支付金额</text>
-			<text class="price">{{888}}</text>
+			<text class="price">{{total}}</text>
 		</view>
 
 		<view class="pay-type-list">
@@ -50,15 +50,16 @@
 	export default {
 		data() {
 			return {
-				payType: 1,
-				orderInfo: {}
+				payType: 1, // 判断支付方式
+				total: 0,//实付款金额
 			};
 		},
 		computed: {
 		
 		},
 		onLoad(options) {
-			
+			// 将接受的总价 赋值出去
+			this.total = options.total
 		},
 
 		methods: {

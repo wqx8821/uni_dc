@@ -40,15 +40,15 @@
 		<!-- 底部操作菜单 -->
 		<view class="page-bottom">
 			<navigator url="/pages/home/home" open-type="switchTab" class="p-b-btn">
-				<u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
+				<u-icon name="home" :size="40"></u-icon>
 				<text>首页</text>
 			</navigator>
 			<navigator url="/pages/order/order" open-type="switchTab" class="p-b-btn">
-				<u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
+				<u-icon name="shopping-cart" :size="43"></u-icon>
 				<text>美食车</text>
 			</navigator>
 			<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
-				<u-icon name="heart" :size="40" :color="$u.color['contentColor']"></u-icon>
+				<u-icon name="heart" :size="40" :color="$u.color['favorite']"></u-icon>
 				<text>收藏</text>
 			</view>
 			
@@ -147,8 +147,16 @@
 			},
 			// 跳转立即购买
 			toSureOrder() {
+				let foodsData = [{
+					name: this.detailData[0].name,
+					price: this.detailData[0].price,
+					number: 1,
+				}]
+				this.detailData
 				uni.navigateTo({
-					url: '/pages/order/sureOrder'
+					url: `/pages/order/sureOrder?data=${JSON.stringify({
+							foodsData: foodsData
+						})}`
 				})
 			},
 			// toOrder() {
@@ -268,7 +276,7 @@
 				width: 96upx;
 				height: 80upx;
 				&.active, &.active .yticon{
-					color: #000000;
+					color: #fa436a;
 				}
 			}
 			.action-btn-group{

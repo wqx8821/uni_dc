@@ -6,14 +6,14 @@
 				<text class="name">柠檬小铺</text>
 			</view>
 			<!-- 商品列表 -->
-			<view class="g-item">
-				<image src=""></image>
+			<view class="g-item" v-for="food in surefoods" :key = "food.name">
+				<image :src="food.image"></image>
 				<view class="right">
-					<text class="title clamp">宫保鸡丁</text>
+					<text class="title clamp">{{food.name}}</text>
 					<text class="spec"></text>
 					<view class="price-box">
-						<text class="price">￥17.8</text>
-						<text class="number">x 1</text>
+						<text class="price">￥{{food.price}}</text>
+						<text class="number">x {{food.number}}</text>
 					</view>
 				</view>
 			</view>
@@ -39,11 +39,11 @@
 		<view class="yt-list">
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">商品金额</text>
-				<text class="cell-tip">￥179.88</text>
+				<text class="cell-tip">￥{{totalPrice || 0}}</text>
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">优惠金额</text>
-				<text class="cell-tip red">-￥0</text>
+				<text class="cell-tip red">-￥{{discount}}</text>
 			</view>
 			<view class="yt-list-cell desc-cell">
 				<text class="cell-tit clamp">备注</text>
@@ -56,7 +56,7 @@
 			<view class="price-content">
 				<text>实付款</text>
 				<text class="price-tip">￥</text>
-				<text class="price">475</text>
+				<text class="price">{{pay || total}}</text>
 			</view>
 			<!-- submit跳转pay/pay -->
 			<text class="submit" @click="submit">提交订单</text>
@@ -68,14 +68,14 @@
 				可选用优惠卷
 				<!-- 优惠券页面，仿mt -->
 				<view class="coupon-item" v-for="(item,index) in couponList" :key="index">
-					<view class="con">
+					<view class="con" @click="useDiscount(item)">
 						<view class="left">
 							<text class="title">{{item.title}}</text>
 							<text class="time">有效期至2022-06-30</text>
 						</view>
 						<view class="right">
 							<text class="price">{{item.price}}</text>
-							<text>满30可用</text>
+							<text>满{{item.full}}可用</text>
 						</view>
 						
 						<view class="circle l"></view>
@@ -96,28 +96,64 @@
 				maskState: 0, //优惠券面板显示状态
 				desc: '', //备注
 				payType: 1, //1微信 2支付宝
+				surefoods: [],// 结算商品数据
+				total: 0, // 总价
+				pay: 0,// 实付款
 				couponList: [
 					{
 						title: '新用户专享优惠券',
 						price: 5,
+						full: 30
 					},
 					{
-						title: '庆五一发一波优惠券',
-						price: 10,
-					},
-					{
-						title: '优惠券优惠券优惠券优惠券',
+						title: '商家赠送优惠券',
 						price: 15,
+						full: 100
 					}
 				],
 			}
 		},
-		onLoad(option){
+		async onLoad(option){
 			//商品数据
-			//let data = JSON.parse(option.data);
-			//console.log(data);
+			let data = await JSON.parse(option.data);
+			this.surefoods = JSON.parse(JSON.stringify(data.foodsData))
+			console.log(this.surefoods);
+		},
+		computed: {
+			totalPrice() { // 总价
+				 this.total = 0;
+				 this.surefoods.forEach(item => {
+					this.total += item.number * item.price
+				 })
+				 // 提前执行一次 实际付款计算，防止跳转支付金额为初始值0
+				this.pay = this.total
+				return this.total
+			},
+			discount() { // 优惠价格(优惠卷)
+				if(this.pay) {
+					return this.total- this.pay
+				} else {
+					return 0
+				}
+			}
 		},
 		methods: {
+			// 点击使用优惠卷
+			useDiscount(item) {
+				// 点击优惠卷若总价大于 满减金额 就计算实付款
+				if(this.total > item.full) {
+					this.pay = this.total - item.price
+				} else {
+					// 不够满减就提示
+					uni.showToast({
+					    title: '您的食品总价要大于满减金额哦',
+						icon: 'none',
+					    duration: 2000
+					});
+				}
+				// 点击优惠卷后关闭优惠卷面板
+				this.toggleMask('')
+			},
 			//显示优惠券面板
 			toggleMask(type){
 				let timer = type === 'show' ? 10 : 300;
@@ -133,9 +169,10 @@
 			changePayType(type){
 				this.payType = type;
 			},
+			// 提交订单
 			submit(){
 				uni.redirectTo({
-					url: '/pages/order/pay/pay'
+					url: `/pages/order/pay/pay?total=${this.pay}`
 				})
 			},
 			stopPrevent(){}
@@ -210,6 +247,7 @@
 				padding-top: 10upx;
 
 				.price {
+					color: #fa436a;
 					margin-bottom: 4upx;
 				}
 				.number{
@@ -282,14 +320,14 @@
 
 		.cell-tip {
 			font-size: 26upx;
-			color: #000000;
+			color: #e1685d;
 
 			&.disabled {
-				color: #000000;
+				color: #e1685d;
 			}
 
 			&.active {
-				color: #000000;
+				color: #e1685d;
 			}
 			&.red{
 				color: #000000;
@@ -306,45 +344,6 @@
 			flex: 1;
 			font-size: 24rpx;
 			color: #000000;
-		}
-	}
-	
-	/* 支付列表 */
-	.pay-list{
-		padding-left: 40upx;
-		margin-top: 16upx;
-		background: #fff;
-		.pay-item{
-			display: flex;
-			align-items: center;
-			padding-right: 20upx;
-			line-height: 1;
-			height: 110upx;	
-			position: relative;
-		}
-		.icon-weixinzhifu{
-			width: 80upx;
-			font-size: 40upx;
-			color: #6BCC03;
-		}
-		.icon-alipay{
-			width: 80upx;
-			font-size: 40upx;
-			color: #06B4FD;
-		}
-		.icon-xuanzhong2{
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 60upx;
-			height: 60upx;
-			font-size: 40upx;
-			color: #000000;
-		}
-		.tit{
-			font-size: 32upx;
-			color: #000000;
-			flex: 1;
 		}
 	}
 	
@@ -372,7 +371,7 @@
 		}
 		.price{
 			font-size: 36upx;
-			color: #000000;
+			color: #fa436a;
 		}
 		.submit{
 			display:flex;
@@ -382,7 +381,7 @@
 			height: 100%;
 			color: #fff;
 			font-size: 32upx;
-			background-color: #000000;
+			background-color: #fa436a;
 		}
 	}
 	
@@ -453,7 +452,7 @@
 		}
 		.title{
 			font-size: 32upx;
-			color: #000000;
+			color: #fa436a;
 			margin-bottom: 10upx;
 		}
 		.time{
@@ -466,12 +465,12 @@
 			justify-content: center;
 			align-items: center;
 			font-size: 26upx;
-			color: #000000;
+			color: #262626;
 			height: 100upx;
 		}
 		.price{
 			font-size: 44upx;
-			color: #000000;
+			color: #fa436a;
 			&:before{
 				content: '￥';
 				font-size: 34upx;
@@ -479,7 +478,7 @@
 		}
 		.tips{
 			font-size: 24upx;
-			color: #000000;
+			color: #9e2a43;
 			line-height: 60upx;
 			padding-left: 30upx;
 		}
