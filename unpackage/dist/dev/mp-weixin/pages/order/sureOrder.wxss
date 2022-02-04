@@ -62,6 +62,7 @@ page {
   padding-top: 10rpx;
 }
 .goods-section .g-item .price-box .price {
+  color: #fa436a;
   margin-bottom: 4rpx;
 }
 .goods-section .g-item .price-box .number {
@@ -121,13 +122,13 @@ page {
 }
 .yt-list-cell .cell-tip {
   font-size: 26rpx;
-  color: #000000;
+  color: #e1685d;
 }
 .yt-list-cell .cell-tip.disabled {
-  color: #000000;
+  color: #e1685d;
 }
 .yt-list-cell .cell-tip.active {
-  color: #000000;
+  color: #e1685d;
 }
 .yt-list-cell .cell-tip.red {
   color: #000000;
@@ -139,44 +140,6 @@ page {
   flex: 1;
   font-size: 24rpx;
   color: #000000;
-}
-/* 支付列表 */
-.pay-list {
-  padding-left: 40rpx;
-  margin-top: 16rpx;
-  background: #fff;
-}
-.pay-list .pay-item {
-  display: flex;
-  align-items: center;
-  padding-right: 20rpx;
-  line-height: 1;
-  height: 110rpx;
-  position: relative;
-}
-.pay-list .icon-weixinzhifu {
-  width: 80rpx;
-  font-size: 40rpx;
-  color: #6BCC03;
-}
-.pay-list .icon-alipay {
-  width: 80rpx;
-  font-size: 40rpx;
-  color: #06B4FD;
-}
-.pay-list .icon-xuanzhong2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60rpx;
-  height: 60rpx;
-  font-size: 40rpx;
-  color: #000000;
-}
-.pay-list .tit {
-  font-size: 32rpx;
-  color: #000000;
-  flex: 1;
 }
 .footer {
   position: fixed;
@@ -203,7 +166,7 @@ page {
 }
 .footer .price {
   font-size: 36rpx;
-  color: #000000;
+  color: #fa436a;
 }
 .footer .submit {
   display: flex;
@@ -213,7 +176,7 @@ page {
   height: 100%;
   color: #fff;
   font-size: 32rpx;
-  background-color: #000000;
+  background-color: #fa436a;
 }
 /* 优惠券面板 */
 .mask {
@@ -283,7 +246,7 @@ page {
 }
 .coupon-item .title {
   font-size: 32rpx;
-  color: #000000;
+  color: #fa436a;
   margin-bottom: 10rpx;
 }
 .coupon-item .time {
@@ -296,12 +259,12 @@ page {
   justify-content: center;
   align-items: center;
   font-size: 26rpx;
-  color: #000000;
+  color: #262626;
   height: 100rpx;
 }
 .coupon-item .price {
   font-size: 44rpx;
-  color: #000000;
+  color: #fa436a;
 }
 .coupon-item .price:before {
   content: '￥';
@@ -309,7 +272,7 @@ page {
 }
 .coupon-item .tips {
   font-size: 24rpx;
-  color: #000000;
+  color: #9e2a43;
   line-height: 60rpx;
   padding-left: 30rpx;
 }

@@ -1,8 +1,10 @@
 <template>
 	<view class="u-wrap">
+		<!-- 搜索 -->
 		<view class="search_d">
 			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()"></u-search>
 		</view>
+		<!-- 轮播 -->
 		<view class="swiper_wrap">
 			<u-swiper :list="list" height="350" mode="rect"></u-swiper>
 		</view>
@@ -26,10 +28,10 @@
 		<view class="seckill-section m-t">
 			<view class="s-header">
 				<image class="s-img" src="/static/temp/secskill-img.jpg" mode="widthFix"></image>
-				<text class="tip">8点场</text>
-				<text class="hour timer">07</text>
-				<text class="minute timer">13</text>
-				<text class="second timer">55</text>
+				<view>
+					<text class="tip">今日特惠</text>
+					<u-count-down :timestamp="timestamp" bg-color="#000000" color="#ffffff"></u-count-down>
+				</view>
 			</view>
 			<scroll-view class="floor-list" scroll-x>
 				<view class="scoll-wrapper">
@@ -40,7 +42,7 @@
 					>
 						<image :src="item.image" mode="aspectFill"></image>
 						<text class="title clamp">{{item.name}}</text>
-						<!-- <text class="price">￥{{item.price}}</text> -->
+						<text class="price">￥{{item.price}}</text>
 					</view>
 				</view>
 			</scroll-view>
@@ -48,24 +50,42 @@
 	</view>
 </template>
 <script>
-	import classifyData from '@/common/classify.data.js';
 	export default {
 		data() {
 			return {
+				timestamp: 86400, // 倒计时
 				list: [{
 						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif',
-						name: 2
+						name: '定定义',
+						price: 22
 					},
 					{
 						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif',
-						name: 2
+						name: '定定义',
+						price: 22
 					},
 					{
 						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
-						name: 2
+						name: '定定义',
+						price: 22
+					},
+					{
+						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
+						name: '定定义',
+						price: 22
+					},
+					{
+						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
+						name: '定定义',
+						price: 22
+					},
+					{
+						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
+						name: '定定义',
+						price: 22
 					}
 				],
-				search: '', // 双向绑定定义搜索内容
+				search: '', // 双向绑搜索内容
 				show: false,
 				seat: "请选择座位号", // 座位
 				list1: [{
@@ -103,6 +123,8 @@
 			}
 		},
 		async onLoad() {
+			// 更新倒计时时间
+			this.updateTime()
 			// 连接数据请求数据
 			const db = uniCloud.database();
 			const collection = db.collection('dc-goods');
@@ -115,7 +137,7 @@
 			data.forEach(res => {
 				this.goodsList.push(res.dc_foods)
 			})
-			console.log(this.goodsList);
+			// console.log(this.goodsList);
 		},
 		methods: {
 			// 跳转搜索页面
@@ -132,6 +154,15 @@
 			// 上新推荐
 			change(e) {
 				this.current = e.detail.current;
+			},
+			// 根据时间更新倒计时
+			updateTime() {
+				// 获取当前时间
+				let date = new Date()
+				// 获取当前日期 当天0:00
+				let e = new Date(date.toLocaleDateString())
+				// 获取今天剩余的时间（秒）
+				this.timestamp = 86400 - (date.getTime() - e.getTime()) / 1000
 			},
 			// 推荐商品跳转详情页
 			toDetail(name) {
@@ -182,61 +213,43 @@
 	/* 秒杀专区 */
 	.seckill-section{
 		margin: 10rpx 15rpx;
-		padding: 4upx 30upx 24upx;
+		padding: 4rpx 30rpx 24rpx;
 		background: #fff;
 		.s-header{
 			display:flex;
+			justify-content: space-between;
 			align-items:center;
-			height: 92upx;
+			height: 92rpx;
 			line-height: 1;
 			.s-img{
-				width: 140upx;
-				height: 30upx;
+				width: 88rpx;
+				height: 30rpx;
 			}
 			.tip{
 				font-size: 16px;
 				color: #000000;
-				margin: 0 20upx 0 40upx;
-			}
-			.timer{
-				display:inline-block;
-				width: 40upx;
-				height: 36upx;
-				text-align:center;
-				line-height: 36upx;
-				margin-right: 14upx;
-				font-size: 16px;
-				color: #fff;
-				border-radius: 2px;
-				background: rgba(0,0,0,.8);
-			}
-			.icon-you{
-				font-size: 16px;
-				color: #000000;
-				flex: 1;
-				text-align: right;
+				margin: 0 30rpx 0 40rpx;
 			}
 		}
 		.floor-list{
-			white-space: nowrap;
+			// white-space: nowrap;
 		}
 		.scoll-wrapper{
 			display:flex;
 			align-items: flex-start;
 		}
 		.floor-item{
-			width: 150upx;
-			margin-right: 20upx;
+			margin-right: 20rpx;
 			font-size: 16px;
 			color: #000000;
 			line-height: 1.8;
 			image{
-				width: 150upx;
-				height: 150upx;
-				border-radius: 6upx;
+				width: 220rpx;
+				height: 200rpx;
+				border-radius: 6rpx;
 			}
 			.price{
-				color: #000000;
+				color: #c13248;
 			}
 		}
 	}

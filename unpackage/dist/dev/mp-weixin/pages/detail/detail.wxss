@@ -12,12 +12,13 @@
 }
 .item-menu-name.data-v-3e159eb4 {
   font-weight: normal;
-  font-size: 35rpx;
-  margin: 6rpx 25rpx;
-  color: #303133;
+  font-size: 40rpx;
+  margin: 6rpx 35rpx;
+  color: #c30061;
 }
 .total-price.data-v-3e159eb4 {
-  color: red;
+  color: #c30061;
+  font-size: 38rpx;
 }
 .tag.data-v-3e159eb4 {
   padding-left: 30rpx;
@@ -26,7 +27,7 @@
   margin: 20rpx 15rpx;
 }
 .wrap.data-v-3e159eb4 {
-  padding: 20rpx 20rpx;
+  padding: 15rpx 15rpx;
 }
 .comment.data-v-3e159eb4 {
   display: flex;
@@ -97,7 +98,7 @@
   height: 80rpx;
 }
 .page-bottom .p-b-btn.active.data-v-3e159eb4, .page-bottom .p-b-btn.active .yticon.data-v-3e159eb4 {
-  color: #000000;
+  color: #fa436a;
 }
 .page-bottom .action-btn-group.data-v-3e159eb4 {
   display: flex;

@@ -14,11 +14,15 @@
   width: 220rpx;
   height: 200rpx;
   border-radius: 10rpx;
-  margin: 0 20rpx;
+  margin: 0 20rpx 0 0;
 }
 .item.data-v-127632e4 {
   display: flex;
-  padding: 20rpx;
+  background-color: rgba(247, 247, 241, 0.7);
+  border-radius: 10rpx;
+  margin: 0 10rpx;
+  margin-top: 5rpx;
+  padding: 10rpx;
 }
 .title-wrap.data-v-127632e4 {
   display: flex;
@@ -45,19 +49,18 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  text-align: right;
-  padding-right: 40rpx;
+  align-items: center;
 }
 .action-section .total-box .price.data-v-127632e4 {
-  font-size: 34rpx;
-  color: rgba(217, 60, 93, 0.72);
+  font-size: 32rpx;
+  color: #303133;
 }
 .action-section .total-box .coupon.data-v-127632e4 {
-  font-size: 34rpx;
-  color: rgba(217, 60, 93, 0.72);
+  font-size: 26rpx;
+  color: #909399;
 }
 .action-section .total-box .coupon text.data-v-127632e4 {
-  color: rgba(217, 60, 93, 0.72);
+  color: #303133;
 }
 .action-section .confirm-btn.data-v-127632e4 {
   padding: 0 38rpx;

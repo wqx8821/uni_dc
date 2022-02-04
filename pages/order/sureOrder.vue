@@ -24,10 +24,8 @@
 			<view class="yt-list-cell b-b" @click="toggleMask('show')">
 				<view class="cell-icon">券</view>
 				<text class="cell-tit clamp">优惠券</text>
-				<text class="cell-tip active">
-					选择优惠券
-				</text>
-				<text class="cell-more wanjia wanjia-gengduo-d"></text>
+				<text class="cell-tip active">选择优惠券</text>
+				<!-- <text class="cell-more wanjia wanjia-gengduo-d"></text> -->
 			</view>
 			<view class="yt-list-cell b-b">
 				<view class="cell-icon hb">减</view>
@@ -143,12 +141,16 @@
 				// 点击优惠卷若总价大于 满减金额 就计算实付款
 				if(this.total > item.full) {
 					this.pay = this.total - item.price
+					uni.showToast({
+					    title: '选择成功',
+					    duration: 500
+					});
 				} else {
 					// 不够满减就提示
 					uni.showToast({
 					    title: '您的食品总价要大于满减金额哦',
 						icon: 'none',
-					    duration: 2000
+					    duration: 1000
 					});
 				}
 				// 点击优惠卷后关闭优惠卷面板

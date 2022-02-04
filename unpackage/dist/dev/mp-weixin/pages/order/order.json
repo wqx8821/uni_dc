@@ -3,6 +3,7 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-swipe-action": "/uview-ui/components/u-swipe-action/u-swipe-action",
+    "u-checkbox": "/uview-ui/components/u-checkbox/u-checkbox",
     "u-number-box": "/uview-ui/components/u-number-box/u-number-box"
   }
 }

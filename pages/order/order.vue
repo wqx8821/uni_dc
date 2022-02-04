@@ -3,19 +3,19 @@
 		<!-- 列表 -->
 		<view class="cart-list">
 			<u-swipe-action 
-			:show="show"
-			:options="options"
-			:index="index"
-			v-for="(item, index) in dcdata" 
-			:key="index"
+				:show="show"
+				:options="options"
+				:index="index"
+				v-for="(item, index) in dcdata" 
+				:key="index"
 			>
 				<view class="item u-border-bottom">
 					<u-checkbox 
-					v-model="item.checked" 
-					active-color="red" 
-					shape="circle"
-					:name="item.name"
-					@change="check"
+						v-model="item.checked" 
+						active-color="red" 
+						shape="circle"
+						:name="item.name"
+						@change="check"
 					></u-checkbox>
 					<image mode="aspectFill" class="item-menu-image" :src="item.foods_thumb" />
 					<!-- 此层wrap在此为必写的，否则可能会出现标题定位错误 -->
@@ -57,7 +57,7 @@
 					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫保鸡丁",
 					"price": 35,
-					"number": 12,
+					"number": 2,
 					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,
@@ -67,7 +67,7 @@
 					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫保鸡",
 					"price": 35,
-					"number": 12,
+					"number": 1,
 					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,
@@ -77,7 +77,7 @@
 					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
 					"name": "宫鸡丁",
 					"price": 35,
-					"number": 12,
+					"number": 5,
 					"checked": true,
 					"_createTime": 1612936568799,
 					"_updateTime": 1613344915884,

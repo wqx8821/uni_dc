@@ -3,7 +3,6 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
-    "u-divider": "/uview-ui/components/u-divider/u-divider",
     "u-tag": "/uview-ui/components/u-tag/u-tag",
     "u-icon": "/uview-ui/components/u-icon/u-icon"
   }

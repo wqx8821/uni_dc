@@ -2,39 +2,43 @@
 	<view style="background-color: #f8f8f8;">
 		<!-- 餐品名称价格特色轮播 -->
 		<view class="detailStyle" v-for="item in detailData" :key="item.name">
+			<!-- 详情页轮播 -->
+			<view class="wrap">
+				<u-swiper :list="item.foods_banner_imgs" :height="430" ></u-swiper>
+			</view>
+			<text class="u-line-2 u-p-l-20 u-p-r-20 u-m-t-15 u-m-b-10 u-text-center">
+				风味简介：{{item.foods_desc}}
+			</text>
 			<!-- 名字 -->
 			<text class="item-menu-name">{{item.name}}</text>
-			<!-- 详情页轮播 -->
-			<view class="wrap"   >
-				<u-swiper :list="item.foods_banner_imgs" :height="450" ></u-swiper>
-			</view>
-			<text class="u-line-2 u-p-l-20 u-p-r-20 u-m-t-20">{{item.foods_desc}}</text>
+			<!-- 单价 -->
 			<text class="total-price">￥{{ item.price }}</text>
-			<u-divider></u-divider>
 		</view>
 		<!-- 评价 -->
-		<view class="tag">
-			<view style="font-size: 32rpx;">食客评价</view>
-			<u-tag text="味道不错" mode="light" type="info" />
-			<u-tag text="价格公道" mode="light" type="info"/>
-			<u-tag text="好评+1" mode="light" type="info"/>
-			<u-tag text="服务态度好" mode="light" type="info"/>
-		</view>
-		<view class="comment" v-for="(res, index) in commentList" :key="res.id">
-			<view class="left">
-				<image :src="res.url" mode="aspectFill"></image>
+		<view style="padding-bottom: 100rpx;">
+			<view class="tag">
+				<view style="font-size: 32rpx;">食客评价</view>
+				<u-tag text="味道不错" mode="light" type="info" />
+				<u-tag text="价格公道" mode="light" type="info"/>
+				<u-tag text="好评+1" mode="light" type="info"/>
+				<u-tag text="服务态度好" mode="light" type="info"/>
 			</view>
-			<view class="right">
-				<view class="top">
-					<view class="name">{{ res.name }}</view>
-					<view class="like" :class="{ highlight: res.isLike }">
-						<view class="num">{{ res.likeNum }}</view>
-						<u-icon v-if="!res.isLike" name="thumb-up" :size="30" color="#9a9a9a" @click="getLike(index)">
-						</u-icon>
-						<u-icon v-if="res.isLike" name="thumb-up-fill" :size="30" @click="getLike(index)"></u-icon>
-					</view>
+			<view class="comment" v-for="(res, index) in commentList" :key="res.id">
+				<view class="left">
+					<image :src="res.url" mode="aspectFill"></image>
 				</view>
-				<view class="content">{{ res.contentText }}</view>
+				<view class="right">
+					<view class="top">
+						<view class="name">{{ res.name }}</view>
+						<view class="like" :class="{ highlight: res.isLike }">
+							<view class="num">{{ res.likeNum }}</view>
+							<u-icon v-if="!res.isLike" name="thumb-up" :size="30" color="#9a9a9a" @click="getLike(index)">
+							</u-icon>
+							<u-icon v-if="res.isLike" name="thumb-up-fill" :size="30" @click="getLike(index)"></u-icon>
+						</view>
+					</view>
+					<view class="content">{{ res.contentText }}</view>
+				</view>
 			</view>
 		</view>
 		<!-- 底部操作菜单 -->
@@ -134,7 +138,7 @@
 						id: 4,
 						name: '叶轻眉3',
 						date: '06-20 13:58',
-						contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
+						contentText: '爱情的味道',
 						url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
 						allReply: 0,
 						likeNum: 150,
@@ -145,6 +149,11 @@
 			// 收藏
 			toFavorite(){
 				this.favorite = !this.favorite;
+				// 不够满减就提示
+				uni.showToast({
+				    title: '收藏成功',
+				    duration: 500
+				});
 			},
 			// 跳转立即购买
 			toSureOrder() {
@@ -181,12 +190,13 @@
 	// 详细信息
 	.item-menu-name {
 		font-weight: normal;
-		font-size: 35rpx;
-		margin: 6rpx 25rpx;
-		color: $u-main-color;
+		font-size: 40rpx;
+		margin: 6rpx 35rpx;
+		color: #c30061;
 	}
 	.total-price {
-		color: red;
+		color: #c30061;
+		font-size: 38rpx;
 	}
 	
 	.tag {
@@ -196,7 +206,7 @@
 		}
 	}
 	.wrap {
-		padding: 20rpx 20rpx;
+		padding: 15rpx 15rpx;
 	}
 	.comment {
 		display: flex;
