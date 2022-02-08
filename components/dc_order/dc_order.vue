@@ -7,9 +7,6 @@
 				<view class="text u-line-1">预购</view>
 			</view>
 		</view>
-<!-- 		<view class="right">
-			<view class="buy btn u-line-1">付款</view>
-		</view> -->
 	</view>
 </template>
 
@@ -17,7 +14,6 @@
 export default {
 	methods: {
 		toOrder() {
-			console.log(22);
 			uni.reLaunch({
 				url: '../../pages/order/order'
 			})

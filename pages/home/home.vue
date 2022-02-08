@@ -2,7 +2,15 @@
 	<view class="u-wrap">
 		<!-- 搜索 -->
 		<view class="search_d">
-			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled=true @click="toSearch()"></u-search>
+			<u-search 
+				placeholder="想吃点啥" 
+				bg-color="#edf1f9" 
+				:disabled='true' 
+				:show-action='false' 
+				margin="0 15rpx"
+				@click="toSearch()"
+				>
+			</u-search>
 		</view>
 		<!-- 轮播 -->
 		<view class="swiper_wrap">
@@ -10,7 +18,7 @@
 		</view>
 		<!-- 选择座位 -->
 		<view class="">
-			<u-select v-model="show" mode="single-column" :list="list1" @confirm="confirm"></u-select>
+			<u-select v-model="show" mode="single-column" :list="seatList" @confirm="confirm"></u-select>
 			<u-tag :text="seat" mode="dark" @click="show = true"/>
 		</view>
 		<!-- 最新活动 -->
@@ -36,11 +44,10 @@
 			<scroll-view class="floor-list" scroll-x>
 				<view class="scoll-wrapper">
 					<view 
-						v-for="(item, index) in list" :key="index"
+						v-for="(item, index) in discountList" :key="index"
 						class="floor-item"
-						@click="navToDetailPage(item)"
 					>
-						<image :src="item.image" mode="aspectFill"></image>
+						<image :src="item.foods_thumb" mode="aspectFill" @click="toDetail(item.name)"></image>
 						<text class="title clamp">{{item.name}}</text>
 						<text class="price">￥{{item.price}}</text>
 					</view>
@@ -53,42 +60,16 @@
 	export default {
 		data() {
 			return {
+				list: [{ // 轮播
+					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif'},{
+					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif'},{
+					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif'}], 
 				timestamp: 86400, // 倒计时
-				list: [{
-						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif',
-						name: '定定义',
-						price: 22
-					},
-					{
-						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif',
-						name: '定定义',
-						price: 22
-					},
-					{
-						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
-						name: '定定义',
-						price: 22
-					},
-					{
-						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
-						name: '定定义',
-						price: 22
-					},
-					{
-						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
-						name: '定定义',
-						price: 22
-					},
-					{
-						image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif',
-						name: '定定义',
-						price: 22
-					}
-				],
+				discountList: {}, // 请求的优惠餐品数据信息
 				search: '', // 双向绑搜索内容
 				show: false,
 				seat: "请选择座位号", // 座位
-				list1: [{
+				seatList: [{
 						value: '1',
 						label: '一号座位'
 					},
@@ -97,24 +78,10 @@
 						label: '二号座位'
 					},
 					{
-						value: '2',
+						value: '3',
 						label: '三号座位'
-					},
-					{
-						value: '2',
-						label: '四号座位'
-					},
-					{
-						value: '2',
-						label: '五号座位'
-					},
-					{
-						value: '2',
-						label: '六号座位'
 					}
 				],
-				// 上新推荐
-				current: 0,
 				// 最新活动
 				title: 'NEW 开业福利！！！',
 				subTitle: '2022-05-21',
@@ -125,30 +92,17 @@
 		async onLoad() {
 			// 更新倒计时时间
 			this.updateTime();
+			// 请求餐品数据
 			await uniCloud.callFunction({
 				name: 'getFood',
 				data: {
-					type: '宫保鸡丁'
+					type: '今日特惠'
 				},
 				success: (res) => {
-					console.log(res);
+					this.discountList = res.result
+					// console.log(this.discountList);
 				}
 			});
-			
-			
-			// // 连接数据请求数据
-			// const db = uniCloud.database();
-			// const collection = db.collection('dc-goods');
-			// const res = await collection.where({
-			// 	'dc_foods.category_name': '每日特惠'
-			// }).get()
-			// // 深拷贝一份数据
-			// const data = JSON.parse(JSON.stringify(res.result.data))
-			// // 过滤数据
-			// data.forEach(res => {
-			// 	this.goodsList.push(res.dc_foods)
-			// })
-			// // console.log(this.goodsList);
 		},
 		methods: {
 			// 跳转搜索页面
@@ -161,10 +115,6 @@
 			confirm(e) {
 				console.log(e[0].label);
 				this.seat = e[0].label
-			},
-			// 上新推荐
-			change(e) {
-				this.current = e.detail.current;
 			},
 			// 根据时间更新倒计时
 			updateTime() {
@@ -255,9 +205,12 @@
 			color: #000000;
 			line-height: 1.8;
 			image{
-				width: 220rpx;
+				width: 270rpx;
 				height: 200rpx;
 				border-radius: 6rpx;
+			}
+			.title {
+				padding-left: 10rpx;
 			}
 			.price{
 				color: #c13248;

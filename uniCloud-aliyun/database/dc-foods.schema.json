@@ -1,0 +1,91 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（商品 ID），系统自动生成"
+		},
+		"category": {
+			"bsonType": "string",
+			"description": "分类 id，参考`opendb-mall-categories`表",
+			"defaultValue": ""
+		},
+		"name": {
+			"bsonType": "string",
+			"description": "商品名称",
+			"title": "名称",
+			"trim": "both"
+		},
+		"foods_desc": {
+			"bsonType": "string",
+			"description": "商品详细描述",
+			"title": "详细描述",
+			"trim": "both"
+		},
+		"foods_thumb": {
+			"bsonType": "string",
+			"description": "商品缩略图，用于在列表或搜索结果中预览显示",
+			"title": "缩略图地址",
+			"pattern": "^(http:\/\/|https:\/\/|\/|.\/|@\/)\\S",
+			"trim": "both"
+		},
+		"foods_banner_imgs": {
+			"bsonType": "array",
+			"description": "商品详情页的banner图地址"
+		},
+		"price": {
+			"bsonType": "int",
+			"description": "价格",
+			"title": "价格"
+		},
+		"month_sell_count": {
+			"bsonType": "int",
+			"description": "月销量",
+			"defaultValue": 0
+		},
+		"number": {
+			"bsonType": "int",
+			"description": "加购数量",
+			"defaultValue": 0
+		},
+		"check": {
+			"bsonType": "bool",
+			"description": "选中状态",
+			"defaultValue": false
+		},
+		"is_real": {
+			"bsonType": "bool",
+			"description": "是否实物",
+			"title": "是否为实物",
+			"defaultValue": true
+		},
+		"is_on_sale": {
+			"bsonType": "bool",
+			"description": "是否上架销售",
+			"title": "是否上架",
+			"defaultValue": false
+		},
+		"is_alone_sale": {
+			"bsonType": "bool",
+			"description": "是否能单独销售",
+			"defaultValue": true
+		},
+		"is_new": {
+			"bsonType": "bool",
+			"description": "是否新品",
+			"title": "是否新品",
+			"defaultValue": false
+		},
+		"is_urge": {
+			"bsonType": "bool",
+			"description": "是否促销",
+			"defaultValue": false
+		}
+	}
+}

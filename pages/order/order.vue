@@ -11,7 +11,7 @@
 			>
 				<view class="item u-border-bottom">
 					<u-checkbox 
-						v-model="item.checked" 
+						v-model="item.check" 
 						active-color="red" 
 						shape="circle"
 						:name="item.name"
@@ -52,45 +52,31 @@
 	export default {
 		data() {
 			return {
-				dcdata: [{
-					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
-					"name": "宫保鸡丁",
-					"price": 35,
-					"number": 2,
-					"checked": true,
-					"_createTime": 1612936568799,
-					"_updateTime": 1613344915884,
-					"fenlei": "店长推荐"
-				},{
-					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
-					"name": "宫保鸡",
-					"price": 35,
-					"number": 1,
-					"checked": true,
-					"_createTime": 1612936568799,
-					"_updateTime": 1613344915884,
-					"fenlei": "店长推荐"
-				},{
-					"_id": "28ee4e3e6023757804385d0b1e9aed15",
-					"foods_thumb": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3210050521,2628476601&fm=26&gp=0.jpg",
-					"name": "宫鸡丁",
-					"price": 35,
-					"number": 5,
-					"checked": true,
-					"_createTime": 1612936568799,
-					"_updateTime": 1613344915884,
-					"fenlei": "店长推荐"
-				}],
+				dcdata: [],
 				options: [{text: '删除',style: {backgroundColor: '#dd524d'}}],
 				show: false,
 				allChecked: true, // 全选
 				totalPrice: 0, // 总价
 			};
 		},
-		onLoad() {
+		async onLoad() {
 			this.calcTotal() //计算总价
+			
+			// 加购解决方案
+			let addon = []; 
+			this.FOODS.result.forEach(res => {
+				// 遍历备份数据，将加购的数据提取出来
+				if(res.number) {
+					res.check = true
+					addon.push(res)
+				}
+			})
+			// console.log(addon);
+			// 将提取的数据存入vuex
+			await this.$u.vuex('addOn', addon)
+			// 加载加入购物车数据
+			if(this.addOn) this.dcdata = this.addOn
+			// console.log(this.addOn);
 		},
 		methods: {
 			// 跳转到评价页面
@@ -106,10 +92,10 @@
 				this.dcdata.forEach(item=>{
 					// 根据名字更新数据状态
 					if(item.name === e.name) {
-						item.checked = e.value
+						item.check = e.value
 					}
 					// 若有数据不是选中状态就将 全选状态去除
-					if(!item.checked) {
+					if(!item.check) {
 						this.allChecked = false
 					}
 				})
@@ -121,7 +107,7 @@
 				this.allChecked = !this.allChecked
 				// 列表按钮状态
 				this.dcdata.forEach(item=>{
-					item.checked = this.allChecked;
+					item.check = this.allChecked;
 				})
 				this.calcTotal() //计算总价
 			},
@@ -133,7 +119,7 @@
 				if(!this.dcdata.length) return;
 				this.dcdata.forEach(item=>{
 					// 只计算选中的食品
-					if(item.checked) {
+					if(item.check) {
 						this.totalPrice += item.price * item.number;
 					}
 				})
@@ -191,6 +177,9 @@
 
 <style lang="scss" scoped>
 	/* 购物车列表项 */
+	.cart-list {
+		// margin-bottom: 200rpx;
+	}
 	.item-menu-name {
 		font-weight: normal;
 		font-size: 30rpx;

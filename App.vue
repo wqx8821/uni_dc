@@ -1,6 +1,13 @@
 <script>
 	export default {
-		onLaunch: function() {
+		onLaunch: async function() {
+			await uniCloud.callFunction({
+				name: 'getFood',
+				success: (res) => {
+					// console.log(res);
+					this.$u.vuex('FOODS', res)
+				}
+			})
 			console.log('App Launch')
 		},
 		onShow: function() {

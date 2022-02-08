@@ -5,7 +5,7 @@
 				:scroll-into-view="itemId">
 				<view v-for="(item,index) in dataList" :key="index" class="u-tab-item"
 					:class="[current == index ? 'u-tab-item-active' : '']" @tap.stop="swichMenu(index)">
-					<text class="u-line-1">{{item.category_name}}</text>
+					<text class="u-line-1">{{item.category}}</text>
 				</view>
 			</scroll-view>
 			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box"
@@ -13,7 +13,7 @@
 				<view class="page-view">
 					<view class="class-item" :id="'item' + index" v-for="(item , index) in dataList" :key="index">
 						<view class="item-title">
-							<text>{{item.category_name}}</text>
+							<text>{{item.category}}</text>
 						</view>
 						<view class="item-container">
 							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
@@ -43,13 +43,13 @@
 			return {
 				show: true,
 				AddObj: {}, // 加购的食物对象
+				dataList: [], // 食物分类数据
 				scrollTop: 0, //tab标题的滚动条位置
 				oldScrollTop: 0,
 				current: 0, // 预设当前项的值
 				menuHeight: 0, // 左边菜单的高度
 				menuItemHeight: 0, // 左边菜单item的高度
 				itemId: '', // 栏目右边scroll-view用于滚动的id
-				dataList: [],
 				menuItemPos: [],
 				arr: [],
 				scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
@@ -58,21 +58,64 @@
 			}
 		},
 		async onLoad() {
-			// 连接数据请求数据
-			const db = uniCloud.database();
-			const collection = db.collection('dc-goods');
-			const res = await collection.get()
-			// 深拷贝一份数据
-			const data = JSON.parse(JSON.stringify(res.result.data))
-			// 过滤数据
-			data.forEach(res => {
-				this.dataList.push(res.dc_foods)
+			// 请求餐品数据
+			let result = [
+				{category: '',foods: []},
+				{category: '',foods: []},
+				{category: '',foods: []}
+			]
+			let res = this.FOODS
+			console.log(res);
+			let data = JSON.parse(JSON.stringify(res))
+			data.result.forEach(res => {
+				if(res.category == '今日特惠'){
+				    result[0].category = res.category
+				    result[0].foods.push(res)
+				}
+				if(res.category == '家常菜'){
+				    result[1].category = res.category
+				    result[1].foods.push(res)
+				}
+				if(res.category == '经济大菜'){
+				    result[2].category = res.category
+				    result[2].foods.push(res)
+				}
 			})
-			
-			// console.log(this.dataList);
+			this.dataList = result
+			// // 请求餐品数据
+			// await uniCloud.callFunction({
+			// 	name: 'getFood',
+			// 	success: (res) => {
+			// 		let result = [
+			// 			{category: '',foods: []},
+			// 			{category: '',foods: []},
+			// 			{category: '',foods: []}
+			// 		]
+			// 		let data = JSON.parse(JSON.stringify(res))
+			// 		data.result.forEach(res => {
+			// 			if(res.category == '今日特惠'){
+			// 			    result[0].category = res.category
+			// 			    result[0].foods.push(res)
+			// 			}
+			// 			if(res.category == '家常菜'){
+			// 			    result[1].category = res.category
+			// 			    result[1].foods.push(res)
+			// 			}
+			// 			if(res.category == '经济大菜'){
+			// 			    result[2].category = res.category
+			// 			    result[2].foods.push(res)
+			// 			}
+			// 		})
+			// 		this.dataList = result
+			// 		// console.log(this.dataList);
+			// 	}
+			// });
 		},
 		onReady() {
 			this.getMenuItemTop()
+		},
+		onHide() {
+
 		},
 		methods: {
 			// 跳转详情页
@@ -83,9 +126,13 @@
 			},
 			// 步进器 并入加入购物车的对象
 			valChange(e) {
-				// 以菜品名为键存储加购的数量
-				this.AddObj[e.index] = e.value
-				console.log(this.AddObj)
+				// console.log(e);
+				// 将加购数据同步到数据备份中
+				this.FOODS.result.forEach(res => {
+					if(res.name == e.index) {
+						res.number = e.value
+					}
+				})
 			},
 			// 点击左边的栏目切换
 			async swichMenu(index) {

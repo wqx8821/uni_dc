@@ -76,20 +76,18 @@
 		async onLoad(option) {
 			// 执行评论列表
 			this.getComment();
-			// 获取菜单页传递的菜品名称,连接数据库查询数据渲染
-			const db = uniCloud.database();
-			const collection = db.collection('dc-goods')
-			// 根据菜品名查询数据
-			const res = await collection.where({
-				'dc_foods.foods.name': option.name
-			}).limit(1).get()
-			// 处理查询的数据 获取指定内容
-			const filterData = res.result.data[0].dc_foods.foods
-			this.detailData = filterData.filter(res=> {
-				// 过滤数据
-				return res.name == option.name
-			})
-			console.log(this.detailData);
+			// 请求餐品数据
+			await uniCloud.callFunction({
+				name: 'getFood',
+				data: {
+					// 传递商品名称
+					type: option.name
+				},
+				success: (res) => {
+					this.detailData = res
+					// console.log(this.discountList);
+				}
+			});
 		},
 		methods: {
 			// 评论点赞
@@ -149,11 +147,12 @@
 			// 收藏
 			toFavorite(){
 				this.favorite = !this.favorite;
-				// 不够满减就提示
-				uni.showToast({
-				    title: '收藏成功',
-				    duration: 500
-				});
+				if(this.favorite) {
+					uni.showToast({
+					    title: '收藏成功',
+					    duration: 500
+					});
+				}
 			},
 			// 跳转立即购买
 			toSureOrder() {

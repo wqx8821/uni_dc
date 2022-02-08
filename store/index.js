@@ -12,7 +12,7 @@ try{
 }
 
 // 需要永久存储，且下次APP启动需要取出的，在state中的变量名
-let saveStateKeys = ['token', 'getFood'];
+let saveStateKeys = ['addOn'];
 
 // 保存变量到本地存储中
 const saveLifeData = function(key, value){
@@ -30,9 +30,9 @@ const saveLifeData = function(key, value){
 const store = new Vuex.Store({
 	// 下面这些值仅为示例，使用过程中请删除
 	state: {
-		// 如果上面从本地获取的lifeData对象下有对应的属性，就赋值给state中对应的变量
-		// 如果vuex_version无需保存到本地永久存储，无需lifeData.vuex_version方式
-		vuex_version: '1.0.1',
+		FOODS: [], // 商品信息
+		addOn: {}, // 加购信息
+		token: '', // 用户登录信息
 	},
 	mutations: {
 		$uStore(state, payload) {

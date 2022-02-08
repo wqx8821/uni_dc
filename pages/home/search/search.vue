@@ -5,7 +5,8 @@
 			bg-color="#edf1f9" 
 			:focus="true" 
 			v-model="searchValue" 
-			style="padding: 0 10rpx;"
+			:show-action='false'
+			margin="0 15rpx"
 			>
 		</u-search>
 
