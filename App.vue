@@ -6,6 +6,7 @@
 				success: (res) => {
 					// console.log(res);
 					this.$u.vuex('FOODS', res)
+					this.$u.vuex('addOn', res)
 				}
 			})
 			console.log('App Launch')

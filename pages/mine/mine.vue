@@ -18,13 +18,14 @@
 			<u-cell-group>
 				<u-cell-item icon="heart" title="会员办理"></u-cell-item>
 				<u-cell-item icon="star" title="我的收藏"></u-cell-item>
-				<u-cell-item icon="coupon" title="退出登录"></u-cell-item>
+				<u-cell-item icon="coupon" title="退出登录" @click="logout()"></u-cell-item>
 			</u-cell-group>
 		</view>
 	</view>
 </template>
 
 <script>
+	import loginUser from "../../common/currentUser.js"
 	import cloudApi from '../../common/cloudApi.js'
 	export default {
 		data() {
@@ -32,45 +33,29 @@
 				userInfo:null,
 			}
 		},
+		// 云函数
+		async onLoad(options){
+			this.userInfo = await loginUser.login();
+		},
 		async onShow() {
 			await this.updateUserProfile()
 		},
 		methods: {
 			updateUserProfile(){
 				uni.getUserProfile({
-					// desc提示信息
 					desc: '用于完善会员资料',
 					success: (res) => {
 						this.userInfo = Object.assign(this.userInfo,res.userInfo);
-						cloudApi.call({
-							name: 'updateuserinfo',
-							data: {
-								userInfo: this.userInfo
-							}
-						})
+						loginUser.updateUser(this.userInfo);
 					}
 				})
-				console.log(this.userInfo);
 			},
+			logout(){
+				loginUser.logout()
+				this.userInfo = null
+			}
 		},
-		// 云函数
-		async onLoad(options){
-			uni.login({
-				provider: "weixin",
-				success: (res) => {
-					let code = res.code;
-					cloudApi.call({
-						name: "login",
-						data: {
-							code
-						},
-						success: (res) => {
-							this.userInfo = res.result
-						}
-					})
-				},
-			})
-		}
+		
 	}
 </script>
 

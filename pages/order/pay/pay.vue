@@ -69,6 +69,7 @@
 			},
 			//确认支付
 			confirm: async function() {
+				
 				uni.redirectTo({
 					url: '/pages/order/pay/paySuccess'
 				})

@@ -24,7 +24,7 @@
 										￥{{ item1.price }}
 									</text>
 									<!-- 步进器 -->
-									<u-number-box  input-width="40" :index='item1.name' @change="valChange"></u-number-box>
+									<u-number-box  input-width="40" v-model="item1.number" :index='item1.name' @change="valChange"></u-number-box>
 									<!-- 价格 -->
 									<!-- 共{{ value }}件餐品 -->
 								</view>
@@ -42,7 +42,7 @@
 		data() {
 			return {
 				show: true,
-				AddObj: {}, // 加购的食物对象
+				resObj: {}, // 原始数据对象
 				dataList: [], // 食物分类数据
 				scrollTop: 0, //tab标题的滚动条位置
 				oldScrollTop: 0,
@@ -57,17 +57,18 @@
 
 			}
 		},
-		async onLoad() {
+		async onShow() {
 			// 请求餐品数据
 			let result = [
 				{category: '',foods: []},
 				{category: '',foods: []},
 				{category: '',foods: []}
 			]
-			let res = this.FOODS
-			console.log(res);
+			// 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
+			let res =  this.FOODS
 			let data = JSON.parse(JSON.stringify(res))
-			data.result.forEach(res => {
+			this.resObj = data; // 存储一份原始数据，用来统计加购
+			(data.result || []).forEach(res => {
 				if(res.category == '今日特惠'){
 				    result[0].category = res.category
 				    result[0].foods.push(res)
@@ -126,14 +127,20 @@
 			},
 			// 步进器 并入加入购物车的对象
 			valChange(e) {
-				// console.log(e);
-				// 将加购数据同步到数据备份中
-				this.FOODS.result.forEach(res => {
+				// 将加购数据同步到 onload请求的原始数据备份中
+				this.resObj.result.forEach(res => {
+					// 将数据的选中状态初始化
+					// res.check = false
+					// 同步加购的菜品数量
 					if(res.name == e.index) {
 						res.number = e.value
 					}
 				})
+				// 合并数据
+				this.$u.vuex('FOODS', this.resObj)
+				// console.log(this.resObj);
 			},
+			
 			// 点击左边的栏目切换
 			async swichMenu(index) {
 				if (this.arr.length == 0) {

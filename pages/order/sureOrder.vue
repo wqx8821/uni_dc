@@ -2,12 +2,12 @@
 	<view>
 		<view class="goods-section">
 			<view class="g-header b-b">
-				<image class="logo" src=''></image>
+				<u-icon name="home"></u-icon>
 				<text class="name">柠檬小铺</text>
 			</view>
 			<!-- 商品列表 -->
 			<view class="g-item" v-for="food in surefoods" :key = "food.name">
-				<image :src="food.image"></image>
+				<image :src="food.foods_thumb"></image>
 				<view class="right">
 					<text class="title clamp">{{food.name}}</text>
 					<text class="spec"></text>
@@ -112,10 +112,12 @@
 			}
 		},
 		async onLoad(option){
-			//商品数据
-			let data = await JSON.parse(option.data);
-			this.surefoods = JSON.parse(JSON.stringify(data.foodsData))
-			console.log(this.surefoods);
+			//餐品数据
+			this.surefoods = JSON.parse(JSON.stringify(this.suredata))
+			this.surefoods = this.surefoods.filter(res => {
+				return res.check === true
+			})
+			// console.log(this.surefoods);
 		},
 		computed: {
 			totalPrice() { // 总价

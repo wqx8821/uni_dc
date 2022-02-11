@@ -31,7 +31,8 @@ const store = new Vuex.Store({
 	// 下面这些值仅为示例，使用过程中请删除
 	state: {
 		FOODS: [], // 商品信息
-		addOn: {}, // 加购信息
+		addOn: [], // 食品的原始信息（包含加购数量）
+		suredata: [], // 确认订单的数据
 		token: '', // 用户登录信息
 	},
 	mutations: {

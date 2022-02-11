@@ -34,7 +34,7 @@
 		<view class="action-section">
 			<!-- 全选按钮 -->
 			<!-- <u-button @click="checkedAll">全选</u-button> -->
-			<u-checkbox v-model="allChecked" active-color="red" shape="circle" @change="checkedAll" >全选</u-checkbox>
+			<u-checkbox v-model="allCheck" active-color="red" shape="circle" @change="checkedAll" >全选</u-checkbox>
 			<view class="total-box">
 				<text class="price">总计  ¥{{totalPrice}}</text>
 				<text class="coupon">
@@ -55,27 +55,39 @@
 				dcdata: [],
 				options: [{text: '删除',style: {backgroundColor: '#dd524d'}}],
 				show: false,
-				allChecked: true, // 全选
+				allCheck: true, // 全选
 				totalPrice: 0, // 总价
 			};
 		},
 		async onLoad() {
+			await this.calcTotal() //计算总价
+		},
+		async onShow() {
 			this.calcTotal() //计算总价
 			
 			// 加购解决方案
 			let addon = []; 
-			this.FOODS.result.forEach(res => {
+			(this.FOODS.result || []).forEach(res => {
 				// 遍历备份数据，将加购的数据提取出来
 				if(res.number) {
 					res.check = true
+					// 数量大于零就添加到购物车
 					addon.push(res)
+				} else {
+					res.check = false
 				}
 			})
-			// console.log(addon);
 			// 将提取的数据存入vuex
 			await this.$u.vuex('addOn', addon)
 			// 加载加入购物车数据
-			if(this.addOn) this.dcdata = this.addOn
+			if(addon.length) this.dcdata = this.addOn
+			this.dcdata.forEach((res,index)=>{
+				if(!res.number) {
+					addon.splice(index,1)
+				}
+			})
+			// 提前将数据赋值给成功的数据，
+			this.$u.vuex('suredata',this.dcdata)
 			// console.log(this.addOn);
 		},
 		methods: {
@@ -88,7 +100,7 @@
 			// 订单选择状态， 是否全选
 			check(e) {
 				// 每次点击就更新一下全选按钮
-				this.allChecked = !this.allChecked
+				this.allCheck = !this.allCheck
 				this.dcdata.forEach(item=>{
 					// 根据名字更新数据状态
 					if(item.name === e.name) {
@@ -96,18 +108,23 @@
 					}
 					// 若有数据不是选中状态就将 全选状态去除
 					if(!item.check) {
-						this.allChecked = false
+						this.allCheck = false
 					}
 				})
+				// console.log(this.dcdata);
+				
+				// 将最新的选中状态更新到vuex
+				this.$u.vuex('suredata',this.dcdata)
+				
 				this.calcTotal() //计算总价
 			},
 			// 全选
 			checkedAll(allcked) {
 				// 全选按钮状态
-				this.allChecked = !this.allChecked
+				this.allCheck = !this.allCheck
 				// 列表按钮状态
 				this.dcdata.forEach(item=>{
-					item.check = this.allChecked;
+					item.check = this.allCheck;
 				})
 				this.calcTotal() //计算总价
 			},
@@ -140,36 +157,17 @@
 			},
 			// 跳转确认订单
 			createOrder() {
-				let list = this.dcdata;
-				let foodsData = [];
-				list.forEach(item => {
-					if (item.checked) {
-						// 将必须的字段传入 确认订单页
-						foodsData.push({
-							// foods_thumb: item.foods_thumb,
-							name: item.name,
-							price: item.price,
-							number: item.number,
-							// totalPrice:this.totalPrice
-						})
-					}
-				})
-				
-				uni.navigateTo({
-					url: `/pages/order/sureOrder?data=${JSON.stringify({
-							foodsData: foodsData
-						})}`
-				})
-			},
-			//删除
-			deleteCartItem(index){
-				let list = this.cartList;
-				let row = list[index];
-				let id = row.id;
-			
-				this.cartList.splice(index, 1);
-				this.calcTotal();
-				uni.hideLoading();
+				if(!this.dcdata.length) {
+					uni.showToast({
+					    title: '小主还没有选择好吃的',
+						icon: 'none',
+					    duration: 1000
+					});
+				} else{
+					uni.navigateTo({
+						url: `/pages/order/sureOrder`
+					})
+				}
 			},
 		}
 	}

@@ -15,12 +15,11 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  flex: 1;
 }
 .thumb-box.data-v-add2e368 {
   background-color: #fbfbfb;
   width: 100%;
-  padding: 6rpx 20rpx;
+  padding: 6rpx 60rpx;
   border-radius: 16rpx;
   display: flex;
   align-items: center;
@@ -31,7 +30,7 @@
 .item-menu-name.data-v-add2e368 {
   font-weight: normal;
   font-size: 30rpx;
-  margin-bottom: 6rpx;
+  margin-bottom: 26rpx;
   color: #303133;
 }
 .item-container.data-v-add2e368 {
@@ -41,5 +40,6 @@
 .item-menu-image.data-v-add2e368 {
   width: 220rpx;
   height: 220rpx;
+  border-radius: 20rpx;
 }
 

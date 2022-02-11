@@ -61,9 +61,12 @@
   line-height: 1.8;
 }
 .seckill-section .floor-item image.data-v-92bb8f34 {
-  width: 220rpx;
+  width: 270rpx;
   height: 200rpx;
   border-radius: 6rpx;
+}
+.seckill-section .floor-item .title.data-v-92bb8f34 {
+  padding-left: 10rpx;
 }
 .seckill-section .floor-item .price.data-v-92bb8f34 {
   color: #c13248;
