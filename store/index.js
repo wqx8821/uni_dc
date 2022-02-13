@@ -34,6 +34,7 @@ const store = new Vuex.Store({
 		addOn: [], // 食品的原始信息（包含加购数量）
 		suredata: [], // 确认订单的数据
 		VXFavorite: [], // 餐品收藏
+		VXopenid: ''
 	},
 	mutations: {
 		$uStore(state, payload) {

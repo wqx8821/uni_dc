@@ -24,7 +24,7 @@
 										￥{{ item1.price }}
 									</text>
 									<!-- 步进器 -->
-									<u-number-box  input-width="40" v-model="item1.number" :index='item1.name' @change="valChange"></u-number-box>
+									<u-number-box  input-width="40" :min="1" v-model="item1.number" :index='item1.name' @change="valChange"></u-number-box>
 									<!-- 价格 -->
 									<!-- 共{{ value }}件餐品 -->
 								</view>
@@ -83,34 +83,6 @@
 				}
 			})
 			this.dataList = result
-			// // 请求餐品数据
-			// await uniCloud.callFunction({
-			// 	name: 'getFood',
-			// 	success: (res) => {
-			// 		let result = [
-			// 			{category: '',foods: []},
-			// 			{category: '',foods: []},
-			// 			{category: '',foods: []}
-			// 		]
-			// 		let data = JSON.parse(JSON.stringify(res))
-			// 		data.result.forEach(res => {
-			// 			if(res.category == '今日特惠'){
-			// 			    result[0].category = res.category
-			// 			    result[0].foods.push(res)
-			// 			}
-			// 			if(res.category == '家常菜'){
-			// 			    result[1].category = res.category
-			// 			    result[1].foods.push(res)
-			// 			}
-			// 			if(res.category == '经济大菜'){
-			// 			    result[2].category = res.category
-			// 			    result[2].foods.push(res)
-			// 			}
-			// 		})
-			// 		this.dataList = result
-			// 		// console.log(this.dataList);
-			// 	}
-			// });
 		},
 		onReady() {
 			this.getMenuItemTop()

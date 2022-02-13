@@ -57,7 +57,7 @@
 			</view>
 			
 			<view class="action-btn-group">
-				<button type="primary" class="action-btn no-border add-cart-btn" >加入美食车</button>
+				<button type="primary" class="action-btn no-border add-cart-btn" @click="toOrder">加入美食车</button>
 				<button type="primary" class="action-btn no-border buy-now-btn" @click="toSureOrder()">立即购买</button>
 			</view>
 		</view>
@@ -164,11 +164,12 @@
 						if(res===foodId) this.VXFavorite.splice(index,1)
 					})
 				}
-
+				console.log(this.VXopenid);
 				// 云函数将 收藏 的数据存储
 				uniCloud.callFunction({
 					name: 'test',
 					data: {
+						openid: this.VXopenid,
 						favorites: this.VXFavorite
 					},
 					success: (res) => {
@@ -178,23 +179,33 @@
 			},
 			// 跳转立即购买
 			toSureOrder() {
-				let foodsData = [{
-					name: this.detailData[0].name,
-					price: this.detailData[0].price,
-					number: 1,
-				}]
-				this.detailData
+				let data = this.suredata
+				this.detailData.result.number = 1
+				this.detailData.result.check = true
+				data.push(this.detailData.result)
+				
+				this.$u.vuex('suredata', data)
 				uni.navigateTo({
-					url: `/pages/order/sureOrder?data=${JSON.stringify({
-							foodsData: foodsData
-						})}`
+					url: `/pages/order/sureOrder`
 				})
 			},
-			// toOrder() {
-			// 	uni.switchTab({
-			// 		url: '/pages/order/order'
-			// 	})
-			// }
+			// 详情页加购
+			toOrder() {
+				let data = this.FOODS;
+				const name = this.detailData.result.name;
+				(data.result || []).forEach(res => {
+					if(res.name === name) {
+						res.check = true
+						res.number += 1
+					}
+				})
+				console.log(data);
+				this.$u.vuex('FOODS', data)
+				uni.showToast({
+				    title: '加购成功',
+				    duration: 500
+				});
+			}
 		}
 	};
 </script>

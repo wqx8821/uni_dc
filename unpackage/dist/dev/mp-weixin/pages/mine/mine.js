@@ -191,7 +191,9 @@ var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/clou
   },
   // 云函数
   onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _currentUser.default.login());case 2:_this.userInfo = _context.sent;case 3:case "end":return _context.stop();}}}, _callee);}))();
+                _currentUser.default.login());case 2:_this.userInfo = _context.sent;
+              // 将用户openid存储在vuex中
+              _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 4:case "end":return _context.stop();}}}, _callee);}))();
   },
   onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
                 _this2.updateUserProfile());case 2:case "end":return _context2.stop();}}}, _callee2);}))();

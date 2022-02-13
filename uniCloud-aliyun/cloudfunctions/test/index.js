@@ -1,7 +1,7 @@
 'use strict';
 exports.main = async (event, context) => {
 	
-	const { comment, favorites, addOrder } = event
+	const { openid, comment, favorites, addOrder } = event
 	
 	const db = uniCloud.database();
 	
@@ -14,8 +14,8 @@ exports.main = async (event, context) => {
 		})
 	} else if(favorites) { // 收藏
 		res = await db.collection('comment-favorites').where({
-		    // 'openid': openid
-			'openid':'olwg75MhYydMfBKDJDBLvglbdXr4'
+		    'openid': openid
+			// 'openid':'olwg75MhYydMfBKDJDBLvglbdXr4'
 		}).update({
 		    'favorites': favorites
 		})

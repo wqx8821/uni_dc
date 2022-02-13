@@ -111,7 +111,7 @@
 				],
 			}
 		},
-		async onLoad(option){
+		async onLoad(){
 			//餐品数据
 			this.surefoods = JSON.parse(JSON.stringify(this.suredata))
 			this.surefoods = this.surefoods.filter(res => {

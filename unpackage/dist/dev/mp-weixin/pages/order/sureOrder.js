@@ -266,7 +266,7 @@ var _default =
 
 
   },
-  onLoad: function onLoad(option) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               //餐品数据
               _this.surefoods = JSON.parse(JSON.stringify(_this.suredata));
               _this.surefoods = _this.surefoods.filter(function (res) {

@@ -325,11 +325,12 @@ var _default =
           if (res === foodId) _this2.VXFavorite.splice(index, 1);
         });
       }
-
+      console.log(this.VXopenid);
       // 云函数将 收藏 的数据存储
       uniCloud.callFunction({
         name: 'test',
         data: {
+          openid: this.VXopenid,
           favorites: this.VXFavorite },
 
         success: function success(res) {
@@ -339,24 +340,33 @@ var _default =
     },
     // 跳转立即购买
     toSureOrder: function toSureOrder() {
-      var foodsData = [{
-        name: this.detailData[0].name,
-        price: this.detailData[0].price,
-        number: 1 }];
+      var data = this.suredata;
+      this.detailData.result.number = 1;
+      this.detailData.result.check = true;
+      data.push(this.detailData.result);
 
-      this.detailData;
+      this.$u.vuex('suredata', data);
       uni.navigateTo({
-        url: "/pages/order/sureOrder?data=".concat(JSON.stringify({
-          foodsData: foodsData })) });
+        url: "/pages/order/sureOrder" });
 
+    },
+    // 详情页加购
+    toOrder: function toOrder() {
+      var data = this.FOODS;
+      var name = this.detailData.result.name;
+      (data.result || []).forEach(function (res) {
+        if (res.name === name) {
+          res.check = true;
+          res.number += 1;
+        }
+      });
+      console.log(data);
+      this.$u.vuex('FOODS', data);
+      uni.showToast({
+        title: '加购成功',
+        duration: 500 });
 
-    }
-    // toOrder() {
-    // 	uni.switchTab({
-    // 		url: '/pages/order/order'
-    // 	})
-    // }
-  } };exports.default = _default;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

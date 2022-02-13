@@ -11296,8 +11296,9 @@ var store = new _vuex.default.Store({
     FOODS: [], // 商品信息
     addOn: [], // 食品的原始信息（包含加购数量）
     suredata: [], // 确认订单的数据
-    VXFavorite: [] // 餐品收藏
-  },
+    VXFavorite: [], // 餐品收藏
+    VXopenid: '' },
+
   mutations: {
     $uStore: function $uStore(state, payload) {
       // 判断是否多层级调用，state中为对象存在的情况，诸如user.info.score = 1

@@ -31,6 +31,8 @@
 		// 云函数
 		async onLoad(){
 			this.userInfo = await loginUser.login();
+			// 将用户openid存储在vuex中
+			this.$u.vuex('VXopenid',this.userInfo.openid || '')
 		},
 		async onShow() {
 			await this.updateUserProfile()
@@ -58,7 +60,7 @@
 
 <style lang="scss" scoped>
 page{
-	background-color: #ededed;
+	background-color: #F8F8F8;
 }
 .userStyle {
 	margin: 5vh 0;
@@ -68,16 +70,5 @@ page{
 	justify-content: center;
 }
 
-.camera{
-	width: 54px;
-	height: 44px;
-	
-	&:active{
-		background-color: #ededed;
-	}
-}
-.user-box{
-	background-color: #fff;
-}
 
 </style>
