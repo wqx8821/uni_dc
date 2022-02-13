@@ -17,7 +17,7 @@ function login(){
 						},
 						success: (res) => {
 							userInfo = res.result;
-							resolve(res.result);
+							resolve(userInfo);
 						},
 						fail: (err) => {
 							reject();

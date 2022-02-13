@@ -117,6 +117,17 @@
 				this.$u.vuex('suredata',this.dcdata)
 				
 				this.calcTotal() //计算总价
+				
+				// 云函数将购物车数据存储数据中
+				uniCloud.callFunction({
+					name: 'test',
+					data: {
+						addOeder: []
+					},
+					success: (res) => {
+						console.log(res);
+					}
+				})
 			},
 			// 全选
 			checkedAll(allcked) {

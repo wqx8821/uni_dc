@@ -51,7 +51,7 @@
 				<u-icon name="shopping-cart" :size="43"></u-icon>
 				<text>美食车</text>
 			</navigator>
-			<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
+			<view class="p-b-btn" :class="{active: favorite}" @click="isFavorite">
 				<u-icon name="heart" :size="40" :color="$u.color['favorite']"></u-icon>
 				<text>收藏</text>
 			</view>
@@ -130,7 +130,7 @@
 						likeNum: 21,
 						isLike: false,
 						allReply: 2,
-						url: '../../../static/logo.png',
+						url: 'https://cdn.uviewui.com/uview/template/niannian.jpg',
 					},
 					{
 						id: 4,
@@ -145,14 +145,36 @@
 				];
 			},
 			// 收藏
-			toFavorite(){
+			isFavorite(){
+				// 提取食品id
+				let foodId = this.detailData.result._id
+				// 收藏状态
 				this.favorite = !this.favorite;
 				if(this.favorite) {
+					// 收藏状态就将id存入vuex
+					this.VXFavorite.push(foodId)
+					
 					uni.showToast({
 					    title: '收藏成功',
 					    duration: 500
 					});
+				} else {
+					// 若不是收藏状态就从数据库移除
+					this.VXFavorite.forEach((res,index) => {
+						if(res===foodId) this.VXFavorite.splice(index,1)
+					})
 				}
+
+				// 云函数将 收藏 的数据存储
+				uniCloud.callFunction({
+					name: 'test',
+					data: {
+						favorites: this.VXFavorite
+					},
+					success: (res) => {
+						console.log(res);
+					}
+				})
 			},
 			// 跳转立即购买
 			toSureOrder() {

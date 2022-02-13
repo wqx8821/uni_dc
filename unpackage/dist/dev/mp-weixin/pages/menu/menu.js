@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 167))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 168))
     },
     dc_order: function() {
-      return __webpack_require__.e(/*! import() | components/dc_order/dc_order */ "components/dc_order/dc_order").then(__webpack_require__.bind(null, /*! @/components/dc_order/dc_order.vue */ 174))
+      return __webpack_require__.e(/*! import() | components/dc_order/dc_order */ "components/dc_order/dc_order").then(__webpack_require__.bind(null, /*! @/components/dc_order/dc_order.vue */ 175))
     }
   }
 } catch (e) {

@@ -6,6 +6,13 @@
 page.data-v-dcbcfe34 {
   background-color: #ededed;
 }
+.userStyle.data-v-dcbcfe34 {
+  margin: 5vh 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .camera.data-v-dcbcfe34 {
   width: 54px;
   height: 44px;

@@ -1,20 +1,15 @@
 <template>
 	<view>
-		<view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30 u-m-t-30" @click="updateUserProfile">
-			<view class="u-m-r-10">
-				<u-avatar :src="userInfo.avatarUrl" size="140"></u-avatar>
+		<view class="userStyle" @click="updateUserProfile">
+			<view class="u-m-b-20 u-m-t-40">
+				<u-avatar :src="userInfo.avatarUrl || ''" size="140"></u-avatar>
 			</view>
 			<view class="u-flex-1">
-				<view class="u-font-18 u-p-b-20">{{userInfo.nickName}}</view>
-				<view class="u-font-14 u-tips-color">卡号</view>
-			</view>
-
-			<view class="u-m-l-10 u-p-10">
-				<u-icon name="arrow-right" color="#969799" size="28"></u-icon>
+				<view class="u-font-18">{{userInfo.nickName}}</view>
 			</view>
 		</view>
 		
-		<view class="u-m-t-20">
+		<view class="u-m-t-30">
 			<u-cell-group>
 				<u-cell-item icon="heart" title="会员办理"></u-cell-item>
 				<u-cell-item icon="star" title="我的收藏"></u-cell-item>
@@ -34,7 +29,7 @@
 			}
 		},
 		// 云函数
-		async onLoad(options){
+		async onLoad(){
 			this.userInfo = await loginUser.login();
 		},
 		async onShow() {
@@ -42,13 +37,15 @@
 		},
 		methods: {
 			updateUserProfile(){
-				uni.getUserProfile({
-					desc: '用于完善会员资料',
-					success: (res) => {
-						this.userInfo = Object.assign(this.userInfo,res.userInfo);
-						loginUser.updateUser(this.userInfo);
-					}
-				})
+				if(!this.userInfo) {
+					uni.getUserProfile({
+						desc: '用于完善会员资料',
+						success: (res) => {
+							this.userInfo = Object.assign(this.userInfo,res.userInfo);
+							loginUser.updateUser(this.userInfo);
+						}
+					})
+				}
 			},
 			logout(){
 				loginUser.logout()
@@ -62,6 +59,13 @@
 <style lang="scss" scoped>
 page{
 	background-color: #ededed;
+}
+.userStyle {
+	margin: 5vh 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .camera{

@@ -1,0 +1,34 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"openid": {
+			"bsonType": "array",
+			"description": "用户id"
+		},
+		"comment": {
+			"bsonType": "array",
+			"description": "用户评论存储",
+			"defaultValue": []
+		},
+		"favorites": {
+			"bsonType": "array",
+			"description": "用户收藏存储",
+			"defaultValue": []
+		},
+		"addOrder": {
+			"bsonType": "array",
+			"description": "用户购物车列表",
+			"defaultValue": []
+		}
+	}
+}
