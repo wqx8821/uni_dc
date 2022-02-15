@@ -17,10 +17,10 @@
 			<u-swiper :list="list" height="350" mode="rect"></u-swiper>
 		</view>
 		<!-- 选择座位 -->
-		<view class="">
+		<!-- <view class="">
 			<u-select v-model="show" mode="single-column" :list="seatList" @confirm="confirm"></u-select>
 			<u-tag :text="seat" mode="dark" @click="show = true"/>
-		</view>
+		</view> -->
 		<!-- 最新活动 -->
 		<view class="activity">
 			<u-card :title="title" :sub-title="subTitle" padding="30" title-color='red' title-size="40">
@@ -128,7 +128,7 @@
 			// 推荐商品跳转详情页
 			toDetail(name) {
 				uni.navigateTo({
-					url: `/pages/detail/detail?name=${name}`
+					url: `../../subpkg/detail/detail?name=${name}`
 				})
 			},
 		}

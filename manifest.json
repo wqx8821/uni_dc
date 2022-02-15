@@ -1,7 +1,7 @@
 {
-    "name" : "uView-demo",
+    "name" : "orderingApplet",
     "appid" : "__UNI__AFF15B9",
-    "description" : "",
+    "description" : "小程序的便捷成就了现在的火热，与时俱进才是生存的王道，本店铺开启小程序点餐试运营新时代",
     "versionName" : "1.5.0",
     "versionCode" : "100",
     "transformPx" : false,
@@ -64,7 +64,9 @@
     "mp-weixin" : {
         "appid" : "wx83e7c03d8363216d",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : true,
+            "postcss" : true
         },
         "usingComponents" : true
     },

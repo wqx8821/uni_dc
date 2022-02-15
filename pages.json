@@ -14,81 +14,94 @@
 			"style": {
 				"navigationBarTitleText": "小铺菜单"
 			}
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "点餐列表",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/order/order",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "订单列表",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/mine",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "个人中心",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/detail/detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-		
-        ,{
-            "path" : "pages/evaluation/evaluation",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/home/search/search",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "搜索",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-		    "path" : "pages/order/sureOrder",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "确认订单",
-		        "enablePullDownRefresh": false
-		    }
-		    
+
+
+		, {
+			"path": "pages/home/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"enablePullDownRefresh": false
+			}
+
 		},
 		{
-		    "path" : "pages/order/pay/pay",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "选择支付",
-		        "enablePullDownRefresh": false
-		    }
-		    
+			"path": "pages/order/sureOrder",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"enablePullDownRefresh": false
+			}
+
 		},
 		{
-            "path" : "pages/order/pay/paySuccess",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "支付成功",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+			"path": "pages/order/pay/pay",
+		 "style": {
+				"navigationBarTitleText": "选择支付",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/order/pay/paySuccess",
+			"style": {
+				"navigationBarTitleText": "支付成功",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"subPackages": [{
+		"root": "subpkg",
+		"pages": [{
+				"path": "detail/detail",
+				"style": {
+					"navigationBarTitleText": "详情",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "collect/collect",
+				"style": {
+					"navigationBarTitleText": "收藏列表",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "complaint/complaint",
+				"style": {
+					"navigationBarTitleText": "用户反馈",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "evaluation/evaluation",
+				"style": {
+					"navigationBarTitleText": "评价",
+					"enablePullDownRefresh": false
+				}
+			}, {
+				"path": "allOrders/allOrders",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+			}
+		]
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "柠檬小铺",
@@ -96,33 +109,34 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
-	    "color": "#000000",
-	    "selectedColor": "#55d98d",
-	    "borderStyle": "black",
-	    "backgroundColor": "#F8F8F8",
-	    "list": [{
+		"color": "#000000",
+		"selectedColor": "#55d98d",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
 				"iconPath": "static/tabicons/home_0.png",
 				"selectedIconPath": "static/tabicons/home_1.png",
-				"pagePath":"pages/home/home",
+				"pagePath": "pages/home/home",
 				"text": "首页"
 			},
 			{
-				"iconPath":"static/tabicons/forum_0.png",
-				"selectedIconPath":"static/tabicons/forum_1.png",
-				"pagePath":"pages/menu/menu",
+				"iconPath": "static/tabicons/manage_0.png",
+				"selectedIconPath": "static/tabicons/manage_1.png",
+				"pagePath": "pages/menu/menu",
 				"text": "菜单"
 			},
 			{
-				"iconPath":"static/tabicons/manage_0.png",
-				"selectedIconPath":"static/tabicons/manage_1.png",
-				"pagePath":"pages/order/order",
-				"text": "订单"				
+				"iconPath": "static/tabicons/forum_0.png",
+				"selectedIconPath": "static/tabicons/forum_1.png",
+				"pagePath": "pages/order/order",
+				"text": "点餐"
 			},
 			{
-				"iconPath":"static/tabicons/me_0.png",
-				"selectedIconPath":"./static/tabicons/me_1.png",
-				"pagePath":"pages/mine/mine",
+				"iconPath": "static/tabicons/me_0.png",
+				"selectedIconPath": "./static/tabicons/me_1.png",
+				"pagePath": "pages/mine/mine",
 				"text": "我的"
-			}]
+			}
+		]
 	}
 }

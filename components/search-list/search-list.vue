@@ -51,7 +51,7 @@
 			// 跳转详情页
 			toDetail(name) {
 				uni.navigateTo({
-					url: `/pages/detail/detail?name=${name}`
+					url: `../../subpkg/detail/detail?name=${name}`
 				})
 			},
 		},

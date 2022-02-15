@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 196))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 214))
     },
     uCellGroup: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-group/u-cell-group */ "uview-ui/components/u-cell-group/u-cell-group").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-group/u-cell-group.vue */ 210))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-group/u-cell-group */ "uview-ui/components/u-cell-group/u-cell-group").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-group/u-cell-group.vue */ 221))
     },
     uCellItem: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 217))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 228))
     }
   }
 } catch (e) {
@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 10));
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 10));
 
 
 
@@ -181,8 +181,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/currentUser.js */ 76));
-var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/cloudApi.js */ 77));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+
+
+
+
+
+var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/currentUser.js */ 76));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
     return {
@@ -190,17 +196,49 @@ var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/clou
 
   },
   // 云函数
-  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _currentUser.default.login());case 2:_this.userInfo = _context.sent;
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var storageLogin, _storageLogin;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              // 将用户信息存入本地存储
+              storageLogin = uni.getStorageSync('storageLogin');if (!
+              storageLogin) {_context.next = 5;break;}
+              _this.userInfo = storageLogin;_context.next = 10;break;case 5:_context.next = 7;return (
+
+                _currentUser.default.login());case 7:_storageLogin = _context.sent;
+              uni.setStorageSync('storageLogin', _storageLogin);
+              _this.userInfo = _storageLogin;case 10:
+
+
               // 将用户openid存储在vuex中
-              _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 4:case "end":return _context.stop();}}}, _callee);}))();
-  },
+              _this.$u.vuex('VXopenid', _this.userInfo.openid || '');
+
+              // 根据用户id将用户的私有信息同步到商品
+              // if(this.VXopenid != '') {
+              // 	const db = uniCloud.database();
+              // 	const res = await db.collection('comment-favorites').where({
+              // 		openid: this.VXopenid
+              // 	}).get()
+              // 	let data = res.result.data;
+              // 	let FOODS = this.FOODS;
+
+              // 	// FOODS.result.forEach(res => {
+              // 	// 	data.favorites.forEach(FVal => {
+              // 	// 		if(res._id === Fval) {
+              // 	// 			// res = true
+              // 	// 		}
+              // 	// 	}
+              // 	// 	data.addOrder.forEach(AVal => {
+              // 	// 		if() {
+              // 	// 		}
+              // 	// 	}
+              // 	// })
+              // 	console.log(FOODS);
+              // }
+            case 11:case "end":return _context.stop();}}}, _callee);}))();},
   onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
                 _this2.updateUserProfile());case 2:case "end":return _context2.stop();}}}, _callee2);}))();
   },
   methods: {
     updateUserProfile: function updateUserProfile() {var _this3 = this;
-      if (!this.userInfo) {
+      if (!this.userInfo || this.userInfo.nickName === '') {
         uni.getUserProfile({
           desc: '用于完善会员资料',
           success: function success(res) {
@@ -210,11 +248,21 @@ var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/clou
 
       }
     },
-    logout: function logout() {
-      _currentUser.default.logout();
-      this.userInfo = null;
+    logout: function logout() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var userData, db;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                userData = {
+                  openid: _this4.VXopenid || '',
+                  nickName: "",
+                  avatarUrl: "" };
+
+                _this4.userInfo = userData;
+                db = uniCloud.database();_context3.next = 5;return (
+                  db.collection("users").where({
+                    openid: _this4.VXopenid }).
+                  update(_objectSpread({}, userData)));case 5:
+
+                _this4.$u.vuex('VXopenid', '');case 6:case "end":return _context3.stop();}}}, _callee3);}))();
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"]))
 
 /***/ }),
 

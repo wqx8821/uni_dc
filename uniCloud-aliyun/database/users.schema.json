@@ -1,0 +1,35 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（用户 ID），系统自动生成"
+		},
+		"avatarUrl": {
+			"bsonType": "string",
+			"description": "头像地址",
+			"title": "头像地址",
+			"trim": "both"
+		},
+		"nickName": {
+			"bsonType": "string",
+			"description": "用户昵称",
+			"title": "昵称",
+			"trim": "both"
+		},
+		"token": {
+			"bsonType": "string",
+			"description": "用户token"
+		},
+		"openid": {
+			"bsonType": "string",
+			"description": "微信openid"
+		}
+	}
+}

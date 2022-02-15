@@ -4,14 +4,23 @@
     "pages/menu/menu",
     "pages/order/order",
     "pages/mine/mine",
-    "pages/detail/detail",
-    "pages/evaluation/evaluation",
     "pages/home/search/search",
     "pages/order/sureOrder",
     "pages/order/pay/pay",
     "pages/order/pay/paySuccess"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "pages": [
+        "detail/detail",
+        "collect/collect",
+        "complaint/complaint",
+        "evaluation/evaluation",
+        "allOrders/allOrders"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "柠檬小铺",
@@ -31,16 +40,16 @@
         "text": "首页"
       },
       {
-        "iconPath": "static/tabicons/forum_0.png",
-        "selectedIconPath": "static/tabicons/forum_1.png",
+        "iconPath": "static/tabicons/manage_0.png",
+        "selectedIconPath": "static/tabicons/manage_1.png",
         "pagePath": "pages/menu/menu",
         "text": "菜单"
       },
       {
-        "iconPath": "static/tabicons/manage_0.png",
-        "selectedIconPath": "static/tabicons/manage_1.png",
+        "iconPath": "static/tabicons/forum_0.png",
+        "selectedIconPath": "static/tabicons/forum_1.png",
         "pagePath": "pages/order/order",
-        "text": "订单"
+        "text": "点餐"
       },
       {
         "iconPath": "static/tabicons/me_0.png",

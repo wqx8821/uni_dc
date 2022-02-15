@@ -20,7 +20,7 @@ function login(){
 							resolve(userInfo);
 						},
 						fail: (err) => {
-							reject();
+							reject(err);
 						}
 					})
 				}
@@ -34,7 +34,7 @@ function logout(){
 }
 
 function isLogin(){
-	return userInfo;
+	return userInfo!=null;
 }
 
 function getUserInfo(){

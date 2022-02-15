@@ -19,6 +19,7 @@ exports.main = async (event, context) => {
 	let dbRes = await db.collection("users").where({
 		openid:openid
 	}).get();
+	console.log(dbRes);
 	// 查询 已保存的用户id
 	let CFID = await db.collection("comment-favorites").where({
 		openid:openid
@@ -29,7 +30,7 @@ exports.main = async (event, context) => {
 	let userData;
 	if(dbRes.affectedDocs<=0){
 		userData = {
-			nickName:"点击登录",
+			nickName:"",
 			avatarUrl:"",
 			gender:0,
 			country:"",

@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uSwipeAction: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swipe-action/u-swipe-action */ "uview-ui/components/u-swipe-action/u-swipe-action").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action/u-swipe-action.vue */ 182))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swipe-action/u-swipe-action */ "uview-ui/components/u-swipe-action/u-swipe-action").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action/u-swipe-action.vue */ 200))
     },
     uCheckbox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-checkbox/u-checkbox */ "uview-ui/components/u-checkbox/u-checkbox").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox/u-checkbox.vue */ 189))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-checkbox/u-checkbox */ "uview-ui/components/u-checkbox/u-checkbox").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox/u-checkbox.vue */ 207))
     },
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 168))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 186))
     }
   }
 } catch (e) {
@@ -159,7 +159,14 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 10));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 10));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -224,8 +231,6 @@ var _default =
                 _this.calcTotal());case 2:case "end":return _context.stop();}}}, _callee);}))();
   },
   onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var addon;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-              _this2.calcTotal(); //计算总价
-
               // 加购解决方案
               addon = [];
               (_this2.FOODS.result || []).forEach(function (res) {
@@ -239,18 +244,28 @@ var _default =
                 }
               });
               // 将提取的数据存入vuex
-              _context2.next = 5;return _this2.$u.vuex('addOn', addon);case 5:
+              _context2.next = 4;return _this2.$u.vuex('addOn', addon);case 4:
               // 加载加入购物车数据
               if (addon.length) _this2.dcdata = _this2.addOn;
-              _this2.dcdata.forEach(function (res, index) {
-                if (!res.number) {
-                  addon.splice(index, 1);
-                }
-              });
+
+              // 云函数将购物车数据存储数据中
+              _context2.next = 7;return uniCloud.callFunction({
+                name: 'private',
+                data: {
+                  openid: _this2.VXopenid,
+                  addOrder: _this2.dcdata },
+
+                success: function success(res) {
+                  // console.log(res);
+                } });case 7:
+
+
               // 提前将数据赋值给成功的数据，
               _this2.$u.vuex('suredata', _this2.dcdata);
               // console.log(this.addOn);
-            case 8:case "end":return _context2.stop();}}}, _callee2);}))();},
+
+              _this2.calcTotal(); //计算总价
+            case 9:case "end":return _context2.stop();}}}, _callee2);}))();},
   methods: {
     // 跳转到评价页面
     toEvaluation: function toEvaluation() {
@@ -273,22 +288,22 @@ var _default =
         }
       });
       // console.log(this.dcdata);
-
       // 将最新的选中状态更新到vuex
       this.$u.vuex('suredata', this.dcdata);
 
       this.calcTotal(); //计算总价
 
-      // 云函数将购物车数据存储数据中
-      uniCloud.callFunction({
-        name: 'test',
-        data: {
-          addOeder: [] },
-
-        success: function success(res) {
-          console.log(res);
-        } });
-
+      // // 云函数将购物车数据存储数据中
+      // uniCloud.callFunction({
+      // 	name: 'test',
+      // 	data: {
+      // 		openid: this.VXopenid,
+      // 		addOrder: []
+      // 	},
+      // 	success: (res) => {
+      // 		console.log(res);
+      // 	}
+      // })
     },
     // 全选
     checkedAll: function checkedAll(allcked) {var _this4 = this;
@@ -329,7 +344,9 @@ var _default =
     },
     // 跳转确认订单
     createOrder: function createOrder() {
-      if (!this.dcdata.length) {
+      // 计算总价，若总价为零则不跳转
+      this.calcTotal();
+      if (!this.totalPrice) {
         uni.showToast({
           title: '小主还没有选择好吃的',
           icon: 'none',
@@ -341,7 +358,7 @@ var _default =
 
       }
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

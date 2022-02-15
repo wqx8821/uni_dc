@@ -1,0 +1,136 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.detailStyle.data-v-aeef55cc {
+  margin: 0 8rpx 10rpx 8rpx;
+  padding: 10rpx 10rpx;
+  border: 1px solid #f5f5f5;
+  border-radius: 20rpx;
+  box-shadow: 0 0 1px #7c7c7c;
+}
+.item-menu-name.data-v-aeef55cc {
+  font-weight: normal;
+  font-size: 40rpx;
+  margin: 6rpx 35rpx;
+  color: #c30061;
+}
+.total-price.data-v-aeef55cc {
+  color: #c30061;
+  font-size: 38rpx;
+}
+.tag.data-v-aeef55cc {
+  padding-left: 30rpx;
+}
+.tag .u-tag.data-v-aeef55cc {
+  margin: 20rpx 15rpx;
+}
+.wrap.data-v-aeef55cc {
+  padding: 15rpx 15rpx;
+}
+.comment.data-v-aeef55cc {
+  display: flex;
+  padding: 30rpx;
+}
+.comment .left image.data-v-aeef55cc {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+}
+.comment .right.data-v-aeef55cc {
+  flex: 1;
+  padding-left: 20rpx;
+  font-size: 30rpx;
+}
+.comment .right .top.data-v-aeef55cc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+.comment .right .top .name.data-v-aeef55cc {
+  color: #5677fc;
+}
+.comment .right .top .like.data-v-aeef55cc {
+  display: flex;
+  align-items: center;
+  color: #9a9a9a;
+  font-size: 26rpx;
+}
+.comment .right .top .like .num.data-v-aeef55cc {
+  margin-right: 4rpx;
+  color: #9a9a9a;
+}
+.comment .right .top .highlight.data-v-aeef55cc {
+  color: #5677fc;
+}
+.comment .right .top .highlight .num.data-v-aeef55cc {
+  color: #5677fc;
+}
+.comment .right .content.data-v-aeef55cc {
+  margin-bottom: 10rpx;
+}
+/* 底部操作菜单 */
+.page-bottom.data-v-aeef55cc {
+  position: fixed;
+  left: 30rpx;
+  bottom: 30rpx;
+  z-index: 95;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 690rpx;
+  height: 100rpx;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 20rpx 0 rgba(0, 0, 0, 0.5);
+  border-radius: 16rpx;
+}
+.page-bottom .p-b-btn.data-v-aeef55cc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #000000;
+  width: 96rpx;
+  height: 80rpx;
+}
+.page-bottom .p-b-btn.active.data-v-aeef55cc, .page-bottom .p-b-btn.active .yticon.data-v-aeef55cc {
+  color: #fa436a;
+}
+.page-bottom .action-btn-group.data-v-aeef55cc {
+  display: flex;
+  height: 76rpx;
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: 0 20rpx 40rpx -16rpx #fa436a;
+  box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+  background: linear-gradient(to right, #ffac30, #fa436a, #F56C6C);
+  margin-left: 20rpx;
+  position: relative;
+}
+.page-bottom .action-btn-group.data-v-aeef55cc:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 28rpx;
+  width: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.page-bottom .action-btn-group .action-btn.data-v-aeef55cc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  height: 100%;
+  font-size: 24rpx;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+

@@ -38,12 +38,13 @@
     "minifyWXSS": true,
     "disableUseStrict": false,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "minifyWXML": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "wx83e7c03d8363216d",
-  "projectname": "uView-demo",
+  "projectname": "orderingApplet",
   "condition": {
     "search": {
       "list": []

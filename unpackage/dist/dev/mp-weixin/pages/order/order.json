@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "订单列表",
+  "navigationBarTitleText": "点餐列表",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-swipe-action": "/uview-ui/components/u-swipe-action/u-swipe-action",

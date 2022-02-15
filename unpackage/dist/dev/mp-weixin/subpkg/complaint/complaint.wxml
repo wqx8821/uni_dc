@@ -1,0 +1,1 @@
+<view><textarea class="evalText" value="" placeholder="请留下您的宝贵意见" data-event-opts="{{[['blur',[['bindTextAreaBlur',['$event']]]]]}}" bindblur="__e"></textarea><button type="default">提交</button></view>

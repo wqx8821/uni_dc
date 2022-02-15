@@ -24,7 +24,14 @@
 						<!-- 价格 -->
 						<text class="total-price">￥{{ item.price }}</text>
 						<!-- 数量 -->
-						<u-number-box v-model="item.number" :min="1" :index='item.name' @change="numChange"></u-number-box>
+						<u-number-box
+							v-model="item.number"
+							:min="1" 
+							:index='item.name' 
+							:disabled-input='true'
+							@change="numChange"
+							>
+						</u-number-box>
 					</view>
 				</view>
 			</u-swipe-action>
@@ -63,8 +70,6 @@
 			await this.calcTotal() //计算总价
 		},
 		async onShow() {
-			this.calcTotal() //计算总价
-			
 			// 加购解决方案
 			let addon = []; 
 			(this.FOODS.result || []).forEach(res => {
@@ -81,14 +86,24 @@
 			await this.$u.vuex('addOn', addon)
 			// 加载加入购物车数据
 			if(addon.length) this.dcdata = this.addOn
-			this.dcdata.forEach((res,index)=>{
-				if(!res.number) {
-					addon.splice(index,1)
+			
+			// 云函数将购物车数据存储数据中
+			await uniCloud.callFunction({
+				name: 'private',
+				data: {
+					openid: this.VXopenid,
+					addOrder: this.dcdata
+				},
+				success: (res) => {
+					// console.log(res);
 				}
 			})
+
 			// 提前将数据赋值给成功的数据，
 			this.$u.vuex('suredata',this.dcdata)
 			// console.log(this.addOn);
+			
+			this.calcTotal() //计算总价
 		},
 		methods: {
 			// 跳转到评价页面
@@ -112,22 +127,22 @@
 					}
 				})
 				// console.log(this.dcdata);
-				
 				// 将最新的选中状态更新到vuex
 				this.$u.vuex('suredata',this.dcdata)
 				
 				this.calcTotal() //计算总价
 				
-				// 云函数将购物车数据存储数据中
-				uniCloud.callFunction({
-					name: 'test',
-					data: {
-						addOeder: []
-					},
-					success: (res) => {
-						console.log(res);
-					}
-				})
+				// // 云函数将购物车数据存储数据中
+				// uniCloud.callFunction({
+				// 	name: 'test',
+				// 	data: {
+				// 		openid: this.VXopenid,
+				// 		addOrder: []
+				// 	},
+				// 	success: (res) => {
+				// 		console.log(res);
+				// 	}
+				// })
 			},
 			// 全选
 			checkedAll(allcked) {
@@ -168,7 +183,9 @@
 			},
 			// 跳转确认订单
 			createOrder() {
-				if(!this.dcdata.length) {
+				// 计算总价，若总价为零则不跳转
+				this.calcTotal()
+				if(!this.totalPrice) {
 					uni.showToast({
 					    title: '小主还没有选择好吃的',
 						icon: 'none',

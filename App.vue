@@ -1,6 +1,8 @@
 <script>
 	export default {
 		onLaunch: async function() {
+
+			
 			await uniCloud.callFunction({
 				name: 'getFood',
 				success: (res) => {
@@ -9,10 +11,10 @@
 					this.$u.vuex('addOn', res)
 				}
 			})
-			console.log('App Launch')
+			// console.log('App Launch')
 		},
 		onShow: function() {
-			console.log('App Show')
+			// console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')

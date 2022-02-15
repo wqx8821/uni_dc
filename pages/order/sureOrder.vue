@@ -141,7 +141,7 @@
 			// 点击使用优惠卷
 			useDiscount(item) {
 				// 点击优惠卷若总价大于 满减金额 就计算实付款
-				if(this.total > item.full) {
+				if(this.total >= item.full) {
 					this.pay = this.total - item.price
 					uni.showToast({
 					    title: '选择成功',

@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 168))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 186))
     },
     dc_order: function() {
-      return __webpack_require__.e(/*! import() | components/dc_order/dc_order */ "components/dc_order/dc_order").then(__webpack_require__.bind(null, /*! @/components/dc_order/dc_order.vue */ 175))
+      return __webpack_require__.e(/*! import() | components/dc_order/dc_order */ "components/dc_order/dc_order").then(__webpack_require__.bind(null, /*! @/components/dc_order/dc_order.vue */ 193))
     }
   }
 } catch (e) {
@@ -193,8 +193,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   data: function data() {
@@ -220,6 +218,7 @@ var _default =
               result = [
               { category: '', foods: [] },
               { category: '', foods: [] },
+              { category: '', foods: [] },
               { category: '', foods: [] }];
 
               // 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
@@ -227,7 +226,7 @@ var _default =
               data = JSON.parse(JSON.stringify(res));
               _this.resObj = data; // 存储一份原始数据，用来统计加购
               (data.result || []).forEach(function (res) {
-                if (res.category == '今日特惠') {
+                if (res.category == '招牌菜') {
                   result[0].category = res.category;
                   result[0].foods.push(res);
                 }
@@ -238,6 +237,10 @@ var _default =
                 if (res.category == '经济大菜') {
                   result[2].category = res.category;
                   result[2].foods.push(res);
+                }
+                if (res.category == '今日特惠') {
+                  result[3].category = res.category;
+                  result[3].foods.push(res);
                 }
               });
               _this.dataList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
@@ -252,7 +255,7 @@ var _default =
     // 跳转详情页
     toDetail: function toDetail(name) {
       uni.navigateTo({
-        url: "/pages/detail/detail?name=".concat(name) });
+        url: "../../subpkg/detail/detail?name=".concat(name) });
 
     },
     // 步进器 并入加入购物车的对象

@@ -25,8 +25,6 @@
 									</text>
 									<!-- 步进器 -->
 									<u-number-box  input-width="40" :min="1" v-model="item1.number" :index='item1.name' @change="valChange"></u-number-box>
-									<!-- 价格 -->
-									<!-- 共{{ value }}件餐品 -->
 								</view>
 							</view>
 						</view>
@@ -62,6 +60,7 @@
 			let result = [
 				{category: '',foods: []},
 				{category: '',foods: []},
+				{category: '',foods: []},
 				{category: '',foods: []}
 			]
 			// 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
@@ -69,7 +68,7 @@
 			let data = JSON.parse(JSON.stringify(res))
 			this.resObj = data; // 存储一份原始数据，用来统计加购
 			(data.result || []).forEach(res => {
-				if(res.category == '今日特惠'){
+				if(res.category == '招牌菜'){
 				    result[0].category = res.category
 				    result[0].foods.push(res)
 				}
@@ -80,6 +79,10 @@
 				if(res.category == '经济大菜'){
 				    result[2].category = res.category
 				    result[2].foods.push(res)
+				}
+				if(res.category == '今日特惠'){
+				    result[3].category = res.category
+				    result[3].foods.push(res)
 				}
 			})
 			this.dataList = result
@@ -94,7 +97,7 @@
 			// 跳转详情页
 			toDetail(name) {
 				uni.navigateTo({
-					url: `/pages/detail/detail?name=${name}`
+					url: `../../subpkg/detail/detail?name=${name}`
 				})
 			},
 			// 步进器 并入加入购物车的对象
