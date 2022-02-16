@@ -37,43 +37,33 @@
 		// 云函数
 		async onLoad(){
 			// 将用户信息存入本地存储
-			const storageLogin = uni.getStorageSync('storageLogin');
-			if(storageLogin) {
-				this.userInfo = storageLogin
+			const storage = uni.getStorageSync('storageLogin');
+			// console.log(storage);
+			if(storage) {
+				this.userInfo = storage
 			} else {
-				let storageLogin = await loginUser.login();
-				uni.setStorageSync('storageLogin', storageLogin);
-				this.userInfo = storageLogin
+				this.userInfo  = await loginUser.login();
 			}
 			
 			// 将用户openid存储在vuex中
 			this.$u.vuex('VXopenid',this.userInfo.openid || '')
-			
-			// 根据用户id将用户的私有信息同步到商品
-			// if(this.VXopenid != '') {
-			// 	const db = uniCloud.database();
-			// 	const res = await db.collection('comment-favorites').where({
-			// 		openid: this.VXopenid
-			// 	}).get()
-			// 	let data = res.result.data;
-			// 	let FOODS = this.FOODS;
-				
-			// 	// FOODS.result.forEach(res => {
-			// 	// 	data.favorites.forEach(FVal => {
-			// 	// 		if(res._id === Fval) {
-			// 	// 			// res = true
-			// 	// 		}
-			// 	// 	}
-			// 	// 	data.addOrder.forEach(AVal => {
-			// 	// 		if() {
-			// 	// 		}
-			// 	// 	}
-			// 	// })
-			// 	console.log(FOODS);
-			// }
+
 		},
 		async onShow() {
 			await this.updateUserProfile()
+			
+			// 根据用户id将用户的私有信息同步到商品
+			if(this.VXopenid != '') {
+				const db = uniCloud.database();
+				const res = await db.collection('comment-favorites').where({
+					openid: this.VXopenid
+				}).get()
+				let data = res.result.data;
+				console.log(data);
+				let FOODS = this.FOODS;
+				
+				// console.log(FOODS);
+			}
 		},
 		methods: {
 			updateUserProfile(){
@@ -81,24 +71,20 @@
 					uni.getUserProfile({
 						desc: '用于完善会员资料',
 						success: (res) => {
-							this.userInfo = Object.assign(this.userInfo,res.userInfo);
+							this.userInfo = Object.assign({},this.userInfo,res.userInfo);
+							// console.log(this.userInfo);
 							loginUser.updateUser(this.userInfo);
+							// 设置缓存
+							uni.setStorageSync('storageLogin', this.userInfo);
 						}
 					})
 				}
 			},
 			async logout(){
-				let userData = {
-					openid: this.VXopenid || '',
-					nickName:"",
-					avatarUrl:""
-				}
-				this.userInfo = userData
-				const db = uniCloud.database();
-				await db.collection("users").where({
-					openid: this.VXopenid
-				}).update({...userData});
-				
+				// 立即改变页面状态
+				this.userInfo = null
+				// 清除缓存
+				uni.clearStorageSync('storageLogin');
 				this.$u.vuex('VXopenid','')
 			}
 		},

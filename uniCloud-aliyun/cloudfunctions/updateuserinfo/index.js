@@ -2,11 +2,11 @@
 
 const {verifyToken} = require("wx-common")
 exports.main = async (event, context) => {
-	const {userInfo, token} = event
+	const {userInfo} = event
 	 
 	const db = uniCloud.database();
 	 // 解密的信息
-	const payload = verifyToken(token)
+	const payload = verifyToken(userInfo.token)
 	// console.log(payload)
 	
 	const dbRes = await db.collection('users').where({

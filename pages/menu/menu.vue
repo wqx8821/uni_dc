@@ -61,6 +61,9 @@
 				{category: '',foods: []},
 				{category: '',foods: []},
 				{category: '',foods: []},
+				{category: '',foods: []},
+				{category: '',foods: []},
+				{category: '',foods: []},
 				{category: '',foods: []}
 			]
 			// 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
@@ -80,9 +83,21 @@
 				    result[2].category = res.category
 				    result[2].foods.push(res)
 				}
-				if(res.category == '今日特惠'){
+				if(res.category == '汤面类'){
 				    result[3].category = res.category
 				    result[3].foods.push(res)
+				}
+				if(res.category == '主食'){
+				    result[4].category = res.category
+				    result[4].foods.push(res)
+				}
+				if(res.category == '酒水'){
+				    result[5].category = res.category
+				    result[5].foods.push(res)
+				}
+				if(res.category == '婚宴承包'){
+				    result[6].category = res.category
+				    result[6].foods.push(res)
 				}
 			})
 			this.dataList = result

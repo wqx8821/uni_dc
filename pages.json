@@ -4,6 +4,14 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+		
+		}, 
+		{
 			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "柠檬小铺"
@@ -18,13 +26,6 @@
 			"path": "pages/order/order",
 			"style": {
 				"navigationBarTitleText": "点餐列表",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/mine/mine",
-			"style": {
-				"navigationBarTitleText": "个人中心",
 				"enablePullDownRefresh": false
 			}
 
@@ -96,11 +97,20 @@
 			}, {
 				"path": "allOrders/allOrders",
 				"style": {
-					"navigationBarTitleText": "",
+					"navigationBarTitleText": "全部订单",
 					"enablePullDownRefresh": false
 				}
 			}
-		]
+		    ,{
+                    "path" : "activity/activity",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

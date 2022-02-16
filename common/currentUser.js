@@ -2,18 +2,18 @@ import cloudApi from "./cloudApi.js"
 
 var userInfo;
 
-function login(){
-	return new Promise((resolve,reject)=>{
-		if(isLogin()){
+function login() {
+	return new Promise((resolve, reject) => {
+		if (isLogin()) {
 			resolve(userInfo);
-		}else{
+		} else {
 			uni.login({
-				provider:"weixin",
+				provider: "weixin",
 				success: (res) => {
 					cloudApi.call({
-						name:"login",
-						data:{
-							code:res.code
+						name: "login",
+						data: {
+							code: res.code
 						},
 						success: (res) => {
 							userInfo = res.result;
@@ -29,23 +29,23 @@ function login(){
 	})
 }
 
-function logout(){
+function logout() {
 	userInfo = null;
 }
 
-function isLogin(){
-	return userInfo!=null;
+function isLogin() {
+	return userInfo != null;
 }
 
-function getUserInfo(){
+function getUserInfo() {
 	return userInfo;
 }
 
-function updateUser(userInfo){
+function updateUser(userInfo) {
 	cloudApi.call({
-		name:"updateuserinfo",
-		data:{
-			userInfo:userInfo
+		name: "updateuserinfo",
+		data: {
+			userInfo: userInfo
 		}
 	})
 }

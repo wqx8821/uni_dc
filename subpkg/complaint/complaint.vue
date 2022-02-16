@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<textarea value="" placeholder="请留下您的宝贵意见" class="evalText" @blur="bindTextAreaBlur"/>
-		<button type="default">提交</button>
+		<button type="success" size="medium" :ripple="true" shape="circle" plain>提交</button>
 	</view>
 </template>
 

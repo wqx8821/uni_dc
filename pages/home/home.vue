@@ -2,14 +2,8 @@
 	<view class="u-wrap">
 		<!-- 搜索 -->
 		<view class="search_d">
-			<u-search 
-				placeholder="想吃点啥" 
-				bg-color="#edf1f9" 
-				:disabled='true' 
-				:show-action='false' 
-				margin="0 15rpx"
-				@click="toSearch()"
-				>
+			<u-search placeholder="想吃点啥" bg-color="#edf1f9" :disabled='true' :show-action='false' margin="0 15rpx"
+				@click="toSearch()">
 			</u-search>
 		</view>
 		<!-- 轮播 -->
@@ -24,13 +18,18 @@
 		<!-- 最新活动 -->
 		<view class="activity">
 			<u-card :title="title" :sub-title="subTitle" padding="30" title-color='red' title-size="40">
-					<view slot="body">
+				<view slot="body">
+					<navigator url="../../subpkg/activity/activity" hover-class="navigator-hover">
 						<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
-							<view class="u-body-item-title u-line-3">小铺新开张，至今日起前来本店消费的食客，送饮料一份，进店帮忙推广宣传送50元代金卷，祝各位食客吃的开心</view>
-							<image src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg" mode="aspectFill"></image>
+							<view class="u-body-item-title u-line-3">小铺新开张，至今日起前来本店消费的食客，送饮料一份，进店帮忙推广宣传送50元代金卷，祝各位食客吃的开心
+							</view>
+							<image
+								src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg"
+								mode="aspectFill"></image>
 						</view>
-					</view>
-				</u-card>
+					</navigator>
+				</view>
+			</u-card>
 		</view>
 		<!-- 秒杀楼层 -->
 		<view class="seckill-section m-t">
@@ -43,10 +42,7 @@
 			</view>
 			<scroll-view class="floor-list" scroll-x>
 				<view class="scoll-wrapper">
-					<view 
-						v-for="(item, index) in discountList" :key="index"
-						class="floor-item"
-					>
+					<view v-for="(item, index) in discountList" :key="index" class="floor-item">
 						<image :src="item.foods_thumb" mode="aspectFill" @click="toDetail(item.name)"></image>
 						<text class="title clamp">{{item.name}}</text>
 						<text class="price">￥{{item.price}}</text>
@@ -61,9 +57,12 @@
 		data() {
 			return {
 				list: [{ // 轮播
-					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif'},{
-					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif'},{
-					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif'}], 
+					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/6f1adb6a-208f-4a02-bfcd-e6b1b8b3708f.jfif'
+				}, {
+					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/e57f7483-dd70-40da-85b1-153eed6e0f96.jfif'
+				}, {
+					image: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-91815abe-c96c-4864-8fe8-886aafd84f6f/5677179d-ae35-48f0-9441-6097d3aafd92.jfif'
+				}],
 				timestamp: 86400, // 倒计时
 				discountList: {}, // 请求的优惠餐品数据信息
 				search: '', // 双向绑搜索内容
@@ -154,16 +153,18 @@
 		padding: 4rpx 0;
 		background-color: #f8f8f8;
 	}
+
 	// 最新活动
 	.activity {
 		// padding: 20rpx 10rpx;
 	}
+
 	.u-body-item {
 		font-size: 32rpx;
 		color: #333;
 		padding: 20rpx 10rpx;
 	}
-		
+
 	.u-body-item image {
 		width: 120rpx;
 		flex: 0 0 120rpx;
@@ -171,48 +172,58 @@
 		border-radius: 8rpx;
 		margin-left: 12rpx;
 	}
+
 	/* 秒杀专区 */
-	.seckill-section{
+	.seckill-section {
 		margin: 10rpx 15rpx;
 		padding: 4rpx 30rpx 24rpx;
 		background: #fff;
-		.s-header{
-			display:flex;
+
+		.s-header {
+			display: flex;
 			justify-content: space-between;
-			align-items:center;
+			align-items: center;
 			height: 92rpx;
 			line-height: 1;
-			.s-img{
+
+			.s-img {
 				width: 88rpx;
 				height: 30rpx;
 			}
-			.tip{
+
+			.tip {
 				font-size: 16px;
 				color: #000000;
 				margin: 0 30rpx 0 40rpx;
 			}
 		}
-		.floor-list{
+
+		.floor-list {
 			// white-space: nowrap;
 		}
-		.scoll-wrapper{
-			display:flex;
+
+		.scoll-wrapper {
+			display: flex;
 			align-items: flex-start;
 		}
-		.floor-item{
+
+		.floor-item {
 			margin-right: 20rpx;
 			font-size: 16px;
 			color: #000000;
 			line-height: 1.8;
-			image{
+
+			image {
 				width: 270rpx;
 				height: 200rpx;
 				border-radius: 6rpx;
 			}
+
 			.title {
 				padding-left: 10rpx;
 			}
-			.price{
+
+			.price {
 				color: #c13248;
 			}
 		}

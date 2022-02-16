@@ -40,7 +40,6 @@
 		<!-- 底部菜单栏 -->
 		<view class="action-section">
 			<!-- 全选按钮 -->
-			<!-- <u-button @click="checkedAll">全选</u-button> -->
 			<u-checkbox v-model="allCheck" active-color="red" shape="circle" @change="checkedAll" >全选</u-checkbox>
 			<view class="total-box">
 				<text class="price">总计  ¥{{totalPrice}}</text>

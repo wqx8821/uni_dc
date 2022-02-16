@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/home/home",
     "pages/menu/menu",
     "pages/order/order",
-    "pages/mine/mine",
     "pages/home/search/search",
     "pages/order/sureOrder",
     "pages/order/pay/pay",
@@ -17,7 +17,8 @@
         "collect/collect",
         "complaint/complaint",
         "evaluation/evaluation",
-        "allOrders/allOrders"
+        "allOrders/allOrders",
+        "activity/activity"
       ]
     }
   ],

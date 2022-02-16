@@ -94,7 +94,7 @@ var components
 try {
   components = {
     uSearch: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 144))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 179))
     },
     searchList: function() {
       return __webpack_require__.e(/*! import() | components/search-list/search-list */ "components/search-list/search-list").then(__webpack_require__.bind(null, /*! @/components/search-list/search-list.vue */ 235))

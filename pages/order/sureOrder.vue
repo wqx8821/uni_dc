@@ -145,7 +145,7 @@
 					this.pay = this.total - item.price
 					uni.showToast({
 					    title: '选择成功',
-					    duration: 500
+					    duration: 1000
 					});
 				} else {
 					// 不够满减就提示

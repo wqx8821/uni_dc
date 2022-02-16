@@ -59,11 +59,11 @@
 			"description": "选中状态",
 			"defaultValue": false
 		},
-		"is_real": {
+		"collect": {
 			"bsonType": "bool",
-			"description": "是否实物",
-			"title": "是否为实物",
-			"defaultValue": true
+			"description": "收藏状态",
+			"title": "收藏状态",
+			"defaultValue": false
 		},
 		"is_on_sale": {
 			"bsonType": "bool",

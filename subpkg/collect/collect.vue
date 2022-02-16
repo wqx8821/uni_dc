@@ -67,13 +67,10 @@
 		background-color: #fbfbfb;
 		width: 100%;
 		padding: 6rpx 60rpx;
-		// box-shadow: 0 0 1rpx #000000;
 		border-radius: 16rpx;
 		display: flex;
 		align-items: center;
-		// justify-content: center;
 		flex-direction: row;
-		// align-items: flex-end;
 		justify-content: space-between;
 		margin-top: 10rpx;
 	}

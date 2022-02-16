@@ -1,8 +1,6 @@
 <script>
 	export default {
 		onLaunch: async function() {
-
-			
 			await uniCloud.callFunction({
 				name: 'getFood',
 				success: (res) => {

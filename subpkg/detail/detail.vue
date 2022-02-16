@@ -7,7 +7,7 @@
 				<u-swiper :list="item.foods_banner_imgs" :height="430" ></u-swiper>
 			</view>
 			<text class="u-line-2 u-p-l-20 u-p-r-20 u-m-t-15 u-m-b-10 u-text-center">
-				风味简介：{{item.foods_desc}}
+				{{item.foods_desc}}
 			</text>
 			<!-- 名字 -->
 			<text class="item-menu-name">{{item.name}}</text>
