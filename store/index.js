@@ -12,7 +12,7 @@ try{
 }
 
 // 需要永久存储，且下次APP启动需要取出的，在state中的变量名
-let saveStateKeys = ['addOn'];
+let saveStateKeys = ['addOn','VXFavorite'];
 
 // 保存变量到本地存储中
 const saveLifeData = function(key, value){
@@ -28,12 +28,11 @@ const saveLifeData = function(key, value){
 	}
 }
 const store = new Vuex.Store({
-	// 下面这些值仅为示例，使用过程中请删除
 	state: {
 		FOODS: [], // 商品信息
 		addOn: [], // 食品的原始信息（包含加购数量）
 		suredata: [], // 确认订单的数据
-		VXFavorite: [], // 餐品收藏
+		VXFavorite: lifeData.VXFavorite ? lifeData.VXFavorite: [], // 餐品收藏, 需加入本地存储
 		VXopenid: ''
 	},
 	mutations: {

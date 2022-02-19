@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view class="item-container" v-if="searchData.length">
-			<view class="thumb-box" v-for="(item, index) in searchData" :key="index" @click="toDetail(item.name)">
+		<view class="item-container" v-if="dcdata.length">
+			<view class="thumb-box" v-for="(item, index) in dcdata" :key="index" @click="toDetail(item.name)">
 				<image class="item-menu-image" :src="item.foods_thumb"></image>
 				<view style="display: flex; flex-direction: column; align-items: flex-end;">
 					<view class="item-menu-name">{{item.name}}</view>
@@ -28,13 +28,26 @@
 	export default {
 		data() {
 			return {
-				sortData: true,
 				dcdata: []
 			};
 		},
-		mounted() {
-			let res = this.FOODS
-			this.dcdata = JSON.parse(JSON.stringify(res.result))
+		async onLoad() {
+			// let res = this.FOODS
+			// this.dcdata = res.result
+			// 请求餐品数据
+			await uniCloud.callFunction({
+				name: 'getFood',
+				data: {
+					// 传递商品名称
+					type: '收藏列表',
+					openid: this.VXopenid || ''
+				},
+				success: (res) => {
+					console.log(res.result);
+					this.dcdata = res.result
+					// console.log(this.dcdata);
+				}
+			});
 		},
 		methods: {
 			// 跳转详情页
@@ -86,8 +99,8 @@
 		flex-wrap: wrap;
 	}
 	.item-menu-image {
-		width: 220rpx;
-		height: 220rpx;
+		width: 180rpx;
+		height: 180rpx;
 		border-radius: 20rpx;
 	}
 </style>

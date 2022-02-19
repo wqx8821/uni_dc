@@ -32,7 +32,7 @@
     "color": "#000000",
     "selectedColor": "#55d98d",
     "borderStyle": "black",
-    "backgroundColor": "#F8F8F8",
+    "backgroundColor": "#FFFFFF",
     "list": [
       {
         "iconPath": "static/tabicons/home_0.png",
@@ -60,6 +60,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

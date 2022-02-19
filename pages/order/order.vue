@@ -86,17 +86,17 @@
 			// 加载加入购物车数据
 			if(addon.length) this.dcdata = this.addOn
 			
-			// 云函数将购物车数据存储数据中
-			await uniCloud.callFunction({
-				name: 'private',
-				data: {
-					openid: this.VXopenid,
-					addOrder: this.dcdata
-				},
-				success: (res) => {
-					// console.log(res);
-				}
-			})
+			// // 云函数将购物车数据存储数据中
+			// await uniCloud.callFunction({
+			// 	name: 'private',
+			// 	data: {
+			// 		openid: this.VXopenid,
+			// 		addOrder: this.dcdata
+			// 	},
+			// 	success: (res) => {
+			// 		console.log(res);
+			// 	}
+			// })
 
 			// 提前将数据赋值给成功的数据，
 			this.$u.vuex('suredata',this.dcdata)
@@ -130,18 +130,6 @@
 				this.$u.vuex('suredata',this.dcdata)
 				
 				this.calcTotal() //计算总价
-				
-				// // 云函数将购物车数据存储数据中
-				// uniCloud.callFunction({
-				// 	name: 'test',
-				// 	data: {
-				// 		openid: this.VXopenid,
-				// 		addOrder: []
-				// 	},
-				// 	success: (res) => {
-				// 		console.log(res);
-				// 	}
-				// })
 			},
 			// 全选
 			checkedAll(allcked) {
@@ -181,7 +169,7 @@
 				this.calcTotal()
 			},
 			// 跳转确认订单
-			createOrder() {
+			async createOrder() {
 				// 计算总价，若总价为零则不跳转
 				this.calcTotal()
 				if(!this.totalPrice) {
@@ -191,6 +179,19 @@
 					    duration: 1000
 					});
 				} else{
+					// 云函数将购物车数据存储数据中
+					await uniCloud.callFunction({
+						name: 'private',
+						data: {
+							// openid: this.VXopenid,
+							openid: 'olwg75MhYydMfBKDJDBLvglbdXr4',
+							addOrder: this.dcdata
+						},
+						success: (res) => {
+							console.log(res);
+						}
+					})
+					
 					uni.navigateTo({
 						url: `/pages/order/sureOrder`
 					})

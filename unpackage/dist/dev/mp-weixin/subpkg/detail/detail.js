@@ -242,12 +242,18 @@ var _default =
                 name: 'getFood',
                 data: {
                   // 传递商品名称
-                  type: option.name },
+                  type: option.name,
+                  openid: _this.VXopenid || '' },
 
                 success: function success(res) {
                   _this.detailData = [res.result];
                   // console.log(this.detailData);
+
+                  // 页面加载时同步收藏状态
+                  _this.favorite = _this.detailData[0].collect;
                 } });case 3:case "end":return _context.stop();}}}, _callee);}))();
+
+
 
   },
   methods: {
@@ -308,7 +314,7 @@ var _default =
     // 收藏
     isFavorite: function isFavorite() {var _this2 = this;
       // 提取食品id
-      var foodId = this.detailData[0]._id;
+      var foodId = this.detailData[0];
       // 收藏状态
       this.favorite = !this.favorite;
       if (this.favorite) {
@@ -316,15 +322,19 @@ var _default =
         this.VXFavorite.push(foodId);
         uni.showToast({
           title: '收藏成功',
-          duration: 500 });
+          duration: 2000 });
 
       } else {
+        uni.showToast({
+          title: '取消成功',
+          duration: 2000 });
+
         // 若不是收藏状态就从数据库移除
         this.VXFavorite.forEach(function (res, index) {
-          if (res === foodId) _this2.VXFavorite.splice(index, 1);
+          if (res._id === foodId._id) _this2.VXFavorite.splice(index, 1);
         });
       }
-      console.log(this.VXFavorite);
+      // console.log(this.VXFavorite);
       // 云函数将 收藏 的数据存储
       uniCloud.callFunction({
         name: 'private',

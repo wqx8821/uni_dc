@@ -63,7 +63,7 @@
 				{category: '',foods: []},
 				{category: '',foods: []},
 				{category: '',foods: []},
-				{category: '',foods: []},
+				// {category: '',foods: []},
 				{category: '',foods: []}
 			]
 			// 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
@@ -95,10 +95,10 @@
 				    result[5].category = res.category
 				    result[5].foods.push(res)
 				}
-				if(res.category == '婚宴承包'){
-				    result[6].category = res.category
-				    result[6].foods.push(res)
-				}
+				// if(res.category == '婚宴承包'){
+				//     result[6].category = res.category
+				//     result[6].foods.push(res)
+				// }
 			})
 			this.dataList = result
 		},

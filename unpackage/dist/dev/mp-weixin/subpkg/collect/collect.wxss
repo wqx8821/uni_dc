@@ -38,8 +38,8 @@
   flex-wrap: wrap;
 }
 .item-menu-image.data-v-c74bea60 {
-  width: 220rpx;
-  height: 220rpx;
+  width: 180rpx;
+  height: 180rpx;
   border-radius: 20rpx;
 }
 

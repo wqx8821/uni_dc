@@ -58,10 +58,18 @@
 				const res = await db.collection('comment-favorites').where({
 					openid: this.VXopenid
 				}).get()
+				// 将收藏状态同步到本地vuex 防止覆盖收藏
+				// this.VXFavorite = res.result.data[0].favorites
 				let data = res.result.data;
-				console.log(data);
+				// console.log(data);
 				let FOODS = this.FOODS;
-				
+				for (let i = 0; i < data.length; i++) {
+					for (let j = 0; j < FOODS.length; j++) {
+						if(data[i] === FOODS[i]._id) {
+							
+						}
+					}
+				}
 				// console.log(FOODS);
 			}
 		},

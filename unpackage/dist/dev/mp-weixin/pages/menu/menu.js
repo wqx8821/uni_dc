@@ -221,7 +221,7 @@ var _default =
               { category: '', foods: [] },
               { category: '', foods: [] },
               { category: '', foods: [] },
-              { category: '', foods: [] },
+              // {category: '',foods: []},
               { category: '', foods: [] }];
 
               // 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
@@ -253,10 +253,10 @@ var _default =
                   result[5].category = res.category;
                   result[5].foods.push(res);
                 }
-                if (res.category == '婚宴承包') {
-                  result[6].category = res.category;
-                  result[6].foods.push(res);
-                }
+                // if(res.category == '婚宴承包'){
+                //     result[6].category = res.category
+                //     result[6].foods.push(res)
+                // }
               });
               _this.dataList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
   },
