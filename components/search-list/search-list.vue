@@ -44,7 +44,7 @@
 			};
 		},
 		mounted() {
-			let res = this.FOODS
+			let res = uni.getStorageSync('storagefoods')
 			this.dcdata = JSON.parse(JSON.stringify(res.result))
 		},
 		methods: {

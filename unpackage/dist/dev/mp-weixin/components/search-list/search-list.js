@@ -192,7 +192,7 @@ var _default =
 
   },
   mounted: function mounted() {
-    var res = this.FOODS;
+    var res = uni.getStorageSync('storagefoods');
     this.dcdata = JSON.parse(JSON.stringify(res.result));
   },
   methods: {

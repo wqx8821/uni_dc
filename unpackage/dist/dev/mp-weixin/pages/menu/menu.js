@@ -213,58 +213,13 @@ var _default =
     };
 
   },
-  onShow: function onShow() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result, res, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              // 请求餐品数据
-              result = [
-              { category: '', foods: [] },
-              { category: '', foods: [] },
-              { category: '', foods: [] },
-              { category: '', foods: [] },
-              { category: '', foods: [] },
-              // {category: '',foods: []},
-              { category: '', foods: [] }];
-
-              // 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
-              res = _this.FOODS;
-              data = JSON.parse(JSON.stringify(res));
-              _this.resObj = data; // 存储一份原始数据，用来统计加购
-              (data.result || []).forEach(function (res) {
-                if (res.category == '招牌菜') {
-                  result[0].category = res.category;
-                  result[0].foods.push(res);
-                }
-                if (res.category == '家常菜') {
-                  result[1].category = res.category;
-                  result[1].foods.push(res);
-                }
-                if (res.category == '经济大菜') {
-                  result[2].category = res.category;
-                  result[2].foods.push(res);
-                }
-                if (res.category == '汤面类') {
-                  result[3].category = res.category;
-                  result[3].foods.push(res);
-                }
-                if (res.category == '主食') {
-                  result[4].category = res.category;
-                  result[4].foods.push(res);
-                }
-                if (res.category == '酒水') {
-                  result[5].category = res.category;
-                  result[5].foods.push(res);
-                }
-                // if(res.category == '婚宴承包'){
-                //     result[6].category = res.category
-                //     result[6].foods.push(res)
-                // }
-              });
-              _this.dataList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
+  onShow: function onShow() {
+    uni.setStorageSync('storagefoods', this.FOODS);
+    this.dataList = uni.getStorageSync('storagefoods');
   },
   onReady: function onReady() {
     this.getMenuItemTop();
-  },
-  onHide: function onHide() {
-
+    this.category();
   },
   methods: {
     // 跳转详情页
@@ -273,12 +228,52 @@ var _default =
         url: "../../subpkg/detail/detail?name=".concat(name) });
 
     },
+    // 将加载的菜品数据分类成想要的格式
+    category: function category() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result, res, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                // 请求餐品数据
+                result = [
+                { category: '', foods: [] },
+                { category: '', foods: [] },
+                { category: '', foods: [] },
+                { category: '', foods: [] },
+                { category: '', foods: [] }];
+
+                // 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
+                res = _this.FOODS;
+                data = JSON.parse(JSON.stringify(res));
+                _this.resObj = data; // 存储一份原始数据，用来统计加购
+                (data.result || []).forEach(function (res) {
+                  if (res.category == '经济大菜') {
+                    result[0].category = res.category;
+                    result[0].foods.push(res);
+                  }
+                  if (res.category == '家常菜') {
+                    result[1].category = res.category;
+                    result[1].foods.push(res);
+                  }
+                  if (res.category == '汤面类') {
+                    result[2].category = res.category;
+                    result[2].foods.push(res);
+                  }
+                  if (res.category == '主食') {
+                    result[3].category = res.category;
+                    result[3].foods.push(res);
+                  }
+                  if (res.category == '酒水') {
+                    result[4].category = res.category;
+                    result[4].foods.push(res);
+                  }
+                });
+                _this.dataList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
+    },
+
+
     // 步进器 并入加入购物车的对象
     valChange: function valChange(e) {
+      // 存储一份原始数据，用来统计加购
+      // this.resObj = uni.getStorageSync('storagefoods');
       // 将加购数据同步到 onload请求的原始数据备份中
       this.resObj.result.forEach(function (res) {
-        // 将数据的选中状态初始化
-        // res.check = false
         // 同步加购的菜品数量
         if (res.name == e.index) {
           res.number = e.value;

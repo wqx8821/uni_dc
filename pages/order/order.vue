@@ -26,7 +26,7 @@
 						<!-- 数量 -->
 						<u-number-box
 							v-model="item.number"
-							:min="1" 
+							:min="0" 
 							:index='item.name' 
 							:disabled-input='true'
 							@change="numChange"
@@ -70,6 +70,7 @@
 		},
 		async onShow() {
 			// 加购解决方案
+			this.dcdata = [];
 			let addon = []; 
 			(this.FOODS.result || []).forEach(res => {
 				// 遍历备份数据，将加购的数据提取出来
@@ -82,6 +83,7 @@
 				}
 			})
 			// 将提取的数据存入vuex
+			// uni.setStorageSync('storagefoods', this.FOODS);
 			await this.$u.vuex('addOn', addon)
 			// 加载加入购物车数据
 			if(addon.length) this.dcdata = this.addOn
@@ -114,8 +116,8 @@
 			// 订单选择状态， 是否全选
 			check(e) {
 				// 每次点击就更新一下全选按钮
-				this.allCheck = !this.allCheck
-				this.dcdata.forEach(item=>{
+				this.allCheck = !this.allCheck;
+				(this.dcdata || []).forEach(item=>{
 					// 根据名字更新数据状态
 					if(item.name === e.name) {
 						item.check = e.value

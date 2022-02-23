@@ -362,6 +362,7 @@ var _default =
     // 详情页加购
     toOrder: function toOrder() {
       var data = this.FOODS;
+      console.log(data);
       var name = this.detailData[0].name;
       (data.result || []).forEach(function (res) {
         if (res.name === name) {
@@ -369,7 +370,7 @@ var _default =
           res.number += 1;
         }
       });
-      console.log(data);
+      // console.log(data);
       this.$u.vuex('FOODS', data);
       uni.showToast({
         title: '加购成功',

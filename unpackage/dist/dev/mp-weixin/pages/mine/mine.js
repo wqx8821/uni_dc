@@ -210,29 +210,29 @@ var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/c
               _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 9:case "end":return _context.stop();}}}, _callee);}))();
 
   },
-  onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var db, res, data, FOODS, i, j;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+  onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var db, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
                 _this2.updateUserProfile());case 2:if (!(
 
 
-              _this2.VXopenid != '')) {_context2.next = 10;break;}
+              _this2.VXopenid != '')) {_context2.next = 7;break;}
               db = uniCloud.database();_context2.next = 6;return (
                 db.collection('comment-favorites').where({
                   openid: _this2.VXopenid }).
-                get());case 6:res = _context2.sent;
-              // 将收藏状态同步到本地vuex 防止覆盖收藏
-              // this.VXFavorite = res.result.data[0].favorites
-              data = res.result.data;
-              // console.log(data);
-              FOODS = _this2.FOODS;
-              for (i = 0; i < data.length; i++) {
-                for (j = 0; j < FOODS.length; j++) {
-                  if (data[i] === FOODS[i]._id) {
+                get());case 6:res = _context2.sent;case 7:case "end":return _context2.stop();}}}, _callee2);}))();
 
-                  }
-                }
-              }
-              // console.log(FOODS);
-            case 10:case "end":return _context2.stop();}}}, _callee2);}))();
+
+
+
+
+
+
+
+
+
+
+
+
+
   },
   methods: {
     updateUserProfile: function updateUserProfile() {var _this3 = this;

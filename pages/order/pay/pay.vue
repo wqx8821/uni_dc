@@ -69,7 +69,24 @@
 			},
 			//确认支付
 			confirm: async function() {
-				
+				let dc = this.suredata
+				let foods = uni.getStorageSync('storagefoods')
+				// console.log(foods);
+				this.addOn.forEach(res => {
+					if(!res.check) {
+						foods.result.forEach(val => {
+							if(res.name == val.name) {
+								val.check = res.check
+								val.number = res.number
+							} else {
+								val.check = false
+								val.number = 0
+							}
+						})
+					}
+				})
+				this.$u.vuex('FOODS', foods)
+				this.$u.vuex('addOn', [])
 				uni.redirectTo({
 					url: '/pages/order/pay/paySuccess'
 				})

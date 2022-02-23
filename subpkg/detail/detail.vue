@@ -188,9 +188,13 @@
 			},
 			// 跳转立即购买
 			toSureOrder() {
-				let data = this.suredata
+				// let data = this.suredata
+				let data = []
 				this.detailData[0].number = 1
 				this.detailData[0].check = true
+				if(data.length > 1) {
+					data = []
+				}
 				data.push(this.detailData[0])
 				
 				this.$u.vuex('suredata', data)
@@ -208,7 +212,7 @@
 						res.number += 1
 					}
 				})
-				console.log(data);
+				// console.log(data);
 				this.$u.vuex('FOODS', data)
 				uni.showToast({
 				    title: '加购成功',

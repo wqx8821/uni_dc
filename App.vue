@@ -5,8 +5,9 @@
 				name: 'getFood',
 				success: (res) => {
 					// console.log(res);
-					this.$u.vuex('FOODS', res)
+					this.$u.vuex('FOODS',res)
 					this.$u.vuex('addOn', res)
+					uni.setStorageSync('storagefoods', res);
 				}
 			})
 			// console.log('App Launch')
