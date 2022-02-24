@@ -28,7 +28,7 @@
 					</radio>
 				</label>
 			</view>
-			<view class="type-item" @click="changePayType(3)">
+<!-- 			<view class="type-item" @click="changePayType(3)">
 				<u-icon name="rmb-circle" class="icon yticon icon-erjiye-yucunkuan"></u-icon>
 				<view class="con">
 					<text class="tit">预存款支付</text>
@@ -38,7 +38,7 @@
 					<radio value="" color="#fa436a" :checked='payType == 3' />
 					</radio>
 				</label>
-			</view>
+			</view> -->
 		</view>
 		
 		<text class="mix-btn" @click="confirm">确认支付</text>
@@ -69,10 +69,11 @@
 			},
 			//确认支付
 			confirm: async function() {
-				let dc = this.suredata
-				let foods = uni.getStorageSync('storagefoods')
+				// 将原始数据取出
+				let foods = uni.getStorageSync('storagefoods');
 				// console.log(foods);
-				this.addOn.forEach(res => {
+				// 将 在 购物车 但未购买的餐品信息同步，完成确认订单后清除购物车中已购买的餐品
+				(this.addOn || []).forEach(res => {
 					if(!res.check) {
 						foods.result.forEach(val => {
 							if(res.name == val.name) {
@@ -85,8 +86,23 @@
 						})
 					}
 				})
+				// 将同步完成的数据赋给全局变量
 				this.$u.vuex('FOODS', foods)
 				this.$u.vuex('addOn', [])
+				
+				// let data = {total: this.total, foods: [...this.suredata]}
+				// // 将确认的订单加入数据库
+				// await uniCloud.callFunction({
+				// 	name: 'private',
+				// 	data: {
+				// 		openid: this.VXopenid,
+				// 		sureOrder: data
+				// 	},
+				// 	success: (res) => {
+				// 		console.log(res);
+				// 	}
+				// })
+				// this.$u.vuex('suredata',this.dcdata)
 				uni.redirectTo({
 					url: '/pages/order/pay/paySuccess'
 				})

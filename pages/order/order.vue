@@ -104,6 +104,12 @@
 			this.$u.vuex('suredata',this.dcdata)
 			// console.log(this.addOn);
 			
+			// 解决 非全选状态下的结算后 全选按钮异常
+			let ischeck = this.dcdata.find(res => {
+				return res.check === false
+			})
+			if(!ischeck) this.allCheck = true
+			
 			this.calcTotal() //计算总价
 		},
 		methods: {
@@ -141,6 +147,7 @@
 				this.dcdata.forEach(item=>{
 					item.check = this.allCheck;
 				})
+			
 				this.calcTotal() //计算总价
 			},
 			// 计算总价
@@ -202,7 +209,11 @@
 		}
 	}
 </script>
-
+<style lang="scss">
+	page {
+		background-color: #F8F8F8;
+	}
+</style>
 <style lang="scss" scoped>
 	/* 购物车列表项 */
 	.cart-list {
@@ -212,7 +223,7 @@
 		font-weight: normal;
 		font-size: 30rpx;
 		margin-bottom: 6rpx;
-		color: $u-main-color;
+		// color: $u-main-color;
 	}
 	.item-menu-image {
 		width: 220rpx;

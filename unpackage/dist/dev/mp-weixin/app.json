@@ -15,7 +15,6 @@
       "pages": [
         "detail/detail",
         "collect/collect",
-        "complaint/complaint",
         "evaluation/evaluation",
         "allOrders/allOrders",
         "activity/activity"
@@ -32,7 +31,7 @@
     "color": "#000000",
     "selectedColor": "#55d98d",
     "borderStyle": "black",
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8",
     "list": [
       {
         "iconPath": "static/tabicons/home_0.png",

@@ -32,7 +32,6 @@
 				</view>
 			</scroll-view>
 		</view>
-		<dc_order></dc_order>
 	</view>
 </template>
 <script>

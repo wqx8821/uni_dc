@@ -29,6 +29,11 @@
 			"bsonType": "array",
 			"description": "用户购物车列表",
 			"defaultValue": []
+		},
+		"sureOrder": {
+			"bsonType": "array",
+			"description": "全部订单",
+			"defaultValue": []
 		}
 	}
 }

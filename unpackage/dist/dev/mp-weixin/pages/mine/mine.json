@@ -3,6 +3,9 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
+    "u-grid": "/uview-ui/components/u-grid/u-grid",
+    "u-grid-item": "/uview-ui/components/u-grid-item/u-grid-item",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
     "u-cell-group": "/uview-ui/components/u-cell-group/u-cell-group",
     "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item"
   }

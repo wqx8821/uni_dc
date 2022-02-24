@@ -43,7 +43,7 @@
 					openid: this.VXopenid || ''
 				},
 				success: (res) => {
-					console.log(res.result);
+					// console.log(res.result);
 					this.dcdata = res.result
 					// console.log(this.dcdata);
 				}
@@ -59,7 +59,11 @@
 		}
 	}
 </script>
-
+<style lang="scss">
+	page {
+		background-color: #F8F8F8;
+	}
+</style>
 <style lang="scss" scoped>
 	.sortStyle {
 		border:  1rpx dashed #edf2fa;

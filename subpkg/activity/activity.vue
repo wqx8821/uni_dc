@@ -36,6 +36,11 @@
 	}
 </script>
 
+<style lang="scss">
+	page {
+		background-color: #F8F8F8;
+	}
+</style>
 <style lang="scss" scoped>
 	.u-content {
 		// margin-top: 100rpx;

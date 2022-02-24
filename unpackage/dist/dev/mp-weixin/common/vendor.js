@@ -4291,7 +4291,55 @@ guid;exports.default = _default;
 
 /***/ }),
 
-/***/ 282:
+/***/ 29:
+/*!*********************************************************************!*\
+  !*** C:/Users/ERHA/Desktop/dc-demo/uview-ui/libs/function/color.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
+// 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
+var color = {
+  primary: "#2979ff",
+  primaryDark: "#2b85e4",
+  primaryDisabled: "#a0cfff",
+  primaryLight: "#ecf5ff",
+  bgColor: "#f3f4f6",
+
+  info: "#909399",
+  infoDark: "#82848a",
+  infoDisabled: "#c8c9cc",
+  infoLight: "#f4f4f5",
+
+  warning: "#ff9900",
+  warningDark: "#f29100",
+  warningDisabled: "#fcbd71",
+  warningLight: "#fdf6ec",
+
+  error: "#fa3534",
+  errorDark: "#dd6161",
+  errorDisabled: "#fab6b6",
+  errorLight: "#fef0f0",
+
+  success: "#19be6b",
+  successDark: "#18b566",
+  successDisabled: "#71d5a1",
+  successLight: "#dbf1e1",
+
+  mainColor: "#303133",
+  contentColor: "#606266",
+  tipsColor: "#909399",
+  lightColor: "#c0c4cc",
+  borderColor: "#e4e7ed" };var _default =
+
+
+color;exports.default = _default;
+
+/***/ }),
+
+/***/ 293:
 /*!**************************************************************************************!*\
   !*** C:/Users/ERHA/Desktop/dc-demo/uview-ui/components/u-parse/libs/MpHtmlParser.js ***!
   \**************************************************************************************/
@@ -4305,9 +4353,9 @@ guid;exports.default = _default;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 283),
+var cfg = __webpack_require__(/*! ./config.js */ 294),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 284),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 295),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -4882,7 +4930,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 283:
+/***/ 294:
 /*!********************************************************************************!*\
   !*** C:/Users/ERHA/Desktop/dc-demo/uview-ui/components/u-parse/libs/config.js ***!
   \********************************************************************************/
@@ -4972,14 +5020,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 284:
+/***/ 295:
 /*!************************************************************************************!*\
   !*** C:/Users/ERHA/Desktop/dc-demo/uview-ui/components/u-parse/libs/CssHandler.js ***!
   \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 283),
+var cfg = __webpack_require__(/*! ./config.js */ 294),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {
@@ -5079,54 +5127,6 @@ parser.prototype.Content = function () {
   this.list = [];
   this.state = this.Space;
 };
-
-/***/ }),
-
-/***/ 29:
-/*!*********************************************************************!*\
-  !*** C:/Users/ERHA/Desktop/dc-demo/uview-ui/libs/function/color.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
-// 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
-var color = {
-  primary: "#2979ff",
-  primaryDark: "#2b85e4",
-  primaryDisabled: "#a0cfff",
-  primaryLight: "#ecf5ff",
-  bgColor: "#f3f4f6",
-
-  info: "#909399",
-  infoDark: "#82848a",
-  infoDisabled: "#c8c9cc",
-  infoLight: "#f4f4f5",
-
-  warning: "#ff9900",
-  warningDark: "#f29100",
-  warningDisabled: "#fcbd71",
-  warningLight: "#fdf6ec",
-
-  error: "#fa3534",
-  errorDark: "#dd6161",
-  errorDisabled: "#fab6b6",
-  errorLight: "#fef0f0",
-
-  success: "#19be6b",
-  successDark: "#18b566",
-  successDisabled: "#71d5a1",
-  successLight: "#dbf1e1",
-
-  mainColor: "#303133",
-  contentColor: "#606266",
-  tipsColor: "#909399",
-  lightColor: "#c0c4cc",
-  borderColor: "#e4e7ed" };var _default =
-
-
-color;exports.default = _default;
 
 /***/ }),
 
@@ -13543,9 +13543,9 @@ module.exports = {
         "127.0.0.1",
         "192.168.128.67"
     ],
-    "debugPort": 2235,
-    "initialLaunchType": "local",
-    "servePort": 2236,
+    "debugPort": 11562,
+    "initialLaunchType": "remote",
+    "servePort": 11563,
     "skipFiles": [
         "<node_internals>/**/*.js",
         "C:/HBuilder/HBuilderX/plugins/unicloud/**/*.js"

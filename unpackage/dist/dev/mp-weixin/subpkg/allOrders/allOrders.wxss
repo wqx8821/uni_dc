@@ -1,35 +1,54 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+page {
+  background-color: #F8F8F8;
+}
 
-page{background-color: #f4f4f4;}
-.my-order-view{
-	background-color: #FFFFFF;
-	border-radius: 10rpx;
-	margin: 20rpx;
-	padding: 20rpx;
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.sortStyle.data-v-971d05f0 {
+  border: 1rpx dashed #edf2fa;
 }
-.my-order-name{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-bottom: 20rpx;
-	border-bottom: 1rpx solid #e5e5e5;
+.green.data-v-971d05f0 {
+  color: #55d98d;
 }
-.my-order-name text:nth-child(1){
-	font-weight: bold;
+.filer.data-v-971d05f0 {
+  margin: 20rpx 0 0rpx 0;
+  background-color: #f5f5f5;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
-.my-order-number{
-	padding-top: 20rpx;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	color: #999999;
+.thumb-box.data-v-971d05f0 {
+  background-color: #fbfbfb;
+  width: 100%;
+  padding: 6rpx 60rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10rpx;
 }
-.my-order-time{
-	flex-shrink: unset;
-	padding-top: 20rpx;
+.item-menu-name.data-v-971d05f0 {
+  font-weight: normal;
+  font-size: 30rpx;
+  margin-bottom: 26rpx;
+  color: #303133;
 }
-.my-order-price{
-	align-self: flex-end;
-	color: #d31c1c;
-	font-weight: bold;
+.item-container.data-v-971d05f0 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.item-menu-image.data-v-971d05f0 {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 20rpx;
 }
 

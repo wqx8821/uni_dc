@@ -3,7 +3,7 @@
 		<!-- 文本编辑 -->
 		<textarea value="" placeholder="感谢您的宝贵意见" class="evalText" @blur="bindTextAreaBlur"/>
 		<!-- 图片上传 -->
-<!-- 		<view class="wrap">
+		<!-- <view class="wrap">
 			选择图片
 			<view class="pre-box" v-if="!showUploadList">
 				<view class="pre-item" v-for="(item, index) in lists" :key="index">
@@ -52,7 +52,11 @@
 		// }
 	}
 </script>
-
+<style lang="scss">
+	page {
+		background-color: #F8F8F8;
+	}
+</style>
 <style lang="scss" scoped>
 	.evalText {
 		width: 100%;

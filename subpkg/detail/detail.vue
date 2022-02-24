@@ -198,6 +198,7 @@
 				data.push(this.detailData[0])
 				
 				this.$u.vuex('suredata', data)
+				this.$u.vuex('addOn', data)
 				uni.navigateTo({
 					url: `/pages/order/sureOrder`
 				})

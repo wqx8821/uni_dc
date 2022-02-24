@@ -1,7 +1,7 @@
 'use strict';
 exports.main = async (event, context) => {
 	
-	const { openid, comment, favorites, addOrder } = event
+	const { openid, comment, favorites, addOrder, sureOrder } = event
 	
 	const db = uniCloud.database();
 	
@@ -25,10 +25,11 @@ exports.main = async (event, context) => {
 		}).update({
 		    'addOrder': addOrder
 		})
-	} else {
-		res = 'err: 未传入(点赞收藏或购物车)数据'
-	} 
-	
+	} else if(sureOrder) { // 订单
+		res = await db.collection('comment-favorites').where({
+		    'openid': openid
+		}).add(sureOrder)
+	}
 	//返回数据给客户端
 	return res
 };

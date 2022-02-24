@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "全部订单",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "u-empty": "/uview-ui/components/u-empty/u-empty"
+  }
 }
