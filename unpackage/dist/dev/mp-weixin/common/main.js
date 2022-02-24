@@ -107,17 +107,7 @@ __webpack_require__.r(__webpack_exports__);
                     _this.$u.vuex('FOODS', res);
                     _this.$u.vuex('addOn', res);
                     uni.setStorageSync('storagefoods', res);
-                  } }));case 2:case "end":return _context.stop();}}}, _callee);}));function onLaunch() {return _onLaunch.apply(this, arguments);}return onLaunch;}(),
-
-
-
-
-  onShow: function onShow() {
-    // console.log('App Show')
-  },
-  onHide: function onHide() {
-    // console.log('App Hide')
-  } };exports.default = _default;
+                  } }));case 2:case "end":return _context.stop();}}}, _callee);}));function onLaunch() {return _onLaunch.apply(this, arguments);}return onLaunch;}() };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -198,8 +198,12 @@ var _default =
   methods: {
     // 跳转详情页
     toDetail: function toDetail(name) {
+      console.log(name);
       uni.navigateTo({
-        url: "../../subpkg/detail/detail?name=".concat(name) });
+        url: "../../subpkg/detail/detail?name=".concat(name),
+        success: function success() {
+          console.log('cg');
+        } });
 
     } },
 

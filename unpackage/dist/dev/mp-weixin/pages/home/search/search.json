@@ -3,6 +3,6 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-search": "/uview-ui/components/u-search/u-search",
-    "search-list": "/components/search-list/search-list"
+    "u-empty": "/uview-ui/components/u-empty/u-empty"
   }
 }
