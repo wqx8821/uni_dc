@@ -7,9 +7,9 @@ exports.main = async (event, context) => {
 	const db = uniCloud.database();
 	 // 解密的信息
 	const payload = verifyToken(userInfo.token)
-	// console.log(payload)
+	console.log(payload)
 	
-	const dbRes = await db.collection('users').where({
+	const dbRes = await db.collection('dc-users').where({
 		openid: userInfo.openid
 	}).update({
 		nickName:userInfo.nickName,

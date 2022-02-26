@@ -1,0 +1,33 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（用户 ID），系统自动生成"
+		},
+		"username": {
+			"bsonType": "string",
+			"description": "用户昵称",
+			"title": "昵称",
+			"trim": "both"
+		},
+		"password": {
+			"bsonType": "string",
+			"description": "微信openid"
+		},
+		"token": {
+			"bsonType": "string",
+			"description": "用户token"
+		},
+		"isAdmin": {
+			"bsonType": "number",
+			"description": "是否为管理员"
+		}
+	}
+}

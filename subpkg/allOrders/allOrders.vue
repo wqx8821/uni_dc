@@ -37,8 +37,24 @@
 				sure: []
 			};
 		},
-		onShow() {
-			this.sure = this.suredata
+		async onShow() {
+			uni.showToast({
+				title: '加载中',
+				icon: 'none',
+				duration: 800
+			})
+			// 请求订单数据
+			const db = uniCloud.database();
+			const res = await db.collection('dc-sureOrder').where({
+				openid: this.VXopenid
+			}).get()
+			// 处理数据
+			const result = res.result.data.filter(res => {
+				return res.openid === this.VXopenid
+			})
+			result.forEach(res => {
+				this.sure.push(...res.sureOrder)
+			})
 		},
 		methods: {
 			// 跳转详情页

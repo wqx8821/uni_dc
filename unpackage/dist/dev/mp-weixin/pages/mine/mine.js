@@ -170,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 10));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 10));
 
 
 
@@ -234,39 +234,35 @@ var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/c
               _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 9:case "end":return _context.stop();}}}, _callee);}))();
 
   },
-  onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var db, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                _this2.updateUserProfile());case 2:if (!(
-
-              _this2.VXopenid != '')) {_context2.next = 7;break;}
-              db = uniCloud.database();_context2.next = 6;return (
-                db.collection('comment-favorites').where({
-                  openid: _this2.VXopenid }).
-                get());case 6:res = _context2.sent;case 7:case "end":return _context2.stop();}}}, _callee2);}))();
-
+  onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                _this2.updateUserProfile());case 2:case "end":return _context2.stop();}}}, _callee2);}))();
   },
   methods: {
     updateUserProfile: function updateUserProfile() {var _this3 = this;
       if (!this.userInfo || this.userInfo.nickName === '') {
         uni.getUserProfile({
           desc: '用于完善会员资料',
-          success: function success(res) {
-            _this3.userInfo = Object.assign({}, _this3.userInfo, res.userInfo);
-            // console.log(this.userInfo);
-            _currentUser.default.updateUser(_this3.userInfo);
-            // 设置缓存
-            uni.setStorageSync('storageLogin', _this3.userInfo);
-          } });
+          success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {var UserInfo;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
+
+                        _currentUser.default.login());case 2:UserInfo = _context3.sent;
+                      // 将新老信息合并
+                      _this3.userInfo = Object.assign({}, UserInfo, res.userInfo);
+                      // 将合并后的信息更新进数据库
+                      _currentUser.default.updateUser(_this3.userInfo);
+                      // 设置缓存
+                      uni.setStorageSync('storageLogin', _this3.userInfo);case 6:case "end":return _context3.stop();}}}, _callee3);}));function success(_x) {return _success.apply(this, arguments);}return success;}() });
+
 
       }
     },
-    logout: function logout() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+    logout: function logout() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
                 // 立即改变页面状态
                 _this4.userInfo = null;
                 // 清除缓存
                 uni.clearStorageSync('storageLogin');
-                _this4.$u.vuex('VXopenid', '');case 3:case "end":return _context3.stop();}}}, _callee3);}))();
+                _this4.$u.vuex('VXopenid', '');case 3:case "end":return _context4.stop();}}}, _callee4);}))();
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

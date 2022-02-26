@@ -189,6 +189,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -209,11 +211,16 @@ var _default =
     };
 
   },
-  onShow: function onShow() {
-    this.category();
-    this.getMenuItemTop();
+  onShow: function onShow() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              _this.category();
+              _this.getMenuItemTop();case 2:case "end":return _context.stop();}}}, _callee);}))();
   },
-  onReady: function onReady() {
+  onLoad: function onLoad() {return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+              uni.showToast({
+                title: '加载中...',
+                icon: 'none',
+                duration: 1500 });case 1:case "end":return _context2.stop();}}}, _callee2);}))();
+
   },
   methods: {
     // 跳转详情页
@@ -223,49 +230,48 @@ var _default =
 
     },
     // 将加载的菜品数据分类成想要的格式
-    category: function category() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result, res, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                // 请求餐品数据
-                result = [
-                { category: '', foods: [] },
-                { category: '', foods: [] },
-                { category: '', foods: [] },
-                { category: '', foods: [] },
-                { category: '', foods: [] }];
+    category: function category() {
+      // 数据模型
+      var result = [
+      { category: '', foods: [] },
+      { category: '', foods: [] },
+      { category: '', foods: [] },
+      { category: '', foods: [] },
+      { category: '', foods: [] }];
 
-                // 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
-                res = _this.FOODS;
-                data = JSON.parse(JSON.stringify(res));
-                _this.resObj = data; // 存储一份原始数据，用来统计加购
-                (data.result || []).forEach(function (res) {
-                  if (res.category == '经济大菜') {
-                    result[0].category = res.category;
-                    result[0].foods.push(res);
-                  }
-                  if (res.category == '家常菜') {
-                    result[1].category = res.category;
-                    result[1].foods.push(res);
-                  }
-                  if (res.category == '汤面类') {
-                    result[2].category = res.category;
-                    result[2].foods.push(res);
-                  }
-                  if (res.category == '主食') {
-                    result[3].category = res.category;
-                    result[3].foods.push(res);
-                  }
-                  if (res.category == '酒水') {
-                    result[4].category = res.category;
-                    result[4].foods.push(res);
-                  }
-                });
-                _this.dataList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
+      // 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
+      var res = this.FOODS;
+      var data = JSON.parse(JSON.stringify(res));
+      this.resObj = res; // 存储一份原始数据，用来统计加购
+      (data.result || []).forEach(function (res) {
+        if (res.category == '经济大菜') {
+          result[0].category = res.category;
+          result[0].foods.push(res);
+        }
+        if (res.category == '家常菜') {
+          result[1].category = res.category;
+          result[1].foods.push(res);
+        }
+        if (res.category == '汤面类') {
+          result[2].category = res.category;
+          result[2].foods.push(res);
+        }
+        if (res.category == '主食') {
+          result[3].category = res.category;
+          result[3].foods.push(res);
+        }
+        if (res.category == '酒水') {
+          result[4].category = res.category;
+          result[4].foods.push(res);
+        }
+      });
+      this.dataList = result;
     },
 
 
     // 步进器 并入加入购物车的对象
     valChange: function valChange(e) {
       // 存储一份原始数据，用来统计加购
-      // this.resObj = uni.getStorageSync('storagefoods');
       // 将加购数据同步到 onload请求的原始数据备份中
       this.resObj.result.forEach(function (res) {
         // 同步加购的菜品数量
@@ -279,17 +285,17 @@ var _default =
     },
 
     // 点击左边的栏目切换
-    swichMenu: function swichMenu(index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (!(
-                _this2.arr.length == 0)) {_context2.next = 3;break;}_context2.next = 3;return (
+    swichMenu: function swichMenu(index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (!(
+                _this2.arr.length == 0)) {_context3.next = 3;break;}_context3.next = 3;return (
                   _this2.getMenuItemTop());case 3:if (!(
 
-                index == _this2.current)) {_context2.next = 5;break;}return _context2.abrupt("return");case 5:
+                index == _this2.current)) {_context3.next = 5;break;}return _context3.abrupt("return");case 5:
                 _this2.scrollRightTop = _this2.oldScrollTop;
                 _this2.$nextTick(function () {
                   this.scrollRightTop = this.arr[index];
                   this.current = index;
                   this.leftMenuStatus(index);
-                });case 7:case "end":return _context2.stop();}}}, _callee2);}))();
+                });case 7:case "end":return _context3.stop();}}}, _callee3);}))();
     },
     // 获取一个目标元素的高度
     getElRect: function getElRect(elClass, dataVal) {var _this3 = this;
@@ -311,7 +317,7 @@ var _default =
       });
     },
     // 观测元素相交状态
-    observer: function observer() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+    observer: function observer() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
                 _this4.tabbar.map(function (val, index) {
                   var observer = uni.createIntersectionObserver(_this4);
                   // 检测右边scroll-view的id为itemxx的元素与right-box的相交状态
@@ -324,18 +330,18 @@ var _default =
                       _this4.leftMenuStatus(id);
                     }
                   });
-                });case 1:case "end":return _context3.stop();}}}, _callee3);}))();
+                });case 1:case "end":return _context4.stop();}}}, _callee4);}))();
     },
     // 设置左边菜单的滚动状态
-    leftMenuStatus: function leftMenuStatus(index) {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+    leftMenuStatus: function leftMenuStatus(index) {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
                 _this5.current = index;
                 // 如果为0，意味着尚未初始化
-                if (!(_this5.menuHeight == 0 || _this5.menuItemHeight == 0)) {_context4.next = 6;break;}_context4.next = 4;return (
-                  _this5.getElRect('menu-scroll-view', 'menuHeight'));case 4:_context4.next = 6;return (
+                if (!(_this5.menuHeight == 0 || _this5.menuItemHeight == 0)) {_context5.next = 6;break;}_context5.next = 4;return (
+                  _this5.getElRect('menu-scroll-view', 'menuHeight'));case 4:_context5.next = 6;return (
                   _this5.getElRect('u-tab-item', 'menuItemHeight'));case 6:
 
                 // 将菜单活动item垂直居中
-                _this5.scrollTop = index * _this5.menuItemHeight + _this5.menuItemHeight / 2 - _this5.menuHeight / 2;case 7:case "end":return _context4.stop();}}}, _callee4);}))();
+                _this5.scrollTop = index * _this5.menuItemHeight + _this5.menuItemHeight / 2 - _this5.menuHeight / 2;case 7:case "end":return _context5.stop();}}}, _callee5);}))();
     },
     // 获取右边菜单每个item到顶部的距离
     getMenuItemTop: function getMenuItemTop() {var _this6 = this;
@@ -358,13 +364,13 @@ var _default =
       });
     },
     // 右边菜单滚动
-    rightScroll: function rightScroll(e) {var _this7 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
+    rightScroll: function rightScroll(e) {var _this7 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
                 _this7.oldScrollTop = e.detail.scrollTop;if (!(
-                _this7.arr.length == 0)) {_context5.next = 4;break;}_context5.next = 4;return (
+                _this7.arr.length == 0)) {_context6.next = 4;break;}_context6.next = 4;return (
                   _this7.getMenuItemTop());case 4:if (!
 
-                _this7.timer) {_context5.next = 6;break;}return _context5.abrupt("return");case 6:if (
-                _this7.menuHeight) {_context5.next = 9;break;}_context5.next = 9;return (
+                _this7.timer) {_context6.next = 6;break;}return _context6.abrupt("return");case 6:if (
+                _this7.menuHeight) {_context6.next = 9;break;}_context6.next = 9;return (
                   _this7.getElRect('menu-scroll-view', 'menuHeight'));case 9:
 
                 setTimeout(function () {// 节流
@@ -380,7 +386,7 @@ var _default =
                       return;
                     }
                   }
-                }, 10);case 10:case "end":return _context5.stop();}}}, _callee5);}))();
+                }, 10);case 10:case "end":return _context6.stop();}}}, _callee6);}))();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -64,22 +64,18 @@
 		},
 		async onShow() {
 			await this.updateUserProfile()
-			// 根据用户id将用户的私有信息同步到商品
-			if (this.VXopenid != '') {
-				const db = uniCloud.database();
-				const res = await db.collection('comment-favorites').where({
-					openid: this.VXopenid
-				}).get()
-			}
 		},
 		methods: {
 			updateUserProfile() {
 				if (!this.userInfo || this.userInfo.nickName === '') {
 					uni.getUserProfile({
 						desc: '用于完善会员资料',
-						success: (res) => {
-							this.userInfo = Object.assign({}, this.userInfo, res.userInfo);
-							// console.log(this.userInfo);
+						success: async (res) => {
+							// 调用login方法获得带有token 的用户信息
+							const UserInfo = await loginUser.login()
+							// 将新老信息合并
+							this.userInfo = Object.assign({}, UserInfo, res.userInfo);
+							// 将合并后的信息更新进数据库
 							loginUser.updateUser(this.userInfo);
 							// 设置缓存
 							uni.setStorageSync('storageLogin', this.userInfo);

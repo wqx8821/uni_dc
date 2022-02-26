@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
 	// 获取用户openid
 	const openid = res.data.openid;
 	// 在users表中查询用户信息
-	let dbRes = await db.collection("users").where({
+	let dbRes = await db.collection("dc-users").where({
 		openid:openid
 	}).get();
 	console.log(dbRes);
@@ -35,7 +35,7 @@ exports.main = async (event, context) => {
 			city:"",
 			token:""
 		}
-		await db.collection("users").add({openid:openid,...userData});
+		await db.collection("dc-users").add({openid:openid,...userData});
 	}else{
 		userData = dbRes.data[0];
 		// 将openid存储在评论收藏表

@@ -17,10 +17,10 @@ function login() {
 						},
 						success: (res) => {
 							userInfo = res.result;
-							resolve(userInfo);
+							resolve(res.result);
 						},
 						fail: (err) => {
-							reject(err);
+							reject();
 						}
 					})
 				}

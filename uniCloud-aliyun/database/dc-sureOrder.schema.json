@@ -1,0 +1,24 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"openid": {
+			"bsonType": "string",
+			"description": "用户id"
+		},
+		"sureOrder": {
+			"bsonType": "array",
+			"description": "全部订单",
+			"defaultValue": []
+		}
+	}
+}

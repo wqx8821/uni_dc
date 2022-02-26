@@ -28,17 +28,6 @@
 					</radio>
 				</label>
 			</view>
-<!-- 			<view class="type-item" @click="changePayType(3)">
-				<u-icon name="rmb-circle" class="icon yticon icon-erjiye-yucunkuan"></u-icon>
-				<view class="con">
-					<text class="tit">预存款支付</text>
-					<text>可用余额 ¥198.5</text>
-				</view>
-				<label class="radio">
-					<radio value="" color="#fa436a" :checked='payType == 3' />
-					</radio>
-				</label>
-			</view> -->
 		</view>
 		
 		<text class="mix-btn" @click="confirm">确认支付</text>
@@ -90,19 +79,13 @@
 				this.$u.vuex('FOODS', foods)
 				this.$u.vuex('addOn', [])
 				
-				// let data = {total: this.total, foods: [...this.suredata]}
-				// // 将确认的订单加入数据库
-				// await uniCloud.callFunction({
-				// 	name: 'private',
-				// 	data: {
-				// 		openid: this.VXopenid,
-				// 		sureOrder: data
-				// 	},
-				// 	success: (res) => {
-				// 		console.log(res);
-				// 	}
-				// })
-				// this.$u.vuex('suredata',this.dcdata)
+				let data = {openid: this.VXopenid, sureOrder: [...this.suredata]}
+				
+				// 将确认的订单加入数据库
+				const db = uniCloud.database();
+				await db.collection('dc-sureOrder').add(data)
+				
+				this.$u.vuex('suredata',this.dcdata)
 				uni.redirectTo({
 					url: '/pages/order/pay/paySuccess'
 				})

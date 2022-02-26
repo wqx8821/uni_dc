@@ -1,6 +1,6 @@
 <template>
 	<view class="u-wrap">
-		<view class="u-menu-wrap" >
+		<view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
 				:scroll-into-view="itemId">
 				<view v-for="(item,index) in dataList" :key="index" class="u-tab-item"
@@ -17,14 +17,16 @@
 						</view>
 						<view class="item-container">
 							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
-								<image class="item-menu-image" :src="item1.foods_thumb" @click="toDetail(item1.name)" style="border-radius: 10rpx;"></image>
+								<image class="item-menu-image" :src="item1.foods_thumb" @click="toDetail(item1.name)"
+									style="border-radius: 10rpx;"></image>
 								<view style="display: flex; flex-direction: column; align-items: center;">
 									<view class="item-menu-name">{{item1.name}}</view>
 									<text class="total-price">
 										￥{{ item1.price }}
 									</text>
 									<!-- 步进器 -->
-									<u-number-box  input-width="40" :min="1" v-model="item1.number" :index='item1.name' @change="valChange"></u-number-box>
+									<u-number-box input-width="40" :min="1" v-model="item1.number" :index='item1.name'
+										@change="valChange"></u-number-box>
 								</view>
 							</view>
 						</view>
@@ -54,11 +56,16 @@
 
 			}
 		},
-		onShow() {
+		async onShow() {
 			this.category()
 			this.getMenuItemTop();
 		},
-		onReady() {
+		async onLoad() {
+			uni.showToast({
+			    title: '加载中...',
+				icon: 'none',
+			    duration: 1500
+			});
 		},
 		methods: {
 			// 跳转详情页
@@ -68,8 +75,8 @@
 				})
 			},
 			// 将加载的菜品数据分类成想要的格式
-			async category() {
-				// 请求餐品数据
+			category() {
+				// 数据模型
 				let result = [
 					{category: '',foods: []},
 					{category: '',foods: []},
@@ -78,43 +85,42 @@
 					{category: '',foods: []}
 				]
 				// 如果用户点击了步进器就请求 添加后的数据，相当于间接数据持久化
-				let res =  this.FOODS
-				let data = JSON.parse(JSON.stringify(res))
-				this.resObj = data; // 存储一份原始数据，用来统计加购
+				let res = this.FOODS
+				let data = JSON.parse(JSON.stringify(res));
+				this.resObj = res; // 存储一份原始数据，用来统计加购
 				(data.result || []).forEach(res => {
 					if(res.category == '经济大菜'){
-					    result[0].category = res.category
-					    result[0].foods.push(res)
+						result[0].category = res.category
+						result[0].foods.push(res)
 					}
 					if(res.category == '家常菜'){
-					    result[1].category = res.category
-					    result[1].foods.push(res)
+						result[1].category = res.category
+						result[1].foods.push(res)
 					}
 					if(res.category == '汤面类'){
-					    result[2].category = res.category
-					    result[2].foods.push(res)
+						result[2].category = res.category
+						result[2].foods.push(res)
 					}
 					if(res.category == '主食'){
-					    result[3].category = res.category
-					    result[3].foods.push(res)
+						result[3].category = res.category
+						result[3].foods.push(res)
 					}
 					if(res.category == '酒水'){
-					    result[4].category = res.category
-					    result[4].foods.push(res)
+						result[4].category = res.category
+						result[4].foods.push(res)
 					}
 				})
 				this.dataList = result
 			},
-			
-			
+
+
 			// 步进器 并入加入购物车的对象
 			valChange(e) {
 				// 存储一份原始数据，用来统计加购
-				// this.resObj = uni.getStorageSync('storagefoods');
 				// 将加购数据同步到 onload请求的原始数据备份中
 				this.resObj.result.forEach(res => {
 					// 同步加购的菜品数量
-					if(res.name == e.index) {
+					if (res.name == e.index) {
 						res.number = e.value
 					}
 				})
@@ -122,7 +128,7 @@
 				this.$u.vuex('FOODS', this.resObj);
 				// console.log(this.resObj);
 			},
-			
+
 			// 点击左边的栏目切换
 			async swichMenu(index) {
 				if (this.arr.length == 0) {
@@ -227,8 +233,7 @@
 					}
 				}, 10)
 			}
-		}
-		,
+		},
 	}
 </script>
 
@@ -241,13 +246,16 @@
 		display: flex;
 		flex-direction: column;
 	}
+
 	.swiper_wrap {
 		padding: 10rpx;
 	}
+
 	.search_d {
 		padding: 4rpx 0;
 		background-color: #f8f8f8;
 	}
+
 	.u-search-box {
 		padding: 18rpx 30rpx;
 	}
