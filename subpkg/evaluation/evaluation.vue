@@ -17,8 +17,12 @@
 			</u-upload>
 		</view> -->
 		<!-- rate评分 -->
-		用餐满意度:<u-rate :count="count" v-model="value" size="60" gutter="30"></u-rate>
-		<u-button size="default">提交</u-button>
+		<view style="margin-top: 5vh; font-size: 45rpx;">
+			用餐满意度:<u-rate :count="count" v-model="value" size="55" gutter="30"></u-rate>
+		</view>
+		<view style="margin-top: 20vh; text-align: center;">
+			<button type="default" size="mini" @click="evaluation()">提交</button>
+		</view>
 	</view>
 </template>
 
@@ -27,29 +31,66 @@
 		data() {
 			return {
 				count: 5,
-				value: 0,
-				// action: '', // 演示地址
-				// showUploadList: false,
-				// 如果将某个ref的组件实例赋值给data中的变量，在小程序中会因为循环引用而报错
-				// 这里直接获取内部的lists变量即可
-				// lists: [],
-				reviewText: ''   // 评价的文字
+				value: '',
+				foodName: '', // 餐品名称
+				reviewText: '',   // 评价的文字
+				evaluationdata: { // 评价信息整合
+					userName: '',
+					userAva: '',
+					foodName: '',
+					content: ''
+				} 
+			}
+		},
+		onLoad(option) {
+			// 点击评价时将餐品名存储
+			this.foodName = option.name
+			// 获取用户信息
+			const storage = uni.getStorageSync('storageLogin');
+			if(storage) {
+				this.evaluationdata.userName = storage.nickName
+				this.evaluationdata.userAva = storage.avatarUrl
 			}
 		},
 		methods: {
 			// 评价文本编辑器事件
 			bindTextAreaBlur(e) {
-				if(e.detail.value) return;
-				if(this.reviewText != e.detail.value ) {
+				if(e.detail.value) {
 					this.reviewText = e.detail.value
 				}
+			},
+			async evaluation() {
+				if(this.reviewText) {
+					this.evaluationdata.foodName = this.foodName
+					this.evaluationdata.content = this.reviewText
+					uni.showLoading({
+					    title: '正在评价中....'
+					});
+					// 将信息存入数据库
+					const db = uniCloud.database();
+					await db.collection('dc-comments').add(this.evaluationdata);
+					uni.hideLoading();
+					uni.showModal({
+					    title: '评价成功',
+					    content: '评价已完成，请点击返回首页',
+						showCancel: false,
+					    success: function (res) {
+							if (res.confirm) {
+								uni.switchTab({
+									url: '../../pages/home/home'
+								})
+							}
+					    }
+					});
+				} else {
+					uni.showToast({
+					    title: '请输入内容哦',
+						icon: 'none',
+					    duration: 1500
+					});
+				}
 			}
-		},
-		// 只有onReady生命周期才能调用refs操作组件
-		// onReady() {
-		// 	// 得到整个组件对象，内部图片列表变量为"lists"
-		// 	this.lists = this.$refs.uUpload.lists;
-		// }
+		}
 	}
 </script>
 <style lang="scss">
@@ -58,6 +99,7 @@
 	}
 </style>
 <style lang="scss" scoped>
+
 	.evalText {
 		width: 100%;
 		background-color: #ebeef5;

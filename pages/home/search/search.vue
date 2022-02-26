@@ -57,10 +57,7 @@
 			toDetail(name) {
 				console.log(name);
 				uni.navigateTo({
-					url:`../../../subpkg/detail/detail?name=${name}`,
-					success() {
-						console.log('cg');
-					}
+					url:`../../../subpkg/detail/detail?name=${name}`
 				})
 			},
 		},

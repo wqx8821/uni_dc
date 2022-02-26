@@ -25,11 +25,11 @@
 			</view>
 			<view class="comment" v-for="(res, index) in commentList" :key="res.id">
 				<view class="left">
-					<image :src="res.url" mode="aspectFill"></image>
+					<image :src="res.userAva" mode="aspectFill"></image>
 				</view>
 				<view class="right">
 					<view class="top">
-						<view class="name">{{ res.name }}</view>
+						<view class="name">{{ res.userName }}</view>
 						<view class="like" :class="{ highlight: res.isLike }">
 							<view class="num">{{ res.likeNum }}</view>
 							<u-icon v-if="!res.isLike" name="thumb-up" :size="30" color="#9a9a9a" @click="getLike(index)">
@@ -37,7 +37,7 @@
 							<u-icon v-if="res.isLike" name="thumb-up-fill" :size="30" @click="getLike(index)"></u-icon>
 						</view>
 					</view>
-					<view class="content">{{ res.contentText }}</view>
+					<view class="content">{{ res.content }}</view>
 				</view>
 			</view>
 		</view>
@@ -74,8 +74,6 @@
 			}
 		},
 		async onLoad(option) {
-			// 执行评论列表
-			this.getComment();
 			// 请求餐品数据
 			await uniCloud.callFunction({
 				name: 'getFood',
@@ -92,7 +90,9 @@
 					this.favorite = this.detailData[0].collect
 				}
 			});
-			
+		
+			// 执行评论列表
+			this.getComment(option.name);
 
 		},
 		methods: {
@@ -106,47 +106,37 @@
 				}
 			},
 			// 评论列表
-			getComment() {
-				this.commentList = [{
+			async getComment(foodName) {
+				const db = uniCloud.database();
+				const res = await db.collection('dc-comments').where({
+					foodName: foodName
+				}).get();
+				
+				this.commentList = [
+					...res.result.data,
+					{
 						id: 1,
-						name: '叶轻眉',
-						date: '12-25 18:58',
-						contentText: '味道挺不错的,朋友都很喜欢吃,说下次还要继续点。 今天还是比较幸运的,去了不用排队,可能我们去比较早吧。 虽然中间出了一点小插曲,但还好不影响我们吃,而且店家提供的量是够的。 还担心不好吃呢,结果是感觉比想象中令人满意,..',
-						url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-						allReply: 12,
+						userName: '叶轻眉',
+						content: '味道挺不错的,朋友都很喜欢吃,说下次还要继续点。 今天还是比较幸运的,去了不用排队,可能我们去比较早吧。 虽然中间出了一点小插曲,但还好不影响我们吃,而且店家提供的量是够的。 还担心不好吃呢,结果是感觉比想象中令人满意,..',
+						userAva: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
 						likeNum: 33,
 						isLike: false,
 					},
 					{
 						id: 2,
-						name: '叶轻眉1',
-						date: '01-25 13:58',
-						contentText: '味道超赞，而且一看就让人觉得很有食欲，但是分量不大，属于比较精致的类型。胜在菜品也很新鲜，味道咸淡适中，而且火候掌握的刚好。',
-						allReply: 0,
+						userName: '叶轻眉1',
+						content: '味道超赞，而且一看就让人觉得很有食欲，但是分量不大，属于比较精致的类型。胜在菜品也很新鲜，味道咸淡适中，而且火候掌握的刚好。',
 						likeNum: 11,
 						isLike: false,
-						url: 'https://cdn.uviewui.com/uview/template/niannian.jpg',
+						userAva: 'https://cdn.uviewui.com/uview/template/niannian.jpg',
 					},
 					{
 						id: 3,
-						name: '叶轻眉2',
-						date: '03-25 13:58',
-						contentText: '这家餐厅环境很好，非常干净整洁，食物不仅外形美观，重要的是味道非常棒，色味俱佳。做法保留了食材原有的味道，清新爽口。',
-						allReply: 0,
+						userName: '叶轻眉2',
+						content: '这家餐厅环境很好，非常干净整洁，食物不仅外形美观，重要的是味道非常棒，色味俱佳。做法保留了食材原有的味道，清新爽口。',
 						likeNum: 21,
 						isLike: false,
-						allReply: 2,
-						url: 'https://cdn.uviewui.com/uview/template/niannian.jpg',
-					},
-					{
-						id: 4,
-						name: '叶轻眉3',
-						date: '06-20 13:58',
-						contentText: '爱情的味道',
-						url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-						allReply: 0,
-						likeNum: 150,
-						isLike: false
+						userAva: 'https://cdn.uviewui.com/uview/template/niannian.jpg',
 					}
 				];
 			},

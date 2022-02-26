@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uSwipeAction: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swipe-action/u-swipe-action */ "uview-ui/components/u-swipe-action/u-swipe-action").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action/u-swipe-action.vue */ 239))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swipe-action/u-swipe-action */ "uview-ui/components/u-swipe-action/u-swipe-action").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action/u-swipe-action.vue */ 241))
     },
     uCheckbox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-checkbox/u-checkbox */ "uview-ui/components/u-checkbox/u-checkbox").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox/u-checkbox.vue */ 246))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-checkbox/u-checkbox */ "uview-ui/components/u-checkbox/u-checkbox").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox/u-checkbox.vue */ 248))
     },
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 232))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 234))
     }
   }
 } catch (e) {

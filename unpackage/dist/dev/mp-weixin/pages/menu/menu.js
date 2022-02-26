@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 232))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 234))
     }
   }
 } catch (e) {

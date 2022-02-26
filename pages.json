@@ -97,7 +97,7 @@
                     "path" : "activity/activity",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "",
+                    "navigationBarTitleText": "最新活动",
                     "enablePullDownRefresh": false
                 }
                 
@@ -113,7 +113,7 @@
 	"tabBar": {
 		"color": "#000000",
 		"selectedColor": "#55d98d",
-		"borderStyle": "black",
+		"borderStyle": "white",
 		"backgroundColor": "#F8F8F8",
 		"list": [{
 				"iconPath": "static/tabicons/home_0.png",

@@ -14,9 +14,6 @@ exports.main = async (event, context) => {
 	}).update({
 		nickName:userInfo.nickName,
 		avatarUrl:userInfo.avatarUrl,
-		gender:userInfo.gender,
-		country:userInfo.country,
-		province:userInfo.province,
 		city:userInfo.city,
 		token: userInfo.token
 	})

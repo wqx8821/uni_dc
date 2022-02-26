@@ -96,16 +96,16 @@ var components
 try {
   components = {
     uSearch: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 204))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-search/u-search */ "uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 206))
     },
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 211))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 213))
     },
     uCard: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-card/u-card */ "uview-ui/components/u-card/u-card").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-card/u-card.vue */ 218))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-card/u-card */ "uview-ui/components/u-card/u-card").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-card/u-card.vue */ 220))
     },
     uCountDown: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-count-down/u-count-down */ "uview-ui/components/u-count-down/u-count-down").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-count-down/u-count-down.vue */ 225))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-count-down/u-count-down */ "uview-ui/components/u-count-down/u-count-down").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-count-down/u-count-down.vue */ 227))
     }
   }
 } catch (e) {

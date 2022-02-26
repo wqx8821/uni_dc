@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="mineStyle">
 		<view class="userStyle" @click="updateUserProfile">
 			<view class="u-m-b-20 u-m-t-40">
 				<u-avatar :src="userInfo.avatarUrl || ''" size="140"></u-avatar>
@@ -9,30 +9,30 @@
 			</view>
 		</view>
 
-		<view class="background-color: #f8f8f8; margin-bottom: -1rpx;">
+		<view class="background-color: #c8c8c8;">
 			<u-grid :col="2" border=false>
 					<navigator url="../../subpkg/collect/collect" hover-class="none">
 						<u-grid-item bg-color='#f8f8f8'>
-							<u-icon name="star" :size="46"></u-icon>
+							<u-icon name="star" :size="50"></u-icon>
 							<view class="grid-text">我的收藏</view>
 						</u-grid-item>
 					</navigator>
 					<navigator url="../../subpkg/allOrders/allOrders" hover-class="none">
 						<u-grid-item bg-color='#f8f8f8'>
-							<u-icon name="bag" :size="46"></u-icon>
+							<u-icon name="bag" :size="50"></u-icon>
 							<view class="grid-text">全部订单</view>
 						</u-grid-item>
 					</navigator>
 			</u-grid>
 			<u-cell-group>
-				<button open-type="contact" style="padding: 0; background-color: #f8f8f8; margin-bottom: -1rpx;">
+				<button open-type="contact" style="padding: 0; background-color: #f8f8f8;">
 					<u-cell-item icon="kefu-ermai" title="在线客服"></u-cell-item>
 				</button>
-				<button open-type="feedback" style="padding: 0; background-color: #f8f8f8; margin-bottom: -1rpx;">
+				<button open-type="feedback" style="padding: 0; background-color: #f8f8f8;">
 					<u-cell-item icon="edit-pen" title="用户反馈"></u-cell-item>
 				</button>
 				<button @click="logout()" style="padding: 0; background-color: #f8f8f8;">
-					<u-cell-item icon="edit-pen" title="退出登录"></u-cell-item>
+					<u-cell-item icon="man-delete" title="退出登录"></u-cell-item>
 				</button>
 			</u-cell-group>
 		</view>
@@ -105,6 +105,11 @@
 	}
 </style>
 <style lang="scss" scoped>
+	.mineStyle {
+		button::after {
+			border:none;
+		}
+	}
 	.userStyle {
 		margin: 5vh 0;
 		display: flex;

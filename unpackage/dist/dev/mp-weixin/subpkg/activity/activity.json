@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "最新活动",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-parse": "/uview-ui/components/u-parse/u-parse"

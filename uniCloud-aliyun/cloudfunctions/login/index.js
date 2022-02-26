@@ -32,9 +32,6 @@ exports.main = async (event, context) => {
 		userData = {
 			nickName:"",
 			avatarUrl:"",
-			gender:0,
-			country:"",
-			province:"",
 			city:"",
 			token:""
 		}
