@@ -220,18 +220,17 @@ var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/c
 
   },
   // 云函数
-  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var storage;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              // 将用户信息存入本地存储
-              storage = uni.getStorageSync('storageLogin');
-              // console.log(storage);
-              if (!storage) {_context.next = 5;break;}
-              _this.userInfo = storage;_context.next = 8;break;case 5:_context.next = 7;return (
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
 
-                _currentUser.default.login());case 7:_this.userInfo = _context.sent;case 8:
 
+
+
+
+                _currentUser.default.login());case 2:_this.userInfo = _context.sent;
+              // }
 
               // 将用户openid存储在vuex中
-              _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 9:case "end":return _context.stop();}}}, _callee);}))();
+              _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 4:case "end":return _context.stop();}}}, _callee);}))();
 
   },
   onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
@@ -239,6 +238,7 @@ var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/c
   },
   methods: {
     updateUserProfile: function updateUserProfile() {var _this3 = this;
+      console.log(11);
       if (!this.userInfo || this.userInfo.nickName === '') {
         uni.getUserProfile({
           desc: '用于完善会员资料',

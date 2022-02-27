@@ -44,7 +44,7 @@
 				},
 				success: (res) => {
 					// console.log(res.result);
-					this.dcdata = res.result
+					this.dcdata = res.result || []
 					// console.log(this.dcdata);
 				}
 			});
@@ -53,7 +53,7 @@
 			// 跳转详情页
 			toDetail(name) {
 				uni.navigateTo({
-					url: `/pages/detail/detail?name=${name}`
+					url: `../detail/detail?name=${name}`
 				})
 			},
 		}

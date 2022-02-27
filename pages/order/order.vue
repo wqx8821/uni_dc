@@ -3,10 +3,11 @@
 		<!-- 列表 -->
 		<view class="cart-list">
 			<u-swipe-action 
-				:show="show"
+				:show="item.is_new"
 				:options="options"
 				:index="index"
 				v-for="(item, index) in dcdata" 
+				@click="deleteOrder(index)"
 				:key="index"
 			>
 				<view class="item u-border-bottom">
@@ -102,7 +103,6 @@
 
 			// 提前将数据赋值给成功的数据，
 			this.$u.vuex('suredata',this.dcdata)
-			// console.log(this.addOn);
 			
 			// 解决 非全选状态下的结算后 全选按钮异常
 			let ischeck = this.dcdata.find(res => {
@@ -118,6 +118,20 @@
 				uni.navigateTo({
 					url: '../evaluation/evaluation'
 				})
+			},
+			// 删除购物餐品
+			deleteOrder(i) {
+				// 更新数据
+				(this.FOODS.result || []).forEach(res => {
+					if(res.name == this.dcdata[i].name) {
+						res.check = true
+						res.number = 0;
+					} 
+				})
+				// 在列表删除数据
+				this.dcdata.splice(i, 1);
+				//计算总价
+				this.calcTotal() 
 			},
 			// 订单选择状态， 是否全选
 			check(e) {
@@ -192,8 +206,8 @@
 					await uniCloud.callFunction({
 						name: 'private',
 						data: {
-							// openid: this.VXopenid,
-							openid: 'olwg75MhYydMfBKDJDBLvglbdXr4',
+							openid: this.VXopenid,
+							// openid: 'olwg75MhYydMfBKDJDBLvglbdXr4',
 							addOrder: this.dcdata
 						},
 						success: (res) => {

@@ -217,6 +217,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -265,7 +266,6 @@ var _default =
 
               // 提前将数据赋值给成功的数据，
               _this2.$u.vuex('suredata', _this2.dcdata);
-              // console.log(this.addOn);
 
               // 解决 非全选状态下的结算后 全选按钮异常
               ischeck = _this2.dcdata.find(function (res) {
@@ -282,8 +282,22 @@ var _default =
         url: '../evaluation/evaluation' });
 
     },
+    // 删除购物餐品
+    deleteOrder: function deleteOrder(i) {var _this3 = this;
+      // 更新数据
+      (this.FOODS.result || []).forEach(function (res) {
+        if (res.name == _this3.dcdata[i].name) {
+          res.check = true;
+          res.number = 0;
+        }
+      });
+      // 在列表删除数据
+      this.dcdata.splice(i, 1);
+      //计算总价
+      this.calcTotal();
+    },
     // 订单选择状态， 是否全选
-    check: function check(e) {var _this3 = this;
+    check: function check(e) {var _this4 = this;
       // 每次点击就更新一下全选按钮
       this.allCheck = !this.allCheck;
       (this.dcdata || []).forEach(function (item) {
@@ -293,7 +307,7 @@ var _default =
         }
         // 若有数据不是选中状态就将 全选状态去除
         if (!item.check) {
-          _this3.allCheck = false;
+          _this4.allCheck = false;
         }
       });
       // console.log(this.dcdata);
@@ -303,18 +317,18 @@ var _default =
       this.calcTotal(); //计算总价
     },
     // 全选
-    checkedAll: function checkedAll(allcked) {var _this4 = this;
+    checkedAll: function checkedAll(allcked) {var _this5 = this;
       // 全选按钮状态
       this.allCheck = !this.allCheck;
       // 列表按钮状态
       this.dcdata.forEach(function (item) {
-        item.check = _this4.allCheck;
+        item.check = _this5.allCheck;
       });
 
       this.calcTotal(); //计算总价
     },
     // 计算总价
-    calcTotal: function calcTotal() {var _this5 = this;
+    calcTotal: function calcTotal() {var _this6 = this;
       // 每次计算前 清空状态，防止一直累加
       this.totalPrice = 0;
       // 若购物车无商品就不计算
@@ -322,7 +336,7 @@ var _default =
       this.dcdata.forEach(function (item) {
         // 只计算选中的食品
         if (item.check) {
-          _this5.totalPrice += item.price * item.number;
+          _this6.totalPrice += item.price * item.number;
         }
       });
     },
@@ -341,10 +355,10 @@ var _default =
       this.calcTotal();
     },
     // 跳转确认订单
-    createOrder: function createOrder() {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+    createOrder: function createOrder() {var _this7 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 // 计算总价，若总价为零则不跳转
-                _this6.calcTotal();if (
-                _this6.totalPrice) {_context3.next = 5;break;}
+                _this7.calcTotal();if (
+                _this7.totalPrice) {_context3.next = 5;break;}
                 uni.showToast({
                   title: '小主还没有选择好吃的',
                   icon: 'none',
@@ -355,9 +369,9 @@ var _default =
                   uniCloud.callFunction({
                     name: 'private',
                     data: {
-                      // openid: this.VXopenid,
-                      openid: 'olwg75MhYydMfBKDJDBLvglbdXr4',
-                      addOrder: _this6.dcdata },
+                      openid: _this7.VXopenid,
+                      // openid: 'olwg75MhYydMfBKDJDBLvglbdXr4',
+                      addOrder: _this7.dcdata },
 
                     success: function success(res) {
                       console.log(res);

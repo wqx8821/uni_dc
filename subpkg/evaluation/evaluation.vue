@@ -42,6 +42,11 @@
 				} 
 			}
 		},
+		onUnload() {
+			uni.navigateBack({
+			    delta: 1
+			})
+		},
 		onLoad(option) {
 			// 点击评价时将餐品名存储
 			this.foodName = option.name
@@ -69,6 +74,8 @@
 					// 将信息存入数据库
 					const db = uniCloud.database();
 					await db.collection('dc-comments').add(this.evaluationdata);
+					
+					// 清空加载提示 显示模态框
 					uni.hideLoading();
 					uni.showModal({
 					    title: '评价成功',

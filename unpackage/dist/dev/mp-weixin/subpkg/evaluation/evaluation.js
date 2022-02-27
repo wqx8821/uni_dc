@@ -199,6 +199,11 @@ var _default =
 
 
   },
+  onUnload: function onUnload() {
+    uni.navigateBack({
+      delta: 1 });
+
+  },
   onLoad: function onLoad(option) {
     // 点击评价时将餐品名存储
     this.foodName = option.name;
@@ -226,6 +231,8 @@ var _default =
                 // 将信息存入数据库
                 db = uniCloud.database();_context.next = 7;return (
                   db.collection('dc-comments').add(_this.evaluationdata));case 7:
+
+                // 清空加载提示 显示模态框
                 uni.hideLoading();
                 uni.showModal({
                   title: '评价成功',

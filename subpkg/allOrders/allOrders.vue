@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="item-container" v-if="sure.length">
-			<view class="thumb-box" v-for="(item, index) in sure" :key="index" @click="toDetail(item.name)">
+			<view class="thumb-box" v-for="(item, index) in sure" :key="item._id" @click="toDetail(item.name)">
 				<image class="item-menu-image" :src="item.foods_thumb"></image>
 				<view style="display: flex; flex-direction: column; align-items: center;">
 					<view class="item-menu-name">{{item.name}}</view>
@@ -37,37 +37,45 @@
 				sure: []
 			};
 		},
-		async onShow() {
+		onShow() {
 			uni.showToast({
 				title: '加载中',
 				icon: 'none',
-				duration: 800
+				duration: 1000
 			})
-			// 请求订单数据
-			const db = uniCloud.database();
-			const res = await db.collection('dc-sureOrder').where({
-				openid: this.VXopenid
-			}).get()
-			// 处理数据
-			const result = res.result.data.filter(res => {
-				return res.openid === this.VXopenid
-			})
-			result.forEach(res => {
-				this.sure.push(...res.sureOrder)
-			})
+		},
+		onLoad() {
+			this.filudata();
 		},
 		methods: {
 			// 跳转详情页
 			toDetail(name) {
-				uni.navigateTo({
-					url: `/pages/detail/detail?name=${name}`
+				uni.redirectTo({
+					url: `../detail/detail?name=${name}`
 				})
 			},
 			// 跳转评价页面
 			toEvaluation(name) {
-				uni.navigateTo({
+				uni.reLaunch({
 					url:`../evaluation/evaluation?name=${name}`
 				})
+			},
+			// 处理数据
+			async filudata () {
+				// 请求订单数据
+				const db = uniCloud.database();
+				const res = await db.collection('dc-sureOrder').where({
+					openid: this.VXopenid
+				}).get();
+				
+				// 处理数据
+				let result = res.result.data.filter(res => {
+					return res.openid === this.VXopenid
+				})
+				result.forEach(res => {
+					this.sure.push(...res.sureOrder)
+				})
+				// console.log(this.sure);
 			}
 		}
 	}

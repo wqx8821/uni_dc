@@ -24,7 +24,7 @@
 							<view class="u-body-item-title u-line-3">小铺新开张，至今日起前来本店消费的食客，送饮料一份，进店帮忙推广宣传送50元代金卷，祝各位食客吃的开心
 							</view>
 							<image
-								src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg"
+								src="https://img1.baidu.com/it/u=1442697856,3291831935&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=313"
 								mode="aspectFill"></image>
 						</view>
 					</navigator>

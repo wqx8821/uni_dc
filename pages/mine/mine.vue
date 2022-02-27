@@ -50,13 +50,12 @@
 		// 云函数
 		async onLoad() {
 			// 将用户信息存入本地存储
-			const storage = uni.getStorageSync('storageLogin');
-			// console.log(storage);
-			if (storage) {
-				this.userInfo = storage
-			} else {
+			// const storage = uni.getStorageSync('storageLogin');
+			// if (storage) {
+			// 	this.userInfo = storage
+			// } else {
 				this.userInfo = await loginUser.login();
-			}
+			// }
 
 			// 将用户openid存储在vuex中
 			this.$u.vuex('VXopenid', this.userInfo.openid || '')
@@ -67,6 +66,7 @@
 		},
 		methods: {
 			updateUserProfile() {
+				console.log(11);
 				if (!this.userInfo || this.userInfo.nickName === '') {
 					uni.getUserProfile({
 						desc: '用于完善会员资料',

@@ -213,6 +213,9 @@ var _default =
     },
     //确认支付
     confirm: function () {var _confirm = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var foods, data, db;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                uni.showLoading({
+                  title: '购买中....' });
+
                 // 将原始数据取出
                 foods = uni.getStorageSync('storagefoods');
                 // console.log(foods);
@@ -237,12 +240,15 @@ var _default =
                 data = { openid: this.VXopenid, sureOrder: _toConsumableArray(this.suredata) };
 
                 // 将确认的订单加入数据库
-                db = uniCloud.database();_context.next = 8;return (
-                  db.collection('dc-sureOrder').add(data));case 8:
+                db = uniCloud.database();_context.next = 9;return (
+                  db.collection('dc-sureOrder').add(data));case 9:
+
+                // 清空加载提示
+                uni.hideLoading();
 
                 this.$u.vuex('suredata', this.dcdata);
                 uni.redirectTo({
-                  url: '/pages/order/pay/paySuccess' });case 10:case "end":return _context.stop();}}}, _callee, this);}));function confirm() {return _confirm.apply(this, arguments);}return confirm;}() } };exports.default = _default;
+                  url: '/pages/order/pay/paySuccess' });case 12:case "end":return _context.stop();}}}, _callee, this);}));function confirm() {return _confirm.apply(this, arguments);}return confirm;}() } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"]))
 
 /***/ }),

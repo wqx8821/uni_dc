@@ -197,38 +197,46 @@ var _default =
       sure: [] };
 
   },
-  onShow: function onShow() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var db, res, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              uni.showToast({
-                title: '加载中',
-                icon: 'none',
-                duration: 800 });
+  onShow: function onShow() {
+    uni.showToast({
+      title: '加载中',
+      icon: 'none',
+      duration: 1000 });
 
-              // 请求订单数据
-              db = uniCloud.database();_context.next = 4;return (
-                db.collection('dc-sureOrder').where({
-                  openid: _this.VXopenid }).
-                get());case 4:res = _context.sent;
-              // 处理数据
-              result = res.result.data.filter(function (res) {
-                return res.openid === _this.VXopenid;
-              });
-              result.forEach(function (res) {var _this$sure;
-                (_this$sure = _this.sure).push.apply(_this$sure, _toConsumableArray(res.sureOrder));
-              });case 7:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  onLoad: function onLoad() {
+    this.filudata();
   },
   methods: {
     // 跳转详情页
     toDetail: function toDetail(name) {
-      uni.navigateTo({
-        url: "/pages/detail/detail?name=".concat(name) });
+      uni.redirectTo({
+        url: "../detail/detail?name=".concat(name) });
 
     },
     // 跳转评价页面
     toEvaluation: function toEvaluation(name) {
-      uni.navigateTo({
+      uni.reLaunch({
         url: "../evaluation/evaluation?name=".concat(name) });
 
-    } } };exports.default = _default;
+    },
+    // 处理数据
+    filudata: function filudata() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var db, res, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                // 请求订单数据
+                db = uniCloud.database();_context.next = 3;return (
+                  db.collection('dc-sureOrder').where({
+                    openid: _this.VXopenid }).
+                  get());case 3:res = _context.sent;
+
+                // 处理数据
+                result = res.result.data.filter(function (res) {
+                  return res.openid === _this.VXopenid;
+                });
+                result.forEach(function (res) {var _this$sure;
+                  (_this$sure = _this.sure).push.apply(_this$sure, _toConsumableArray(res.sureOrder));
+                });
+                // console.log(this.sure);
+              case 6:case "end":return _context.stop();}}}, _callee);}))();} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"]))
 
 /***/ }),

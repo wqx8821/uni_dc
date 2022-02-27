@@ -141,7 +141,7 @@
 				];
 			},
 			// 收藏
-			isFavorite(){
+			async isFavorite(){
 				// 提取食品id
 				let foodId = this.detailData[0]
 				// 收藏状态
@@ -165,15 +165,15 @@
 				}
 				// console.log(this.VXFavorite);
 				// 云函数将 收藏 的数据存储
-				uniCloud.callFunction({
+				await uniCloud.callFunction({
 					name: 'private',
 					data: {
 						openid: this.VXopenid,
 						favorites: this.VXFavorite
 					},
-					// success: (res) => {
-					// 	console.log(res);
-					// }
+					success: (res) => {
+						console.log(res);
+					}
 				})
 			},
 			// 跳转立即购买

@@ -302,40 +302,40 @@ var _default =
 
     },
     // 收藏
-    isFavorite: function isFavorite() {var _this3 = this;
-      // 提取食品id
-      var foodId = this.detailData[0];
-      // 收藏状态
-      this.favorite = !this.favorite;
-      if (this.favorite) {
-        // 收藏状态就将id存入vuex
-        this.VXFavorite.push(foodId);
-        uni.showToast({
-          title: '收藏成功',
-          duration: 2000 });
+    isFavorite: function isFavorite() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var foodId;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                // 提取食品id
+                foodId = _this3.detailData[0];
+                // 收藏状态
+                _this3.favorite = !_this3.favorite;
+                if (_this3.favorite) {
+                  // 收藏状态就将id存入vuex
+                  _this3.VXFavorite.push(foodId);
+                  uni.showToast({
+                    title: '收藏成功',
+                    duration: 2000 });
 
-      } else {
-        uni.showToast({
-          title: '取消成功',
-          duration: 2000 });
+                } else {
+                  uni.showToast({
+                    title: '取消成功',
+                    duration: 2000 });
 
-        // 若不是收藏状态就从数据库移除
-        this.VXFavorite.forEach(function (res, index) {
-          if (res._id === foodId._id) _this3.VXFavorite.splice(index, 1);
-        });
-      }
-      // console.log(this.VXFavorite);
-      // 云函数将 收藏 的数据存储
-      uniCloud.callFunction({
-        name: 'private',
-        data: {
-          openid: this.VXopenid,
-          favorites: this.VXFavorite }
+                  // 若不是收藏状态就从数据库移除
+                  _this3.VXFavorite.forEach(function (res, index) {
+                    if (res._id === foodId._id) _this3.VXFavorite.splice(index, 1);
+                  });
+                }
+                // console.log(this.VXFavorite);
+                // 云函数将 收藏 的数据存储
+                _context3.next = 5;return uniCloud.callFunction({
+                  name: 'private',
+                  data: {
+                    openid: _this3.VXopenid,
+                    favorites: _this3.VXFavorite },
 
-        // success: (res) => {
-        // 	console.log(res);
-        // }
-      });
+                  success: function success(res) {
+                    console.log(res);
+                  } });case 5:case "end":return _context3.stop();}}}, _callee3);}))();
+
     },
     // 跳转立即购买
     toSureOrder: function toSureOrder() {

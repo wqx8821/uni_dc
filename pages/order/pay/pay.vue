@@ -58,6 +58,9 @@
 			},
 			//确认支付
 			confirm: async function() {
+				uni.showLoading({
+				    title: '购买中....'
+				});
 				// 将原始数据取出
 				let foods = uni.getStorageSync('storagefoods');
 				// console.log(foods);
@@ -84,6 +87,9 @@
 				// 将确认的订单加入数据库
 				const db = uniCloud.database();
 				await db.collection('dc-sureOrder').add(data)
+				
+				// 清空加载提示
+				uni.hideLoading();
 				
 				this.$u.vuex('suredata',this.dcdata)
 				uni.redirectTo({

@@ -201,7 +201,7 @@ var _default =
 
                   success: function success(res) {
                     // console.log(res.result);
-                    _this.dcdata = res.result;
+                    _this.dcdata = res.result || [];
                     // console.log(this.dcdata);
                   } }));case 2:case "end":return _context.stop();}}}, _callee);}))();
 
@@ -210,7 +210,7 @@ var _default =
     // 跳转详情页
     toDetail: function toDetail(name) {
       uni.navigateTo({
-        url: "/pages/detail/detail?name=".concat(name) });
+        url: "../detail/detail?name=".concat(name) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 9)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
