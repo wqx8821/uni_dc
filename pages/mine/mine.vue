@@ -66,7 +66,7 @@
 		},
 		methods: {
 			updateUserProfile() {
-				console.log(11);
+				// console.log(11);
 				if (!this.userInfo || this.userInfo.nickName === '') {
 					uni.getUserProfile({
 						desc: '用于完善会员资料',

@@ -238,7 +238,7 @@ var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/c
   },
   methods: {
     updateUserProfile: function updateUserProfile() {var _this3 = this;
-      console.log(11);
+      // console.log(11);
       if (!this.userInfo || this.userInfo.nickName === '') {
         uni.getUserProfile({
           desc: '用于完善会员资料',

@@ -1,5 +1,5 @@
-const appId = "wx83e7c03d8363216d";
-const appSecret = "a558af380b27439a9bf57e9259d20773"
+const appId = "";
+const appSecret = ""
 
 const jwt = require('jsonwebtoken')
 function getToken(openid) {

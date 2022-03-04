@@ -13543,9 +13543,9 @@ module.exports = {
         "127.0.0.1",
         "192.168.128.67"
     ],
-    "debugPort": 10463,
-    "initialLaunchType": "local",
-    "servePort": 10464,
+    "debugPort": 11093,
+    "initialLaunchType": "remote",
+    "servePort": 11094,
     "skipFiles": [
         "<node_internals>/**/*.js",
         "C:/HBuilder/HBuilderX/plugins/unicloud/**/*.js"
