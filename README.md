@@ -1,16 +1,18 @@
+克隆本项目使用流程  (效果图：[https://www.yuque.com/u25290692/ppqbkl/ecpmt5](url))
 
-克隆本项目使用流程
 1、 克隆完毕后，npm i 下载依赖
-2、 在uniCloud/cloudfunctions/common/wx-common/index.js
-	填写对应的openid 密钥 (微信授权需要)
-3、 绑定云服务空间，将数据库以及云函数部署后运行编译
-4、 admin开头的云函数数据库 忽略即可 还没做
-5、 本人小白，本项目就是各种缝合，编写不规范(能跑就行)
 
+2、 在uniCloud/cloudfunctions/common/wx-common/index.js 填写对应的openid 密钥 (微信授权需要)
+
+3、 绑定云服务空间，将数据库以及云函数部署后运行编译
+
+4、 admin开头的云函数数据库 忽略即可 还没做
+
+5、 本人小白，本项目就是各种缝合，编写不规范(能跑就行)
 
 # 待完成清单
 
-优化登录功能，完成退出功能 ✓ 
+优化登录功能，完成退出功能 ✓
 
 云开发打通加购至支付一条龙 ✓
 
@@ -30,51 +32,38 @@
 
 ## 首页
 
-* 菜品搜索功能 1
-* 首页轮播 1
-* 商品收藏 1
-* 热门商品推荐  1
-* 优惠活动顶部通知 1
+- 菜品搜索功能 1
+- 首页轮播 1
+- 商品收藏 1
+- 热门商品推荐 1
+- 优惠活动顶部通知 1
 
 ## 菜单页
 
-* 商品分类展示 4/ 5
-
-* 菜品加入购物车  1
-
-* 一键下单 1 
-
-* 商品收藏 1
-
-  
+- 商品分类展示 4/ 5
+- 菜品加入购物车 1
+- 一键下单 1
+- 商品收藏 1
 
 ## 购物车
 
-* 订单状态 1/2
-
-* 订单总价计算 付款  1
-
-* 订单评价 1/2
-
-* 历史订单查询
+- 订单状态 1/2
+- 订单总价计算 付款 1
+- 订单评价 1/2
+- 历史订单查询
 
 ## 我的
 
-* 用户登录 退出  1
+- 用户登录 退出 1
+- 已有卡卷优惠展示 1
+- 菜品收藏 1
+- 意见反馈 1
+- 商家联系方式
 
-* 已有卡卷优惠展示 1
+## 详情页面
 
-* 菜品收藏 1
-
-* 意见反馈 1
-
-* 商家联系方式
-
-## 详情页面 
-
-* 菜品详情介绍  1
-
-* 菜品评价   1/2
+- 菜品详情介绍 1
+- 菜品评价 1/2
 
 ## 卡卷页面
 
@@ -84,17 +73,11 @@
 
 # 组件拆分
 
-1. 定位  
+1. 定位
 
 首页 订单页 新品页的 预购和一键购买
 
-2. 搜索组件 内容区域 页面
-
-   
-
-
-
-
+1. 搜索组件 内容区域 页面
 
 # 后端云开发
 
@@ -102,24 +85,23 @@
 
 ### 登录功能实现
 
-​		本程序是运行在微信的微信小程序，程序的场景是在餐厅内扫码进入程序进行点餐，所以在登录环节尽可能的简单，所以没有做注册绑定功能，而是采用微信授权的方式登录。
+ 本程序是运行在微信的微信小程序，程序的场景是在餐厅内扫码进入程序进行点餐，所以在登录环节尽可能的简单，所以没有做注册绑定功能，而是采用微信授权的方式登录。
 
-​		采用微信官方提供的[code2Session](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html) 方式  如下是官方原文
+ 采用微信官方提供的[code2Session](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html) 方式 如下是官方原文
 
 1. 调用 [wx.login()](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html) 获取 **临时登录凭证code** ，并回传到开发者服务器。
 2. 调用 [auth.code2Session](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html) 接口，换取 **用户唯一标识 OpenID** 、 用户在微信开放平台帐号下的**唯一标识UnionID**（若当前小程序已绑定到微信开放平台帐号） 和 **会话密钥 session_key**。
 
-之后开发者服务器可以根据用户标识来生成自定义登录态，用于后续业务逻辑中前后端交互时识别用户身份` 
+之后开发者服务器可以根据用户标识来生成自定义登录态，用于后续业务逻辑中前后端交互时识别用户身份`
 
 1、 初次进入小程序时弹出授权
 
 2、在我的页面手动点击头像进行登录
 
-**页面使用云函数**   创建cloudApi.js文件统一处理云函数
+**页面使用云函数** 创建cloudApi.js文件统一处理云函数
 
-`前端下的common/cloudApi.js`
-
-```js
+```
+前端下的common/cloudApi.js
 let token;
 // 统一管理请求
 
@@ -155,7 +137,7 @@ module.exports = {
 
 使用
 
-```js
+```
 点击事件 获取授权
 updateUserProfile(){
     uni.getUserProfile({
@@ -194,11 +176,9 @@ async onLoad(options){
 }
 ```
 
-
-
 #### 创建login云函数。
 
-```js
+```
 'use strict';
 // 公共云函数模块引入
 const {appId,appSecret,getToken} = require('wx-common')
@@ -247,14 +227,11 @@ exports.main = async (event, context) => {
 
 #### 创建公共模块
 
-​	创建公共模块处理 token的加密解密 以及用户 appId 和appSecret的获取
+ 创建公共模块处理 token的加密解密 以及用户 appId 和appSecret的获取
 
 ```
 在创建的 wx-common公共模块中导入jwt包
 npm i jwtwebtoken
-```
-
-```js
 const appId = "wx83e7c03d8363216d";
 const appSecret = "a558af380b27439a9bf57e9259d20773"
 
@@ -277,7 +254,7 @@ module.exports = {
 
 创建updateuserinfo云函数
 
-```js
+```
 'use strict';
 
 const {verifyToken} = require("wx-common")
@@ -314,24 +291,20 @@ exports.main = async (event, context) => {
 
 商品表——收藏——上新
 
-* 商品表 内容
-* 图片 icon
-* 价格 price
-* 已售 sell
-* 数量 num
-* id
+- 商品表 内容
+- 图片 icon
+- 价格 price
+- 已售 sell
+- 数量 num
+- id
 
 评论表
-
-
 
 订单表——状态
 
 会员表
 
 # admin搭建
-
-
 
 订单接受处理
 
