@@ -1,5 +1,9 @@
 <template>
-	<view class="mineStyle">
+	<view class="login_container" v-if="userInfo === null" >
+		<u-icon name="man-add" :size="150"></u-icon>
+		<button class="login_btn" @click="updateUserProfile">一键登录</button>
+	</view>
+	<view class="mineStyle" v-else>
 		<view class="userStyle" @click="updateUserProfile">
 			<view class="u-m-b-20 u-m-t-40">
 				<u-avatar :src="userInfo.avatarUrl || ''" size="140"></u-avatar>
@@ -44,29 +48,20 @@
 	export default {
 		data() {
 			return {
-				userInfo: null,
+				userInfo: uni.getStorageSync('storageLogin') || null,
 			}
 		},
 		// 云函数
 		async onLoad() {
-			// 将用户信息存入本地存储
-			// const storage = uni.getStorageSync('storageLogin');
-			// if (storage) {
-			// 	this.userInfo = storage
-			// } else {
-				this.userInfo = await loginUser.login();
-			// }
+			if(this.userInfo === null) {
+				await this.updateUserProfile()
+				// this.userInfo = await loginUser.login();
+			}
+			// console.log(uni.getStorageSync('token'));
 
-			// 将用户openid存储在vuex中
-			this.$u.vuex('VXopenid', this.userInfo.openid || '')
-
-		},
-		async onShow() {
-			await this.updateUserProfile()
 		},
 		methods: {
 			updateUserProfile() {
-				// console.log(11);
 				if (!this.userInfo || this.userInfo.nickName === '') {
 					uni.getUserProfile({
 						desc: '用于完善会员资料',
@@ -79,6 +74,10 @@
 							loginUser.updateUser(this.userInfo);
 							// 设置缓存
 							uni.setStorageSync('storageLogin', this.userInfo);
+							uni.setStorageSync('token', this.userInfo.token || '');
+							
+							// // 将用户openid存储在vuex中
+							// this.$u.vuex('VXopenid', this.userInfo.openid || '')
 						}
 					})
 				}
@@ -113,5 +112,30 @@
 		align-items: center;
 		justify-content: center;
 		// background-color: #606266;
+	}
+	
+	.login_container {
+		height: 60vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 160rpx;
+		background-color: #f0f0f0;
+		position: relative;
+		&::after {
+			content: " ";
+			height: 80rpx;
+			width: 100%;
+			position: absolute;
+			bottom: -5%;
+			border-radius: 50%;
+			background-color: #e2e2e2;
+		}
+		.login_btn {
+			background-color: #56c082;
+			width: 90%;
+			border-radius: 30rpx;
+			margin-top: 50rpx;
+		}
 	}
 </style>

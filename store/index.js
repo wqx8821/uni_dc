@@ -33,7 +33,8 @@ const store = new Vuex.Store({
 		addOn: [], // 食品的原始信息（包含加购数量）
 		suredata: [], // 确认订单的数据
 		VXFavorite: lifeData.VXFavorite ? lifeData.VXFavorite: [], // 餐品收藏, 需加入本地存储
-		VXopenid: ''
+		VXopenid: uni.getStorageSync('storageLogin').openid || '',
+		Token: uni.getStorageSync('token') || ''
 	},
 	mutations: {
 		$uStore(state, payload) {

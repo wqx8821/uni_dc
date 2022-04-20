@@ -4,14 +4,6 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/mine/mine",
-			"style": {
-				"navigationBarTitleText": "个人中心",
-				"enablePullDownRefresh": false
-			}
-		
-		}, 
-		{
 			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "柠檬小铺"
@@ -29,8 +21,15 @@
 				"enablePullDownRefresh": false
 			}
 
-		}
-		, {
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
 			"path": "pages/home/search/search",
 			"style": {
 				"navigationBarTitleText": "搜索",
@@ -44,15 +43,13 @@
 				"navigationBarTitleText": "确认订单",
 				"enablePullDownRefresh": false
 			}
-
 		},
 		{
 			"path": "pages/order/pay/pay",
-		 "style": {
+			"style": {
 				"navigationBarTitleText": "选择支付",
 				"enablePullDownRefresh": false
 			}
-
 		},
 		{
 			"path": "pages/order/pay/paySuccess",
@@ -79,7 +76,7 @@
 					"enablePullDownRefresh": false
 				}
 
-			}, 
+			},
 			{
 				"path": "evaluation/evaluation",
 				"style": {
@@ -92,17 +89,15 @@
 					"navigationBarTitleText": "全部订单",
 					"enablePullDownRefresh": false
 				}
+			}, {
+				"path": "activity/activity",
+				"style": {
+					"navigationBarTitleText": "最新活动",
+					"enablePullDownRefresh": false
+				}
+
 			}
-		    ,{
-                    "path" : "activity/activity",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "最新活动",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+		]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

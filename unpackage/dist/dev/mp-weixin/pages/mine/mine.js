@@ -97,6 +97,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uIcon: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 185))
+    },
     uAvatar: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 164))
     },
@@ -105,9 +108,6 @@ try {
     },
     uGridItem: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-grid-item/u-grid-item */ "uview-ui/components/u-grid-item/u-grid-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-grid-item/u-grid-item.vue */ 178))
-    },
-    uIcon: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 185))
     },
     uCellGroup: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-group/u-cell-group */ "uview-ui/components/u-cell-group/u-cell-group").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-group/u-cell-group.vue */ 192))
@@ -212,55 +212,54 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _currentUser = _interopRequireDefault(__webpack_require__(/*! ../../common/currentUser.js */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
     return {
-      userInfo: null };
+      userInfo: uni.getStorageSync('storageLogin') || null };
 
   },
   // 云函数
-  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
+              _this.userInfo === null)) {_context.next = 3;break;}_context.next = 3;return (
+                _this.updateUserProfile());case 3:case "end":return _context.stop();}}}, _callee);}))();
 
 
 
 
-
-                _currentUser.default.login());case 2:_this.userInfo = _context.sent;
-              // }
-
-              // 将用户openid存储在vuex中
-              _this.$u.vuex('VXopenid', _this.userInfo.openid || '');case 4:case "end":return _context.stop();}}}, _callee);}))();
-
-  },
-  onShow: function onShow() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                _this2.updateUserProfile());case 2:case "end":return _context2.stop();}}}, _callee2);}))();
   },
   methods: {
-    updateUserProfile: function updateUserProfile() {var _this3 = this;
-      // console.log(11);
+    updateUserProfile: function updateUserProfile() {var _this2 = this;
       if (!this.userInfo || this.userInfo.nickName === '') {
         uni.getUserProfile({
           desc: '用于完善会员资料',
-          success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {var UserInfo;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
+          success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(res) {var UserInfo;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
 
-                        _currentUser.default.login());case 2:UserInfo = _context3.sent;
+                        _currentUser.default.login());case 2:UserInfo = _context2.sent;
                       // 将新老信息合并
-                      _this3.userInfo = Object.assign({}, UserInfo, res.userInfo);
+                      _this2.userInfo = Object.assign({}, UserInfo, res.userInfo);
                       // 将合并后的信息更新进数据库
-                      _currentUser.default.updateUser(_this3.userInfo);
+                      _currentUser.default.updateUser(_this2.userInfo);
                       // 设置缓存
-                      uni.setStorageSync('storageLogin', _this3.userInfo);case 6:case "end":return _context3.stop();}}}, _callee3);}));function success(_x) {return _success.apply(this, arguments);}return success;}() });
+                      uni.setStorageSync('storageLogin', _this2.userInfo);
+                      uni.setStorageSync('token', _this2.userInfo.token || '');
 
+                      // // 将用户openid存储在vuex中
+                      // this.$u.vuex('VXopenid', this.userInfo.openid || '')
+                    case 7:case "end":return _context2.stop();}}}, _callee2);}));function success(_x) {return _success.apply(this, arguments);}return success;}() });
 
       }
     },
-    logout: function logout() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+    logout: function logout() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 // 立即改变页面状态
-                _this4.userInfo = null;
+                _this3.userInfo = null;
                 // 清除缓存
                 uni.clearStorageSync('storageLogin');
-                _this4.$u.vuex('VXopenid', '');case 3:case "end":return _context4.stop();}}}, _callee4);}))();
+                _this3.$u.vuex('VXopenid', '');case 3:case "end":return _context3.stop();}}}, _callee3);}))();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

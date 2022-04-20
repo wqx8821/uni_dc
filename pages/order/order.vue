@@ -67,6 +67,13 @@
 			};
 		},
 		async onLoad() {
+			// 导航守卫
+			if(this.Token === '') {
+				uni.reLaunch({
+					url: '../mine/mine'
+				})
+			}
+			
 			await this.calcTotal() //计算总价
 		},
 		async onShow() {

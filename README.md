@@ -1,4 +1,5 @@
-克隆本项目使用流程  (效果图：[https://www.yuque.com/u25290692/ppqbkl/ecpmt5](url))
+克隆本项目使用流程  (效果图：[点击查看](https://www.yuque.com/docs/share/1d478914-8a91-4e3a-9905-1621953c0bc0?# 《效果图》
+链接有效期至 2022-03-18 00:30:18))
 
 1、 克隆完毕后，npm i 下载依赖
 

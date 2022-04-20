@@ -22,4 +22,28 @@ page {
   align-items: center;
   justify-content: center;
 }
+.login_container.data-v-dcbcfe34 {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 160rpx;
+  background-color: #f0f0f0;
+  position: relative;
+}
+.login_container.data-v-dcbcfe34::after {
+  content: " ";
+  height: 80rpx;
+  width: 100%;
+  position: absolute;
+  bottom: -5%;
+  border-radius: 50%;
+  background-color: #e2e2e2;
+}
+.login_container .login_btn.data-v-dcbcfe34 {
+  background-color: #56c082;
+  width: 90%;
+  border-radius: 30rpx;
+  margin-top: 50rpx;
+}
 
